@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiểm tra - Java Learning Hub</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="bai29.html#chapters">Lý thuyết</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <h2>📝 Phần KIỂM TRA</h2>
+    <p>
+      Chào mừng bạn đến với phần <strong>Kiểm tra</strong>.
+      Vui lòng <strong>xác nhận thông tin</strong>, sau đó
+      <strong>chọn 1 bài tập</strong> trong danh sách bên dưới để làm bài.
+    </p>
+
+    <hr>
+
+    <!-- ========== PHẦN 1: XÁC NHẬN THÔNG TIN ========== -->
+    <section>
+      <h3>1️⃣ Xác nhận thông tin Sinh viên</h3>
+
+      <form id="form-info">
+        <fieldset>
+          <legend>Thông tin bắt buộc</legend>
+
+          <p>
+            <label for="sv_mssv">Mã số sinh viên (MSSV):</label><br>
+            <input type="text"
+                   id="sv_mssv"
+                   name="mssv"
+                   placeholder="VD: 20210001"
+                   size="40"
+                   maxlength="20"
+                   required>
+          </p>
+
+          <p>
+            <label for="sv_hoten">Họ và tên:</label><br>
+            <input type="text"
+                   id="sv_hoten"
+                   name="hoten"
+                   placeholder="VD: Nguyễn Văn A"
+                   size="40"
+                   maxlength="80"
+                   required>
+          </p>
+        </fieldset>
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ========== PHẦN 2: CHỌN BÀI TẬP ========== -->
+    <section>
+      <h3>2️⃣ Chọn 1 bài tập để làm</h3>
+      <p>
+        Danh sách bài tập được chia theo 3 mức độ:
+        <strong>Dễ</strong> – <strong>Trung bình</strong> – <strong>Khó</strong>.
+        Mỗi bài có <strong>5 bộ test</strong>, mỗi test đúng = <strong>2 điểm</strong>.
+      </p>
+
+      <!-- ---------- MỨC ĐỘ: DỄ ---------- -->
+      <article>
+        <h4>🟢 Mức độ: DỄ</h4>
+
+        <table border="1" cellpadding="8" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Chọn</th>
+              <th>Mã bài</th>
+              <th>Tên bài tập</th>
+              <th>Mô tả</th>
+              <th>Số test</th>
+              <th>Điểm tối đa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="radio" name="baitap" value="D1" id="bai_D1"></td>
+              <td>D1</td>
+              <td><label for="bai_D1">Tính tổng hai số nguyên</label></td>
+              <td>Nhập 2 số nguyên a, b. In ra tổng a + b.</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><input type="radio" name="baitap" value="D2" id="bai_D2"></td>
+              <td>D2</td>
+              <td><label for="bai_D2">Kiểm tra số chẵn lẻ</label></td>
+              <td>Nhập số nguyên n. In ra "CHAN" nếu n chẵn, ngược lại "LE".</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><input type="radio" name="baitap" value="D3" id="bai_D3"></td>
+              <td>D3</td>
+              <td><label for="bai_D3">Tìm số lớn nhất</label></td>
+              <td>Nhập 3 số nguyên a, b, c. In ra số lớn nhất.</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <br>
+
+      <!-- ---------- MỨC ĐỘ: TRUNG BÌNH ---------- -->
+      <article>
+        <h4>🟡 Mức độ: TRUNG BÌNH</h4>
+
+        <table border="1" cellpadding="8" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Chọn</th>
+              <th>Mã bài</th>
+              <th>Tên bài tập</th>
+              <th>Mô tả</th>
+              <th>Số test</th>
+              <th>Điểm tối đa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="radio" name="baitap" value="TB1" id="bai_TB1"></td>
+              <td>TB1</td>
+              <td><label for="bai_TB1">Tính tổng mảng</label></td>
+              <td>Nhập mảng n số nguyên. In ra tổng các phần tử.</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><input type="radio" name="baitap" value="TB2" id="bai_TB2"></td>
+              <td>TB2</td>
+              <td><label for="bai_TB2">Đếm số nguyên tố</label></td>
+              <td>Nhập mảng n số nguyên. Đếm số lượng số nguyên tố.</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><input type="radio" name="baitap" value="TB3" id="bai_TB3"></td>
+              <td>TB3</td>
+              <td><label for="bai_TB3">Đảo ngược chuỗi</label></td>
+              <td>Nhập chuỗi s. In ra chuỗi đảo ngược.</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <br>
+
+      <!-- ---------- MỨC ĐỘ: KHÓ ---------- -->
+      <article>
+        <h4>🔴 Mức độ: KHÓ</h4>
+
+        <table border="1" cellpadding="8" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Chọn</th>
+              <th>Mã bài</th>
+              <th>Tên bài tập</th>
+              <th>Mô tả</th>
+              <th>Số test</th>
+              <th>Điểm tối đa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="radio" name="baitap" value="K1" id="bai_K1"></td>
+              <td>K1</td>
+              <td><label for="bai_K1">Sắp xếp mảng tăng dần</label></td>
+              <td>Nhập mảng n số nguyên. In ra mảng đã sắp xếp tăng dần.</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><input type="radio" name="baitap" value="K2" id="bai_K2"></td>
+              <td>K2</td>
+              <td><label for="bai_K2">Tìm ước chung lớn nhất</label></td>
+              <td>Nhập 2 số nguyên dương a, b. In ra ƯCLN(a, b).</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><input type="radio" name="baitap" value="K3" id="bai_K3"></td>
+              <td>K3</td>
+              <td><label for="bai_K3">Kiểm tra chuỗi đối xứng</label></td>
+              <td>Nhập chuỗi s. In "YES" nếu s đối xứng, ngược lại "NO".</td>
+              <td>5</td>
+              <td>10</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <hr>
+
+    <!-- ========== PHẦN 3: VIẾT LỜI GIẢI ========== -->
+    <section>
+      <h3>3️⃣ Viết lời giải</h3>
+      <p>
+        Nhập lời giải Java của bạn vào ô bên dưới.
+        Sau khi bấm <strong>Nộp bài</strong>, hệ thống sẽ ghi nhận và chấm điểm.
+      </p>
+
+      <form action="sv_ketqua.html" method="get">
+        <!-- Mang thông tin MSSV + Họ tên -->
+        <p>
+          <label for="nop_mssv">MSSV:</label><br>
+          <input type="text"
+                 id="nop_mssv"
+                 name="mssv"
+                 placeholder="Nhập lại MSSV"
+                 size="40"
+                 maxlength="20"
+                 required>
+        </p>
+        <p>
+          <label for="nop_hoten">Họ và tên:</label><br>
+          <input type="text"
+                 id="nop_hoten"
+                 name="hoten"
+                 placeholder="Nhập lại họ tên"
+                 size="40"
+                 maxlength="80"
+                 required>
+        </p>
+
+        <!-- Mã bài đã chọn (SV chọn lại bằng select — vì HTML thuần không truyền radio sang form khác) -->
+        <p>
+          <label for="nop_ma_bai">Mã bài đã chọn:</label><br>
+          <select id="nop_ma_bai" name="ma_bai" required>
+            <option value="">-- Chọn mã bài --</option>
+            <optgroup label="Dễ">
+              <option value="D1">D1 - Tính tổng hai số nguyên</option>
+              <option value="D2">D2 - Kiểm tra số chẵn lẻ</option>
+              <option value="D3">D3 - Tìm số lớn nhất</option>
+            </optgroup>
+            <optgroup label="Trung bình">
+              <option value="TB1">TB1 - Tính tổng mảng</option>
+              <option value="TB2">TB2 - Đếm số nguyên tố</option>
+              <option value="TB3">TB3 - Đảo ngược chuỗi</option>
+            </optgroup>
+            <optgroup label="Khó">
+              <option value="K1">K1 - Sắp xếp mảng tăng dần</option>
+              <option value="K2">K2 - Tìm ƯCLN</option>
+              <option value="K3">K3 - Kiểm tra chuỗi đối xứng</option>
+            </optgroup>
+          </select>
+        </p>
+
+        <!-- Ô nhập lời giải -->
+        <p>
+          <label for="nop_code">Lời giải Java của bạn:</label><br>
+          <textarea id="nop_code"
+                    name="code"
+                    rows="20"
+                    cols="100"
+                    placeholder="// Nhập code Java ở đây&#10;import java.util.Scanner;&#10;&#10;public class Main {&#10;    public static void main(String[] args) {&#10;        // Code của bạn&#10;    }&#10;}"
+                    required></textarea>
+        </p>
+
+        <p>
+          <button type="submit">📤 Nộp bài</button>
+          <button type="reset">Xóa lời giải</button>
+        </p>
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ========== PHẦN 4: LƯU Ý ========== -->
+    <section>
+      <h3>⚠️ Lưu ý</h3>
+      <ul>
+        <li>Chỉ được chọn <strong>1 bài tập</strong> trong phần Kiểm tra.</li>
+        <li>Mỗi bài có <strong>5 bộ test</strong>, mỗi test đúng = <strong>2 điểm</strong>.</li>
+        <li>Điểm tối đa: <strong>10 điểm</strong>.</li>
+        <li>Sau khi bấm <strong>Nộp bài</strong>, hệ thống sẽ chấm và hiển thị kết quả.</li>
+        <li>Không thoát trình duyệt giữa chừng để tránh mất bài làm.</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <section>
+      <h3>🔗 Điều hướng</h3>
+      <ul>
+        <li><a href="sv_nhapthongtin.html">← Quay lại nhập thông tin</a></li>
+        <li><a href="bai29.html">← Trang chủ</a></li>
+        <li><a href="bai29.html#chapters">📚 Xem lý thuyết</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <footer>
+    <p>
+      © 2024 <strong>Java Learning Hub</strong> — Website hỗ trợ dạy học môn Lập trình Java.
+    </p>
+    <p>
+      Liên hệ: <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>
+      | Hotline: 0123 456 789
+    </p>
+  </footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 2 - Biến &amp; Kiểu dữ liệu trong Java</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="index.html">Trang chủ</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+    <h1>CHƯƠNG 2: BIẾN &amp; KIỂU DỮ LIỆU TRONG JAVA</h1>
+    <hr>
+
+    <h2>Mục tiêu chương</h2>
+    <ul>
+        <li>Hiểu sâu về biến: khai báo, khởi tạo, phạm vi (scope), vòng đời và giá trị mặc định.</li>
+        <li>Phân biệt biến cục bộ, biến thực thể (instance) và biến tĩnh (static).</li>
+        <li>Nắm vững 8 kiểu nguyên thủy và các kiểu tham chiếu thông dụng.</li>
+        <li>Hiểu cơ chế autoboxing / unboxing và lớp bao (Wrapper class).</li>
+        <li>Sử dụng thành thạo lớp <code>String</code> và các phương thức phổ biến.</li>
+        <li>Thực hiện chuyển đổi kiểu dữ liệu an toàn (ép kiểu, parse, valueOf).</li>
+        <li>Biết cách dùng <code>final</code>, <code>var</code> và các quy ước đặt tên biến.</li>
+    </ul>
+    <hr>
+
+    <!-- ================== PHẦN LÝ THUYẾT ================== -->
+    <h2 id="chapters">PHẦN LÝ THUYẾT</h2>
+
+    <h3>2.1. Biến trong Java – Nhìn sâu hơn</h3>
+
+    <h4>2.1.1. Khái niệm và cú pháp khai báo</h4>
+    <p>
+        Biến là một <b>vùng nhớ có tên</b> dùng để lưu trữ dữ liệu. Mỗi biến trong Java đều có
+        <b>kiểu dữ liệu</b> xác định, <b>tên</b> và <b>giá trị</b>. Cú pháp tổng quát:
+    </p>
+    <pre>
+[kieuDuLieu] tenBien;              // Khai báo
+[kieuDuLieu] tenBien = giaTri;     // Khai báo và khởi tạo
+[kieuDuLieu] a = 1, b = 2, c;      // Khai báo nhiều biến cùng kiểu
+    </pre>
+    <p>
+        Trong Java, biến <b>bắt buộc phải có kiểu dữ liệu</b> khi khai báo (trừ khi dùng
+        <code>var</code> từ Java 10 – trình biên dịch sẽ tự suy luận kiểu).
+    </p>
+
+    <h4>2.1.2. Phân loại biến theo phạm vi (Scope)</h4>
+    <p>Java có 3 loại biến chính dựa trên vị trí khai báo:</p>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Loại biến</th>
+            <th>Vị trí khai báo</th>
+            <th>Giá trị mặc định</th>
+            <th>Phạm vi sử dụng</th>
+        </tr>
+        <tr>
+            <td><b>Biến cục bộ</b> (local)</td>
+            <td>Bên trong phương thức / khối lệnh</td>
+            <td><i>Không có</i> – phải khởi tạo trước khi dùng</td>
+            <td>Chỉ trong phương thức / khối chứa nó</td>
+        </tr>
+        <tr>
+            <td><b>Biến thực thể</b> (instance)</td>
+            <td>Bên trong lớp, ngoài phương thức (không có static)</td>
+            <td>Có (0, false, null…)</td>
+            <td>Trong suốt đối tượng, truy cập qua <code>this.</code></td>
+        </tr>
+        <tr>
+            <td><b>Biến tĩnh</b> (static)</td>
+            <td>Bên trong lớp, có từ khóa <code>static</code></td>
+            <td>Có (0, false, null…)</td>
+            <td>Dùng chung cho mọi đối tượng của lớp</td>
+        </tr>
+    </table>
+
+    <p>Ví dụ minh họa 3 loại biến:</p>
+    <pre>
+public class SinhVien {
+    static int soLuong = 0;      // biến tĩnh
+    String hoTen;                // biến thực thể
+    int tuoi;                    // biến thực thể
+
+    public void hienThi() {
+        int diem = 10;           // biến cục bộ
+        System.out.println(diem);
+    }
+}
+    </pre>
+
+    <h4>2.1.3. Giá trị mặc định của biến</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Kiểu dữ liệu</th>
+            <th>Giá trị mặc định</th>
+        </tr>
+        <tr><td>byte, short, int, long</td><td>0</td></tr>
+        <tr><td>float, double</td><td>0.0</td></tr>
+        <tr><td>char</td><td>'\u0000' (ký tự null)</td></tr>
+        <tr><td>boolean</td><td>false</td></tr>
+        <tr><td>Kiểu tham chiếu (String, mảng, lớp…)</td><td>null</td></tr>
+    </table>
+    <p><b>Lưu ý:</b> biến cục bộ <b>không có giá trị mặc định</b>. Nếu dùng trước khi khởi tạo,
+        chương trình sẽ báo lỗi biên dịch <i>"variable might not have been initialized"</i>.</p>
+
+    <h4>2.1.4. Từ khóa <code>var</code> (Java 10+)</h4>
+    <p>
+        Từ Java 10, có thể dùng <code>var</code> để trình biên dịch <b>tự suy luận kiểu</b>
+        dựa trên giá trị khởi tạo. Biến <code>var</code> vẫn là kiểu tĩnh (không đổi kiểu được sau khi gán).
+    </p>
+    <pre>
+var tuoi = 20;               // int
+var diem = 8.5;              // double
+var ten = "Nguyen Van A";    // String
+var ds = new ArrayList&lt;String&gt;();   // ArrayList&lt;String&gt;
+
+// tuoi = "hai muoi";  // LỖI: không thể gán String cho biến int
+    </pre>
+    <p><b>Lưu ý:</b> <code>var</code> chỉ dùng được cho biến cục bộ, không dùng cho thuộc tính lớp
+        hay tham số phương thức, và <b>phải khởi tạo ngay khi khai báo</b>.</p>
+
+    <hr>
+
+    <h3>2.2. Hằng số và từ khóa <code>final</code></h3>
+    <p>
+        Hằng là biến có giá trị <b>không thể thay đổi</b> sau khi gán. Trong Java, dùng từ khóa
+        <code>final</code> để khai báo hằng. Theo quy ước, tên hằng viết hoa toàn bộ, các từ cách
+        nhau bởi dấu gạch dưới <code>_</code>.
+    </p>
+    <pre>
+final double PI = 3.14159;
+final int MAX_SINH_VIEN = 100;
+final String TEN_TRUONG = "PTIT";
+
+// PI = 3.14;   // LỖI: không thể gán lại giá trị cho biến final
+    </pre>
+    <p>
+        <b>Lưu ý:</b> với biến tham chiếu <code>final</code>, bản thân <b>tham chiếu</b> không đổi,
+        nhưng <b>nội dung bên trong đối tượng</b> vẫn có thể thay đổi (trừ khi đối tượng là bất biến).
+    </p>
+    <pre>
+final int[] arr = {1, 2, 3};
+arr[0] = 99;               // HỢP LỆ: thay đổi phần tử
+// arr = new int[]{4,5};   // LỖI: không thể trỏ sang mảng khác
+    </pre>
+
+    <hr>
+
+    <h3>2.3. Kiểu dữ liệu nguyên thủy (Primitive Types)</h3>
+
+    <h4>2.3.1. Bảng tổng hợp 8 kiểu nguyên thủy</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Nhóm</th>
+            <th>Kiểu</th>
+            <th>Kích thước</th>
+            <th>Miền giá trị</th>
+            <th>Lớp bao tương ứng</th>
+        </tr>
+        <tr>
+            <td rowspan="4">Số nguyên</td>
+            <td>byte</td><td>1 byte</td><td>-128 đến 127</td><td>Byte</td>
+        </tr>
+        <tr>
+            <td>short</td><td>2 byte</td><td>-32.768 đến 32.767</td><td>Short</td>
+        </tr>
+        <tr>
+            <td>int</td><td>4 byte</td><td>-2^31 đến 2^31 - 1</td><td>Integer</td>
+        </tr>
+        <tr>
+            <td>long</td><td>8 byte</td><td>-2^63 đến 2^63 - 1</td><td>Long</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Số thực</td>
+            <td>float</td><td>4 byte</td><td>~ ±3.4e-38 đến ±3.4e+38</td><td>Float</td>
+        </tr>
+        <tr>
+            <td>double</td><td>8 byte</td><td>~ ±1.7e-308 đến ±1.7e+308</td><td>Double</td>
+        </tr>
+        <tr>
+            <td>Ký tự</td><td>char</td><td>2 byte</td>
+            <td>0 đến 65.535 (Unicode)</td><td>Character</td>
+        </tr>
+        <tr>
+            <td>Logic</td><td>boolean</td><td>1 bit</td>
+            <td>true / false</td><td>Boolean</td>
+        </tr>
+    </table>
+
+    <h4>2.3.2. Lưu ý khi dùng từng kiểu</h4>
+    <ul>
+        <li><b>int</b> là kiểu số nguyên được dùng phổ biến nhất.</li>
+        <li>Khi gán giá trị vượt miền của <code>int</code> cho <code>long</code>,
+            phải thêm hậu tố <code>L</code>: <code>long l = 10000000000L;</code></li>
+        <li>Khi gán giá trị thực cho <code>float</code>, phải thêm hậu tố <code>f</code>:
+            <code>float f = 3.14f;</code> – nếu không, Java hiểu là <code>double</code> và báo lỗi.</li>
+        <li><b>char</b> lưu một ký tự Unicode trong dấu nháy đơn: <code>'A'</code>, <code>'9'</code>,
+            <code>'\n'</code>, <code>'\u0041'</code>.</li>
+        <li><b>boolean</b> chỉ có hai giá trị <code>true</code> / <code>false</code>
+            (không dùng 0/1 như C).</li>
+    </ul>
+
+    <h4>2.3.3. Ví dụ khai báo đúng / sai</h4>
+    <pre>
+int a = 10;                 // OK
+long b = 10000000000L;      // OK (có L)
+float f = 3.14f;            // OK (có f)
+char c = 'J';               // OK
+boolean ok = true;          // OK
+
+// long b = 10000000000;    // LỖI: vượt miền int
+// float f = 3.14;          // LỖI: 3.14 mặc định là double
+// char c = "J";            // LỖI: nháy kép là String
+// boolean b2 = 1;          // LỖI: không dùng 0/1
+    </pre>
+
+    <hr>
+
+    <h3>2.4. Kiểu dữ liệu tham chiếu và lớp bao (Wrapper Class)</h3>
+
+    <h4>2.4.1. Kiểu tham chiếu</h4>
+    <p>
+        Kiểu tham chiếu lưu <b>địa chỉ</b> (tham chiếu) tới đối tượng trong bộ nhớ heap,
+        không lưu trực tiếp giá trị như kiểu nguyên thủy. Các kiểu tham chiếu phổ biến:
+        <code>String</code>, mảng, lớp, interface, enum…
+    </p>
+
+    <h4>2.4.2. Lớp bao (Wrapper Class)</h4>
+    <p>
+        Mỗi kiểu nguyên thủy đều có một <b>lớp bao</b> tương ứng trong gói <code>java.lang</code>.
+        Lớp bao cung cấp thêm các phương thức tiện ích và cho phép dùng kiểu nguyên thủy
+        trong các cấu trúc chỉ nhận đối tượng (như <code>ArrayList</code>, <code>HashMap</code>…).
+    </p>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Kiểu nguyên thủy</th><th>Lớp bao</th><th>Ví dụ</th></tr>
+        <tr><td>int</td><td>Integer</td><td>Integer x = 10;</td></tr>
+        <tr><td>double</td><td>Double</td><td>Double d = 3.14;</td></tr>
+        <tr><td>char</td><td>Character</td><td>Character c = 'A';</td></tr>
+        <tr><td>boolean</td><td>Boolean</td><td>Boolean b = true;</td></tr>
+    </table>
+
+    <h4>2.4.3. Autoboxing và Unboxing</h4>
+    <ul>
+        <li><b>Autoboxing</b>: tự động chuyển từ kiểu nguyên thủy → lớp bao.</li>
+        <li><b>Unboxing</b>: tự động chuyển từ lớp bao → kiểu nguyên thủy.</li>
+    </ul>
+    <pre>
+Integer a = 100;         // autoboxing: int → Integer
+int b = a;               // unboxing: Integer → int
+
+ArrayList&lt;Integer&gt; ds = new ArrayList&lt;&gt;();
+ds.add(5);               // autoboxing: 5 → Integer
+int x = ds.get(0);       // unboxing
+    </pre>
+    <p>
+        <b>Cảnh báo:</b> khi unboxing một đối tượng <code>null</code> sẽ gây
+        <code>NullPointerException</code>. Ví dụ: <code>Integer z = null; int t = z;</code> → lỗi.
+    </p>
+
+    <hr>
+
+    <h3>2.5. Kiểu <code>String</code> và các phương thức phổ biến</h3>
+
+    <h4>2.5.1. Đặc điểm của String</h4>
+    <ul>
+        <li><code>String</code> là <b>lớp bất biến (immutable)</b> – một khi tạo ra, nội dung
+            không thể thay đổi. Mọi "thay đổi" thực chất là tạo đối tượng mới.</li>
+        <li>Chuỗi ký tự được đặt trong dấu nháy kép <code>"..."</code>.</li>
+        <li>Java có <b>String Pool</b>: các chuỗi literal giống nhau được chia sẻ cùng một đối tượng.</li>
+    </ul>
+
+    <h4>2.5.2. So sánh chuỗi: <code>==</code> và <code>equals()</code></h4>
+    <pre>
+String a = "Java";
+String b = "Java";
+String c = new String("Java");
+
+System.out.println(a == b);            // true  (cùng tham chiếu trong pool)
+System.out.println(a == c);            // false (c là đối tượng mới)
+System.out.println(a.equals(c));       // true  (so sánh nội dung)
+System.out.println(a.equalsIgnoreCase("JAVA")); // true
+    </pre>
+    <p><b>Quy tắc:</b> luôn dùng <code>equals()</code> để so sánh nội dung chuỗi,
+        không dùng <code>==</code>.</p>
+
+    <h4>2.5.3. Bảng phương thức String thường dùng</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Phương thức</th><th>Chức năng</th><th>Ví dụ</th></tr>
+        <tr><td>length()</td><td>Độ dài chuỗi</td><td>"Java".length() → 4</td></tr>
+        <tr><td>charAt(i)</td><td>Ký tự tại vị trí i</td><td>"Java".charAt(1) → 'a'</td></tr>
+        <tr><td>substring(a, b)</td><td>Chuỗi con từ a đến b-1</td><td>"Java".substring(0,2) → "Ja"</td></tr>
+        <tr><td>indexOf(s)</td><td>Vị trí đầu tiên của s</td><td>"Java".indexOf('a') → 1</td></tr>
+        <tr><td>lastIndexOf(s)</td><td>Vị trí cuối của s</td><td>"Java".lastIndexOf('a') → 3</td></tr>
+        <tr><td>toUpperCase()</td><td>Chuyển thành chữ hoa</td><td>"java".toUpperCase() → "JAVA"</td></tr>
+        <tr><td>toLowerCase()</td><td>Chuyển thành chữ thường</td><td>"JAVA".toLowerCase() → "java"</td></tr>
+        <tr><td>trim()</td><td>Xóa khoảng trắng 2 đầu</td><td>"  Java  ".trim() → "Java"</td></tr>
+        <tr><td>replace(a, b)</td><td>Thay a bằng b</td><td>"Java".replace('a','o') → "Jovo"</td></tr>
+        <tr><td>contains(s)</td><td>Kiểm tra có chứa s</td><td>"Java".contains("av") → true</td></tr>
+        <tr><td>startsWith(s)</td><td>Bắt đầu bằng s?</td><td>"Java".startsWith("Ja") → true</td></tr>
+        <tr><td>endsWith(s)</td><td>Kết thúc bằng s?</td><td>"Java".endsWith("va") → true</td></tr>
+        <tr><td>split(delim)</td><td>Tách chuỗi theo dấu phân cách</td><td>"a,b,c".split(",") → ["a","b","c"]</td></tr>
+        <tr><td>equals(s)</td><td>So sánh nội dung</td><td>"Java".equals("Java") → true</td></tr>
+        <tr><td>isEmpty()</td><td>Chuỗi rỗng?</td><td>"".isEmpty() → true</td></tr>
+        <tr><td>concat(s)</td><td>Nối chuỗi</td><td>"Ja".concat("va") → "Java"</td></tr>
+        <tr><td>String.valueOf(x)</td><td>Chuyển giá trị sang String</td><td>String.valueOf(100) → "100"</td></tr>
+    </table>
+
+    <h4>2.5.4. Nối chuỗi và StringBuilder</h4>
+    <p>
+        Phép <code>+</code> khi dùng với chuỗi sẽ <b>tự động chuyển</b> giá trị các kiểu khác
+        sang chuỗi. Tuy nhiên, khi cần nối nhiều chuỗi trong vòng lặp, nên dùng
+        <code>StringBuilder</code> để tránh tạo quá nhiều đối tượng trung gian.
+    </p>
+    <pre>
+// Cách 1: nối bằng +
+String s = "";
+for (int i = 0; i &lt; 1000; i++) {
+    s += i;             // Tạo 1000 đối tượng mới – kém hiệu quả
+}
+
+// Cách 2: dùng StringBuilder – hiệu quả hơn
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i &lt; 1000; i++) {
+    sb.append(i);
+}
+String ketQua = sb.toString();
+    </pre>
+
+    <hr>
+
+    <h3>2.6. Chuyển đổi kiểu dữ liệu (Type Conversion)</h3>
+
+    <h4>2.6.1. Ép kiểu ngầm định (Widening)</h4>
+    <p>Từ kiểu nhỏ → kiểu lớn, Java tự động thực hiện. Lưu ý: khi chuyển từ số nguyên sang
+        <code>float</code>/<code>double</code>, giá trị có thể <b>bị mất độ chính xác</b>
+        nếu số nguyên có nhiều chữ số (ví dụ <code>int</code> → <code>float</code>).</p>
+    <pre>
+int i = 10;
+double d = i;         // int → double: 10.0
+long l = i;           // int → long
+float f = i;          // int → float
+    </pre>
+    <p>Thứ tự mở rộng hợp lệ:</p>
+    <pre>
+byte → short → int → long → float → double
+                char → int
+    </pre>
+
+    <h4>2.6.2. Ép kiểu tường minh (Narrowing)</h4>
+    <p>Từ kiểu lớn → kiểu nhỏ, <b>có thể mất dữ liệu</b>, phải ép bằng cú pháp <code>(kieuDuLieu)</code>.</p>
+    <pre>
+double d = 9.7;
+int i = (int) d;      // i = 9 (mất phần lẻ)
+
+long l = 1000L;
+byte b = (byte) l;    // ép về byte
+
+int x = 130;
+byte y = (byte) x;    // y = -126 (tràn số)
+    </pre>
+
+    <h4>2.6.3. Chuyển đổi giữa chuỗi và số</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Chuyển đổi</th><th>Cách làm</th><th>Ví dụ</th></tr>
+        <tr><td>String → int</td><td><code>Integer.parseInt(s)</code></td><td>Integer.parseInt("123") → 123</td></tr>
+        <tr><td>String → long</td><td><code>Long.parseLong(s)</code></td><td>Long.parseLong("1000") → 1000</td></tr>
+        <tr><td>String → double</td><td><code>Double.parseDouble(s)</code></td><td>Double.parseDouble("3.14") → 3.14</td></tr>
+        <tr><td>String → float</td><td><code>Float.parseFloat(s)</code></td><td>Float.parseFloat("1.5") → 1.5</td></tr>
+        <tr><td>int → String</td><td><code>String.valueOf(n)</code> hoặc <code>"" + n</code></td><td>String.valueOf(100) → "100"</td></tr>
+        <tr><td>double → String</td><td><code>String.valueOf(d)</code></td><td>String.valueOf(3.14) → "3.14"</td></tr>
+    </table>
+    <p>
+        <b>Lưu ý:</b> nếu chuỗi không phải số hợp lệ, các phương thức <code>parseXXX</code> sẽ ném ra
+        <code>NumberFormatException</code>. Cần dùng <code>try-catch</code> để xử lý.
+    </p>
+    <pre>
+try {
+    int n = Integer.parseInt("abc");   // Lỗi
+} catch (NumberFormatException e) {
+    System.out.println("Chuoi khong phai so!");
+}
+    </pre>
+
+    <hr>
+
+    <h3>2.7. Quy ước và thực hành tốt khi dùng biến</h3>
+
+    <h4>2.7.1. Quy tắc đặt tên biến</h4>
+    <ul>
+        <li>Bắt đầu bằng <b>chữ cái</b>, <code>_</code> hoặc <code>$</code>; <b>không</b> bắt đầu bằng chữ số.</li>
+        <li>Không chứa khoảng trắng, không dùng ký tự đặc biệt (trừ <code>_</code>, <code>$</code>).</li>
+        <li>Không trùng với <b>từ khóa</b> (<code>class</code>, <code>int</code>, <code>public</code>…).</li>
+        <li>Java <b>phân biệt hoa/thường</b> (<code>ten</code> khác <code>Ten</code>).</li>
+        <li>Đặt tên theo <b>camelCase</b> và có ý nghĩa: <code>hoTen</code>, <code>diemTrungBinh</code>…</li>
+    </ul>
+
+    <h4>2.7.2. Một số thực hành tốt</h4>
+    <ul>
+        <li>Ưu tiên khai báo biến <b>gần nơi sử dụng</b>, có phạm vi nhỏ nhất có thể.</li>
+        <li><b>Khởi tạo ngay</b> khi khai báo nếu đã biết giá trị.</li>
+        <li>Dùng <code>final</code> cho các giá trị không đổi để tránh gán nhầm.</li>
+        <li>Không dùng <code>==</code> để so sánh chuỗi – dùng <code>equals()</code>.</li>
+        <li>Đặt tên hằng bằng chữ HOA có dấu gạch dưới.</li>
+        <li>Tránh "magic number" – thay bằng hằng số có tên gợi nhớ.</li>
+    </ul>
+    <pre>
+// Kém rõ ràng
+if (diem &gt;= 5.0) { ... }
+
+// Tốt hơn
+final double DIEM_DAT = 5.0;
+if (diem &gt;= DIEM_DAT) { ... }
+    </pre>
+
+    <hr>
+
+    <h3>2.8. Ví dụ tổng hợp</h3>
+    <p>Chương trình minh họa khai báo biến, hằng, ép kiểu, xử lý chuỗi và wrapper class:</p>
+    <pre>
+import java.util.Scanner;
+
+public class BienVaKieuDuLieu {
+    static final double PI = 3.14159;
+    static int soLanChay = 0;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        soLanChay++;
+
+        // 1. Nhập dữ liệu
+        System.out.print("Nhap ho ten: ");
+        String hoTen = sc.nextLine();
+
+        System.out.print("Nhap tuoi: ");
+        int tuoi = sc.nextInt();
+
+        System.out.print("Nhap diem trung binh: ");
+        double diem = sc.nextDouble();
+
+        // 2. Ép kiểu
+        int diemNguyen = (int) diem;
+        long danSo = 8_000_000_000L;
+        Integer tuoiWrap = tuoi;             // autoboxing
+        int tuoiInt = tuoiWrap;              // unboxing
+
+        // 3. Xử lý chuỗi
+        String tenHoa = hoTen.toUpperCase();
+        String tenThuong = hoTen.toLowerCase();
+        boolean hopLe = hoTen.length() &gt; 0 &amp;&amp; !hoTen.trim().isEmpty();
+
+        // 4. Tính toán
+        double chuVi = 2 * PI * 5;
+        double thuong = (double) tuoi / 3;
+
+        // 5. Xuất kết quả
+        System.out.println("--- KET QUA ---");
+        System.out.println("Ho ten (hoa): " + tenHoa);
+        System.out.println("Ho ten (thuong): " + tenThuong);
+        System.out.println("Ten hop le: " + hopLe);
+        System.out.println("Tuoi: " + tuoiInt);
+        System.out.println("Diem (double): " + diem);
+        System.out.println("Diem (int): " + diemNguyen);
+        System.out.println("Dan so: " + danSo);
+        System.out.println("Thuong tuoi/3: " + thuong);
+        System.out.printf("Chu vi hinh tron r=5: %.2f%n", chuVi);
+        System.out.println("So lan chay: " + soLanChay);
+
+        sc.close();
+    }
+}
+    </pre>
+
+    <!-- ================== PHẦN BÀI TẬP – 4 MỨC ĐỘ ================== -->
+    <h2>PHẦN BÀI TẬP (4 MỨC ĐỘ)</h2>
+    <p>Bài tập được chia thành 4 mức từ dễ đến khó. Sinh viên nên làm tuần tự từ mức 1 đến mức 4. Mỗi bài đều có lời giải ẩn trong nút "Xem lời giải".</p>
+
+    <!-- ========== MỨC 1 ========== -->
+    <h3>🟢 MỨC 1 – NHẬN BIẾT (Dễ)</h3>
+    <p><i>Mục tiêu: Ghi nhớ khái niệm biến, kiểu dữ liệu, hằng số, giá trị mặc định.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Biến cục bộ (local variable) trong Java có giá trị mặc định là gì?
+            <br>A. 0 &nbsp; B. null &nbsp; C. false &nbsp; D. Không có giá trị mặc định
+        </li>
+        <li>Khai báo nào sau đây <b>hợp lệ</b>?
+            <br>A. <code>float f = 3.14;</code> &nbsp; B. <code>long l = 10000000000;</code>
+            <br>C. <code>float f = 3.14f;</code> &nbsp; D. <code>char c = "A";</code>
+        </li>
+        <li>Từ khóa <code>final</code> dùng để:
+            <br>A. Khai báo hằng số &nbsp; B. Khai báo biến toàn cục
+            <br>C. Kết thúc chương trình &nbsp; D. Khai báo lớp kế thừa
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>D – Biến cục bộ không có giá trị mặc định</li>
+            <li>C – Phải có hậu tố <code>f</code> cho <code>float</code></li>
+            <li>A – Khai báo hằng số</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 1.1.</b> Khai báo các biến thuộc 8 kiểu nguyên thủy với giá trị tùy ý, sau đó in ra màn hình theo mẫu: <code>Kieu du lieu X co gia tri = ...</code></p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_1 {
+    public static void main(String[] args) {
+        byte b = 100;
+        short s = 1000;
+        int i = 2024;
+        long l = 10000000000L;
+        float f = 3.14f;
+        double d = 3.14159;
+        char c = 'J';
+        boolean ok = true;
+
+        System.out.println("byte    = " + b);
+        System.out.println("short   = " + s);
+        System.out.println("int     = " + i);
+        System.out.println("long    = " + l);
+        System.out.println("float   = " + f);
+        System.out.println("double  = " + d);
+        System.out.println("char    = " + c);
+        System.out.println("boolean = " + ok);
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 1.2.</b> Khai báo hằng <code>PI = 3.14159</code> và hằng <code>R = 5.0</code>. Tính và in chu vi, diện tích hình tròn (làm tròn 2 chữ số).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_2 {
+    public static void main(String[] args) {
+        final double PI = 3.14159;
+        final double R  = 5.0;
+
+        double chuVi    = 2 * PI * R;
+        double dienTich = PI * R * R;
+
+        System.out.printf("Chu vi     = %.2f%n", chuVi);
+        System.out.printf("Dien tich  = %.2f%n", dienTich);
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 2 ========== -->
+    <h3>🟡 MỨC 2 – THÔNG HIỂU (Trung bình)</h3>
+    <p><i>Mục tiêu: Hiểu ép kiểu, wrapper class, các phương thức String cơ bản.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Cho <code>double d = 9.99; int i = (int) d;</code> Giá trị của <code>i</code> là:
+            <br>A. 9 &nbsp; B. 10 &nbsp; C. 9.99 &nbsp; D. Lỗi biên dịch
+        </li>
+        <li>Phương thức nào dùng để lấy độ dài của chuỗi?
+            <br>A. <code>size()</code> &nbsp; B. <code>length()</code> &nbsp; C. <code>count()</code> &nbsp; D. <code>getLength()</code>
+        </li>
+        <li>Cơ chế tự động chuyển từ <code>int</code> sang <code>Integer</code> gọi là:
+            <br>A. Casting &nbsp; B. Unboxing &nbsp; C. Autoboxing &nbsp; D. Parsing
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>A – 9 (ép kiểu tường minh cắt phần lẻ)</li>
+            <li>B – <code>length()</code></li>
+            <li>C – Autoboxing</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 2.1.</b> Khai báo <code>double d = 9.99;</code>, ép sang <code>int</code> và in cả hai giá trị. Sau đó khai báo <code>int x = 130;</code>, ép sang <code>byte</code> và in ra để thấy hiện tượng tràn số.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai2_1 {
+    public static void main(String[] args) {
+        double d = 9.99;
+        int i = (int) d;
+        System.out.println("double d = " + d);
+        System.out.println("int i    = " + i);      // 9 - mất phần lẻ
+
+        int x = 130;
+        byte y = (byte) x;
+        System.out.println("int x  = " + x);
+        System.out.println("byte y = " + y);        // -126 - tràn số
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.2.</b> Nhập vào một chuỗi họ tên. In ra: độ dài chuỗi, chuỗi in hoa, chuỗi in thường, ký tự đầu, ký tự cuối, chuỗi sau khi xóa khoảng trắng hai đầu.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap ho ten: ");
+        String hoTen = sc.nextLine();
+
+        System.out.println("Do dai       : " + hoTen.length());
+        System.out.println("In hoa       : " + hoTen.toUpperCase());
+        System.out.println("In thuong    : " + hoTen.toLowerCase());
+
+        if (hoTen.length() > 0) {
+            System.out.println("Ky tu dau    : " + hoTen.charAt(0));
+            System.out.println("Ky tu cuoi   : " + hoTen.charAt(hoTen.length() - 1));
+        }
+
+        System.out.println("Sau khi trim : '" + hoTen.trim() + "'");
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.3.</b> Khai báo <code>Integer a = 100;</code> (autoboxing), gán sang <code>int b</code> (unboxing). In ra tổng <code>a + b</code>. In giá trị lớn nhất / nhỏ nhất của <code>Integer</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai2_3 {
+    public static void main(String[] args) {
+        Integer a = 100;        // autoboxing
+        int b = a;              // unboxing
+
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+        System.out.println("a + b = " + (a + b));
+        System.out.println("MAX = " + Integer.MAX_VALUE);
+        System.out.println("MIN = " + Integer.MIN_VALUE);
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 3 ========== -->
+    <h3>🟠 MỨC 3 – VẬN DỤNG (Khó)</h3>
+    <p><i>Mục tiêu: So sánh chuỗi đúng cách, parse số, xử lý ngoại lệ, static vs instance.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đoạn code sau in ra gì?
+            <pre>
+String a = "Java";
+String b = new String("Java");
+System.out.println(a == b);
+System.out.println(a.equals(b));</pre>
+            A. true / true &nbsp; B. false / true &nbsp; C. true / false &nbsp; D. false / false
+        </li>
+        <li>Từ khóa <code>static</code> khi gắn với biến có ý nghĩa gì?
+            <br>A. Biến chỉ đọc &nbsp; B. Biến dùng chung cho mọi đối tượng của lớp
+            <br>C. Biến cục bộ trong phương thức &nbsp; D. Biến không thể khởi tạo
+        </li>
+        <li>Đoạn code sau gây ra lỗi gì?
+            <pre>
+Integer x = null;
+int y = x;</pre>
+            A. Lỗi biên dịch &nbsp; B. <code>NullPointerException</code>
+            <br>C. <code>NumberFormatException</code> &nbsp; D. Không lỗi, y = 0
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – <code>==</code> so sánh tham chiếu (false), <code>equals()</code> so sánh nội dung (true)</li>
+            <li>B – Biến tĩnh dùng chung cho mọi đối tượng</li>
+            <li>B – Unboxing <code>null</code> gây <code>NullPointerException</code></li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 3.1.</b> Khai báo <code>String a = "Hello";</code>, <code>String b = "Hello";</code>, <code>String c = new String("Hello");</code>. In kết quả so sánh <code>a == b</code>, <code>a == c</code>, <code>a.equals(c)</code> và giải thích bằng chú thích trong code.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai3_1 {
+    public static void main(String[] args) {
+        String a = "Hello";
+        String b = "Hello";
+        String c = new String("Hello");
+
+        // a và b cùng trỏ tới literal trong String Pool
+        System.out.println("a == b        : " + (a == b));   // true
+
+        // c là đối tượng mới trên heap → tham chiếu khác
+        System.out.println("a == c        : " + (a == c));   // false
+
+        // equals() so sánh nội dung
+        System.out.println("a.equals(c)   : " + a.equals(c)); // true
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.2.</b> Nhập vào hai chuỗi số (ví dụ <code>"12"</code> và <code>"8"</code>). Chuyển sang số nguyên bằng <code>Integer.parseInt()</code>, in tổng, hiệu, tích, thương. Thử nhập chuỗi không hợp lệ như <code>"abc"</code> để thấy <code>NumberFormatException</code> và xử lý bằng <code>try-catch</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap chuoi so 1: ");
+        String s1 = sc.nextLine();
+        System.out.print("Nhap chuoi so 2: ");
+        String s2 = sc.nextLine();
+
+        try {
+            int a = Integer.parseInt(s1);
+            int b = Integer.parseInt(s2);
+
+            System.out.println("Tong  = " + (a + b));
+            System.out.println("Hieu  = " + (a - b));
+            System.out.println("Tich  = " + (a * b));
+
+            if (b != 0) {
+                System.out.println("Thuong = " + ((double) a / b));
+            } else {
+                System.out.println("Khong the chia cho 0");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Chuoi nhap vao khong phai so hop le!");
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.3.</b> Tạo lớp <code>Dem</code> có biến <code>static int soLuong</code> và biến <code>int maSo</code>. Trong hàm tạo, tăng <code>soLuong</code> và gán <code>maSo = soLuong</code>. Tạo 3 đối tượng và in ra <code>soLuong</code>, <code>maSo</code> của từng đối tượng để thấy sự khác biệt giữa biến static và biến instance.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai3_3 {
+    static class Dem {
+        static int soLuong = 0;   // dùng chung
+        int maSo;                 // riêng từng đối tượng
+
+        Dem() {
+            soLuong++;
+            maSo = soLuong;
+        }
+    }
+
+    public static void main(String[] args) {
+        Dem d1 = new Dem();
+        Dem d2 = new Dem();
+        Dem d3 = new Dem();
+
+        System.out.println("d1: maSo = " + d1.maSo + ", soLuong = " + Dem.soLuong);
+        System.out.println("d2: maSo = " + d2.maSo + ", soLuong = " + Dem.soLuong);
+        System.out.println("d3: maSo = " + d3.maSo + ", soLuong = " + Dem.soLuong);
+        // soLuong = 3 cho cả 3, maSo lần lượt 1, 2, 3
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 4 ========== -->
+    <h3>🔴 MỨC 4 – VẬN DỤNG CAO (Rất khó)</h3>
+    <p><i>Mục tiêu: Tổng hợp String, StringBuilder, var, xử lý chuỗi phức tạp.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Từ khóa <code>var</code> (Java 10+) <b>không</b> dùng được trong trường hợp nào?
+            <br>A. Biến cục bộ trong phương thức &nbsp; B. Thuộc tính của lớp
+            <br>C. Biến trong khối lệnh &nbsp; D. Biến trong vòng lặp for
+        </li>
+        <li>Đoạn code sau in ra gì?
+            <pre>
+String s = "Java";
+s.toUpperCase();
+System.out.println(s);</pre>
+            A. JAVA &nbsp; B. Java &nbsp; C. java &nbsp; D. Lỗi
+        </li>
+        <li>Để nối nhiều chuỗi trong vòng lặp hiệu quả, nên dùng:
+            <br>A. Phép <code>+</code> &nbsp; B. <code>String.concat()</code>
+            <br>C. <code>StringBuilder</code> &nbsp; D. <code>String.format()</code>
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – <code>var</code> chỉ dùng cho biến cục bộ</li>
+            <li>B – <code>String</code> bất biến, <code>toUpperCase()</code> trả về chuỗi mới chứ không thay đổi <code>s</code></li>
+            <li>C – <code>StringBuilder</code></li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 4.1.</b> Nhập một chuỗi, đếm xem chuỗi có bao nhiêu ký tự là nguyên âm (a, e, i, o, u – không phân biệt hoa/thường).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap chuoi: ");
+        String s = sc.nextLine().toLowerCase();
+
+        int dem = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                dem++;
+            }
+        }
+
+        System.out.println("So nguyen am = " + dem);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.2.</b> Nhập một chuỗi họ tên, in ra tên (phần sau khoảng trắng cuối cùng) và họ (phần trước khoảng trắng đầu tiên).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap ho ten: ");
+        String hoTen = sc.nextLine().trim();
+
+        int viTriCuoi = hoTen.lastIndexOf(' ');
+        int viTriDau  = hoTen.indexOf(' ');
+
+        if (viTriCuoi == -1) {
+            System.out.println("Chi co mot tu: " + hoTen);
+        } else {
+            String ho  = hoTen.substring(0, viTriDau);
+            String ten = hoTen.substring(viTriCuoi + 1);
+            System.out.println("Ho  : " + ho);
+            System.out.println("Ten : " + ten);
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.3.</b> <b>Bài tổng hợp:</b> Dùng <code>var</code> để khai báo biến cục bộ. Dùng <code>StringBuilder</code> để nối các số từ 1 đến 10 thành chuỗi <code>"1,2,3,...,10"</code>. Sau đó tách chuỗi này theo dấu phẩy, chuyển từng phần tử sang số nguyên và tính tổng.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai4_3 {
+    public static void main(String[] args) {
+        // 1. Dùng var + StringBuilder nối chuỗi
+        var sb = new StringBuilder();
+        for (int i = 1; i <= 10; i++) {
+            if (i > 1) sb.append(",");
+            sb.append(i);
+        }
+        var chuoi = sb.toString();
+        System.out.println("Chuoi: " + chuoi);
+
+        // 2. Tách chuỗi theo dấu phẩy
+        var parts = chuoi.split(",");
+
+        // 3. Chuyển sang số và tính tổng
+        int tong = 0;
+        for (var p : parts) {
+            tong += Integer.parseInt(p);
+        }
+        System.out.println("Tong = " + tong);   // 55
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.4.</b> <b>Bài thách thức:</b> Viết chương trình nhập vào một câu văn. In ra câu văn đó với mỗi từ được viết hoa chữ cái đầu (ví dụ: <code>"hello world java"</code> → <code>"Hello World Java"</code>). Dùng <code>split()</code> và <code>StringBuilder</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap cau: ");
+        String cau = sc.nextLine().trim().toLowerCase();
+
+        var sb = new StringBuilder();
+        var tu = cau.split("\\s+");
+
+        for (int i = 0; i < tu.length; i++) {
+            if (tu[i].length() > 0) {
+                sb.append(Character.toUpperCase(tu[i].charAt(0)));
+                sb.append(tu[i].substring(1));
+            }
+            if (i < tu.length - 1) sb.append(" ");
+        }
+
+        System.out.println("Ket qua: " + sb);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <hr>
+
+    <!-- ================== TỔNG KẾT CHƯƠNG ================== -->
+    <h2>Tổng kết chương 2</h2>
+    <ul>
+        <li>Biến có 3 loại theo phạm vi: <b>cục bộ</b>, <b>thực thể</b>, <b>tĩnh</b>; biến cục bộ không có giá trị mặc định.</li>
+        <li>Hằng số dùng <code>final</code>, tên viết HOA có dấu gạch dưới.</li>
+        <li>Java có <b>8 kiểu nguyên thủy</b>, mỗi kiểu có lớp bao tương ứng trong <code>java.lang</code>.</li>
+        <li>Autoboxing / unboxing giúp chuyển đổi tự động giữa primitive và wrapper.</li>
+        <li><code>String</code> là <b>bất biến</b>; so sánh nội dung bằng <code>equals()</code>, không dùng <code>==</code>.</li>
+        <li>Nối nhiều chuỗi nên dùng <code>StringBuilder</code> để tăng hiệu năng.</li>
+        <li>Ép kiểu ngầm định an toàn, ép kiểu tường minh có thể mất dữ liệu.</li>
+        <li>Chuyển chuỗi ↔ số dùng <code>parseXXX</code> / <code>String.valueOf()</code>; cần xử lý <code>NumberFormatException</code>.</li>
+        <li>Dùng <code>var</code> (Java 10+) cho biến cục bộ khi kiểu đã rõ ràng.</li>
+    </ul>
+
+    <hr>
+    <p align="center">
+        <i>— Hết Chương 2 —</i><br>
+        <a href="index.html">Quay lại Trang chủ</a> |
+        <a href="chuong1.html">← Chương 1</a> |
+        <a href="chuong3.html">Chương 3 →</a>
+    </p>
+<script src="app.js"></script>
+</body>
+</html>

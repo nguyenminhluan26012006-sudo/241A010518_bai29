@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chấm điểm - Java Learning Hub</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="bai29.html#chapters">Lý thuyết</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <h2>✅ Chấm Điểm Trực Tiếp</h2>
+    <p>
+      Xem danh sách bài nộp của sinh viên và chấm điểm theo
+      <strong>5 bộ test</strong> (mỗi test đúng = <strong>2 điểm</strong>).
+    </p>
+
+    <p>
+      <a href="gv_dashboard.html">← Quay lại Dashboard Giáo viên</a> |
+      <a href="gv_tao_baitap.html">📝 Tạo bài tập</a> |
+      <a href="gv_tao_dethi.html">📋 Tạo đề thi</a>
+    </p>
+
+    <hr>
+
+    <!-- ========== THỐNG KÊ NHANH ========== -->
+    <section>
+      <h3>📊 Thống Kê Nhanh</h3>
+      <p><em>Ghi chú: Số liệu minh họa — không đếm động được với HTML thuần.</em></p>
+
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Hạng mục</th>
+            <th>Số lượng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>📥 Tổng bài nộp</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>✅ Đã chấm</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>⏳ Chờ chấm</td>
+            <td>3</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- ========== BỘ LỌC (MINH HỌA) ========== -->
+    <section>
+      <h3>🔍 Lọc bài nộp</h3>
+      <p><em>Ghi chú: Bộ lọc minh họa — với HTML thuần chưa lọc động được.</em></p>
+
+      <form>
+        <fieldset>
+          <legend>Điều kiện lọc</legend>
+
+          <p>
+            <label for="loc_mssv">MSSV:</label><br>
+            <input type="text" id="loc_mssv" name="loc_mssv"
+                   placeholder="VD: 20210001" size="30" maxlength="20">
+          </p>
+
+          <p>
+            <label for="loc_hoten">Họ tên:</label><br>
+            <input type="text" id="loc_hoten" name="loc_hoten"
+                   placeholder="VD: Nguyễn Văn A" size="30" maxlength="80">
+          </p>
+
+          <p>
+            <label for="loc_de">Đề thi:</label><br>
+            <select id="loc_de" name="loc_de">
+              <option value="">-- Tất cả đề --</option>
+              <option value="KT01">KT01 - Kiểm tra 15 phút Chương 1</option>
+              <option value="KT02">KT02 - Kiểm tra 15 phút Chương 2</option>
+              <option value="THI01">THI01 - Thi giữa kỳ</option>
+              <option value="THI02">THI02 - Thi cuối kỳ</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="loc_trangthai">Trạng thái:</label><br>
+            <select id="loc_trangthai" name="loc_trangthai">
+              <option value="">-- Tất cả --</option>
+              <option value="cho_cham">⏳ Chờ chấm</option>
+              <option value="da_cham">✅ Đã chấm</option>
+            </select>
+          </p>
+
+          <p>
+            <button type="submit">🔍 Lọc</button>
+            <button type="reset">Xóa bộ lọc</button>
+          </p>
+        </fieldset>
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ========== DANH SÁCH BÀI NỘP ========== -->
+    <section>
+      <h3>📥 Danh sách bài nộp</h3>
+      <p>
+        <em>
+          Ghi chú: Bảng dưới đây là <strong>dữ liệu mẫu</strong>.
+          Với HTML thuần, bài nộp thật của SV <strong>không tự động xuất hiện</strong> ở đây —
+          Giáo viên cần <strong>cập nhật thủ công</strong> sau khi SV nộp bài.
+        </em>
+      </p>
+
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>MSSV</th>
+            <th>Họ tên</th>
+            <th>Đề thi</th>
+            <th>Bài làm</th>
+            <th>Thời gian nộp</th>
+            <th>Điểm</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>20210001</td>
+            <td>Nguyễn Văn A</td>
+            <td>KT01</td>
+            <td>D1</td>
+            <td>2024-06-01 09:15</td>
+            <td>10</td>
+            <td>✅ Đã chấm</td>
+            <td><a href="#form-cham">Chấm lại</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>20210002</td>
+            <td>Trần Thị B</td>
+            <td>KT01</td>
+            <td>D1</td>
+            <td>2024-06-01 09:20</td>
+            <td>8</td>
+            <td>✅ Đã chấm</td>
+            <td><a href="#form-cham">Chấm lại</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>20210003</td>
+            <td>Lê Văn C</td>
+            <td>KT02</td>
+            <td>D2</td>
+            <td>2024-06-01 09:25</td>
+            <td>—</td>
+            <td>⏳ Chờ chấm</td>
+            <td><a href="#form-cham">Chấm ngay</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>20210004</td>
+            <td>Phạm Thị D</td>
+            <td>THI01</td>
+            <td>TB1, K1</td>
+            <td>2024-06-01 09:30</td>
+            <td>—</td>
+            <td>⏳ Chờ chấm</td>
+            <td><a href="#form-cham">Chấm ngay</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>20210005</td>
+            <td>Hoàng Văn E</td>
+            <td>THI02</td>
+            <td>D3, TB2, K2</td>
+            <td>2024-06-01 09:35</td>
+            <td>—</td>
+            <td>⏳ Chờ chấm</td>
+            <td><a href="#form-cham">Chấm ngay</a></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="8">Tổng cộng: 5 bài nộp</th>
+            <th>—</th>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- ========== FORM CHẤM ĐIỂM CHI TIẾT ========== -->
+    <section id="form-cham">
+      <h3>📝 Chấm điểm chi tiết</h3>
+      <p>
+        Chọn 1 bài nộp ở bảng trên, sau đó nhập điểm cho từng test.
+        Mỗi test đúng = <strong>2 điểm</strong>, tối đa <strong>10 điểm/bài</strong>.
+      </p>
+
+      <form action="gv_chamdiem_thanhcong.html" method="get">
+
+        <!-- Thông tin bài nộp -->
+        <fieldset>
+          <legend>1️⃣ Thông tin bài nộp</legend>
+
+          <p>
+            <label for="cham_mssv">MSSV:</label><br>
+            <input type="text" id="cham_mssv" name="cham_mssv"
+                   placeholder="VD: 20210003" size="30" maxlength="20" required>
+          </p>
+
+          <p>
+            <label for="cham_hoten">Họ tên:</label><br>
+            <input type="text" id="cham_hoten" name="cham_hoten"
+                   placeholder="VD: Lê Văn C" size="40" maxlength="80" required>
+          </p>
+
+          <p>
+            <label for="cham_de">Đề thi:</label><br>
+            <select id="cham_de" name="cham_de" required>
+              <option value="">-- Chọn đề --</option>
+              <option value="KT01">KT01 - Kiểm tra 15 phút Chương 1</option>
+              <option value="KT02">KT02 - Kiểm tra 15 phút Chương 2</option>
+              <option value="THI01">THI01 - Thi giữa kỳ</option>
+              <option value="THI02">THI02 - Thi cuối kỳ</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="cham_bai">Bài làm:</label><br>
+            <input type="text" id="cham_bai" name="cham_bai"
+                   placeholder="VD: D2" size="20" maxlength="10" required>
+          </p>
+        </fieldset>
+
+        <br>
+
+        <!-- 5 test -->
+        <fieldset>
+          <legend>2️⃣ Chấm điểm 5 test</legend>
+
+          <p><em>Đánh dấu ✅ nếu test đúng (2 điểm), bỏ trống nếu sai (0 điểm).</em></p>
+
+          <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Test</th>
+                <th>Input</th>
+                <th>Output mong đợi</th>
+                <th>Output của SV</th>
+                <th>Đúng?</th>
+                <th>Điểm</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Test 1</td>
+                <td>3 5</td>
+                <td>8</td>
+                <td><input type="text" name="out_sv_1" placeholder="Nhập output SV" size="20"></td>
+                <td><input type="checkbox" name="dung_1" value="1"></td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>Test 2</td>
+                <td>-10 4</td>
+                <td>-6</td>
+                <td><input type="text" name="out_sv_2" placeholder="Nhập output SV" size="20"></td>
+                <td><input type="checkbox" name="dung_2" value="1"></td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>Test 3</td>
+                <td>0 0</td>
+                <td>0</td>
+                <td><input type="text" name="out_sv_3" placeholder="Nhập output SV" size="20"></td>
+                <td><input type="checkbox" name="dung_3" value="1"></td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>Test 4</td>
+                <td>1000000 2000000</td>
+                <td>3000000</td>
+                <td><input type="text" name="out_sv_4" placeholder="Nhập output SV" size="20"></td>
+                <td><input type="checkbox" name="dung_4" value="1"></td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>Test 5</td>
+                <td>-5 -7</td>
+                <td>-12</td>
+                <td><input type="text" name="out_sv_5" placeholder="Nhập output SV" size="20"></td>
+                <td><input type="checkbox" name="dung_5" value="1"></td>
+                <td>2</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan="5">Tổng điểm (nhập tay)</th>
+                <th>
+                  <input type="number" name="tong_diem" min="0" max="10" step="2" placeholder="0–10" size="5" required>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+
+          <p>
+            <small>
+              <em>
+                Lưu ý: Với HTML thuần, tổng điểm phải <strong>nhập tay</strong>
+                (không tự cộng). Giáo viên tự đếm số test đúng × 2.
+              </em>
+            </small>
+          </p>
+        </fieldset>
+
+        <br>
+
+        <!-- Nhận xét -->
+        <fieldset>
+          <legend>3️⃣ Nhận xét (tùy chọn)</legend>
+          <p>
+            <label for="nhan_xet">Nhận xét của Giáo viên:</label><br>
+            <textarea id="nhan_xet" name="nhan_xet"
+                      rows="4" cols="100"
+                      placeholder="VD: Code chạy đúng 4/5 test. Test 5 sai do chưa xử lý số âm."></textarea>
+          </p>
+        </fieldset>
+
+        <br>
+
+        <!-- Nút lưu -->
+        <p>
+          <button type="submit">💾 Lưu điểm</button>
+          <button type="reset">Xóa form</button>
+        </p>
+
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ========== HƯỚNG DẪN ========== -->
+    <section>
+      <h3>📌 Hướng dẫn chấm điểm</h3>
+      <ol>
+        <li>
+          <strong>Xem danh sách bài nộp:</strong> Ở bảng phía trên, tìm bài nộp cần chấm.
+        </li>
+        <li>
+          <strong>Nhập thông tin bài nộp:</strong> MSSV, họ tên, đề thi, bài làm
+          vào form chấm điểm.
+        </li>
+        <li>
+          <strong>Chấm từng test:</strong> So sánh output của SV với output mong đợi.
+          Tick ✅ nếu đúng.
+        </li>
+        <li>
+          <strong>Nhập tổng điểm:</strong> Tự đếm số test đúng × 2 (VD: 4 test đúng = 8 điểm).
+        </li>
+        <li>
+          <strong>Nhận xét (tùy chọn):</strong> Ghi chú lỗi sai hoặc điểm mạnh của SV.
+        </li>
+        <li>
+          <strong>Bấm "Lưu điểm":</strong> Hệ thống ghi nhận (chuyển trang xác nhận).
+        </li>
+        <li>
+          <strong>Cập nhật thủ công:</strong> Với HTML thuần, điểm <strong>không được lưu thật</strong> —
+          Giáo viên cần ghi lại vào file Excel/giấy hoặc cập nhật bảng danh sách ở trên.
+        </li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <!-- ========== ĐIỀU HƯỚNG ========== -->
+    <section>
+      <h3>🔗 Điều hướng</h3>
+      <ul>
+        <li><a href="gv_dashboard.html">← Quay lại Dashboard Giáo viên</a></li>
+        <li><a href="gv_tao_baitap.html">📝 Sang trang Tạo Bài Tập</a></li>
+        <li><a href="gv_tao_dethi.html">📋 Sang trang Tạo Đề Thi</a></li>
+        <li><a href="bai29.html">🏠 Về Trang chủ</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>
+      © 2024 <strong>Java Learning Hub</strong> — Website hỗ trợ dạy học môn Lập trình Java.
+    </p>
+    <p>
+      Liên hệ: <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>
+      | Hotline: 0123 456 789
+    </p>
+  </footer>
+<script src="app.js"></script>
+</body>
+</html>

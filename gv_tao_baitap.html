@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạo bài tập - Java Learning Hub</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="bai29.html#chapters">Lý thuyết</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <h2>📝 Tạo Bài Tập Mới</h2>
+    <p>
+      Nhập thông tin bài tập và <strong>5 bộ test</strong> (input/output).
+      Mỗi bộ test đúng = <strong>2 điểm</strong>, tổng tối đa <strong>10 điểm</strong>.
+    </p>
+
+    <p>
+      <a href="gv_dashboard.html">← Quay lại Dashboard Giáo viên</a>
+    </p>
+
+    <hr>
+
+    <!-- ================= FORM TẠO BÀI TẬP ================= -->
+    <form action="gv_tao_baitap_thanhcong.html" method="get">
+
+      <!-- ========== PHẦN 1: THÔNG TIN BÀI TẬP ========== -->
+      <fieldset>
+        <legend>1️⃣ Thông tin bài tập</legend>
+
+        <p>
+          <label for="ma_bai">Mã bài tập:</label><br>
+          <input type="text"
+                 id="ma_bai"
+                 name="ma_bai"
+                 placeholder="VD: D1, TB2, K3"
+                 size="20"
+                 maxlength="10"
+                 required>
+          <br>
+          <small>
+            <em>Quy ước: D = Dễ, TB = Trung bình, K = Khó + số thứ tự.</em>
+          </small>
+        </p>
+
+        <p>
+          <label for="tieu_de">Tiêu đề bài tập:</label><br>
+          <input type="text"
+                 id="tieu_de"
+                 name="tieu_de"
+                 placeholder="VD: Tính tổng hai số nguyên"
+                 size="60"
+                 maxlength="200"
+                 required>
+        </p>
+
+        <p>
+          <label for="mo_ta">Mô tả đề bài:</label><br>
+          <textarea id="mo_ta"
+                    name="mo_ta"
+                    rows="6"
+                    cols="100"
+                    placeholder="VD: Nhập 2 số nguyên a, b từ bàn phím. In ra tổng a + b.&#10;&#10;Input: 2 số nguyên a, b&#10;Output: Tổng a + b"
+                    required></textarea>
+        </p>
+
+        <p>
+          <strong>Mức độ:</strong><br>
+          <input type="radio" name="muc_do" value="de" id="md_de" required>
+          <label for="md_de">🟢 Dễ</label>
+          &nbsp;&nbsp;
+          <input type="radio" name="muc_do" value="trung_binh" id="md_tb">
+          <label for="md_tb">🟡 Trung bình</label>
+          &nbsp;&nbsp;
+          <input type="radio" name="muc_do" value="kho" id="md_kho">
+          <label for="md_kho">🔴 Khó</label>
+        </p>
+      </fieldset>
+
+      <br>
+
+      <!-- ========== PHẦN 2: 5 BỘ TEST ========== -->
+      <fieldset>
+        <legend>2️⃣ 5 bộ test (input / output)</legend>
+
+        <p>
+          <em>
+            Mỗi bộ test gồm <strong>input</strong> (dữ liệu vào) và
+            <strong>output</strong> (kết quả mong đợi).
+            Sinh viên nộp code đúng cả 5 test → 10 điểm.
+          </em>
+        </p>
+
+        <!-- ---------- TEST 1 ---------- -->
+        <article>
+          <h4>🧪 Test 1</h4>
+          <p>
+            <label for="input_1">Input 1:</label><br>
+            <textarea id="input_1"
+                      name="input_1"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: 3 5"
+                      required></textarea>
+          </p>
+          <p>
+            <label for="output_1">Output 1 (kết quả mong đợi):</label><br>
+            <textarea id="output_1"
+                      name="output_1"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: 8"
+                      required></textarea>
+          </p>
+        </article>
+
+        <!-- ---------- TEST 2 ---------- -->
+        <article>
+          <h4>🧪 Test 2</h4>
+          <p>
+            <label for="input_2">Input 2:</label><br>
+            <textarea id="input_2"
+                      name="input_2"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: -10 4"
+                      required></textarea>
+          </p>
+          <p>
+            <label for="output_2">Output 2:</label><br>
+            <textarea id="output_2"
+                      name="output_2"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: -6"
+                      required></textarea>
+          </p>
+        </article>
+
+        <!-- ---------- TEST 3 ---------- -->
+        <article>
+          <h4>🧪 Test 3</h4>
+          <p>
+            <label for="input_3">Input 3:</label><br>
+            <textarea id="input_3"
+                      name="input_3"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: 0 0"
+                      required></textarea>
+          </p>
+          <p>
+            <label for="output_3">Output 3:</label><br>
+            <textarea id="output_3"
+                      name="output_3"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: 0"
+                      required></textarea>
+          </p>
+        </article>
+
+        <!-- ---------- TEST 4 ---------- -->
+        <article>
+          <h4>🧪 Test 4</h4>
+          <p>
+            <label for="input_4">Input 4:</label><br>
+            <textarea id="input_4"
+                      name="input_4"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: 1000000 2000000"
+                      required></textarea>
+          </p>
+          <p>
+            <label for="output_4">Output 4:</label><br>
+            <textarea id="output_4"
+                      name="output_4"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: 3000000"
+                      required></textarea>
+          </p>
+        </article>
+
+        <!-- ---------- TEST 5 ---------- -->
+        <article>
+          <h4>🧪 Test 5</h4>
+          <p>
+            <label for="input_5">Input 5:</label><br>
+            <textarea id="input_5"
+                      name="input_5"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: -5 -7"
+                      required></textarea>
+          </p>
+          <p>
+            <label for="output_5">Output 5:</label><br>
+            <textarea id="output_5"
+                      name="output_5"
+                      rows="3"
+                      cols="80"
+                      placeholder="VD: -12"
+                      required></textarea>
+          </p>
+        </article>
+      </fieldset>
+
+      <br>
+
+      <!-- ========== NÚT LƯU ========== -->
+      <p>
+        <button type="submit">💾 Lưu bài tập</button>
+        <button type="reset">Xóa toàn bộ</button>
+      </p>
+
+    </form>
+
+    <hr>
+
+    <!-- ================= DANH SÁCH BÀI TẬP ĐÃ TẠO ================= -->
+    <section>
+      <h3>📋 Danh sách bài tập đã tạo</h3>
+      <p>
+        <em>
+          Ghi chú: Bảng dưới đây là <strong>dữ liệu mẫu</strong>.
+          Với HTML thuần, bài tập mới tạo <strong>không tự động xuất hiện</strong> ở đây —
+          Giáo viên cần <strong>cập nhật thủ công</strong> vào file HTML này
+          sau khi tạo bài tập mới.
+        </em>
+      </p>
+
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã bài</th>
+            <th>Tiêu đề</th>
+            <th>Mức độ</th>
+            <th>Số test</th>
+            <th>Điểm tối đa</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>D1</td>
+            <td>Tính tổng hai số nguyên</td>
+            <td>🟢 Dễ</td>
+            <td>5</td>
+            <td>10</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>D2</td>
+            <td>Kiểm tra số chẵn lẻ</td>
+            <td>🟢 Dễ</td>
+            <td>5</td>
+            <td>10</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>TB1</td>
+            <td>Tính tổng mảng</td>
+            <td>🟡 Trung bình</td>
+            <td>5</td>
+            <td>10</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>K1</td>
+            <td>Sắp xếp mảng tăng dần</td>
+            <td>🔴 Khó</td>
+            <td>5</td>
+            <td>10</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">Tổng cộng: 4 bài tập</th>
+            <th>20</th>
+            <th>—</th>
+            <th>—</th>
+          </tr>
+        </tfoot>
+      </table>
+
+      <p>
+        <em>
+          Các nút "Xem / Sửa / Xóa" chỉ là <strong>liên kết mẫu</strong> —
+          với HTML thuần, chúng chưa hoạt động thực tế.
+        </em>
+      </p>
+    </section>
+
+    <hr>
+
+    <!-- ================= HƯỚNG DẪN ================= -->
+    <section>
+      <h3>📌 Hướng dẫn sử dụng</h3>
+      <ol>
+        <li>
+          <strong>Nhập mã bài:</strong> Theo quy ước D1, D2… (Dễ), TB1, TB2… (Trung bình),
+          K1, K2… (Khó).
+        </li>
+        <li>
+          <strong>Nhập tiêu đề và mô tả:</strong> Mô tả rõ input và output để sinh viên hiểu đề.
+        </li>
+        <li>
+          <strong>Chọn mức độ:</strong> Dễ / Trung bình / Khó.
+        </li>
+        <li>
+          <strong>Nhập 5 bộ test:</strong> Mỗi bộ gồm input và output mong đợi.
+          Nên chọn test đa dạng: số dương, số âm, số 0, số lớn, biên.
+        </li>
+        <li>
+          <strong>Bấm "Lưu bài tập":</strong> Hệ thống ghi nhận (chuyển trang xác nhận).
+        </li>
+        <li>
+          <strong>Cập nhật thủ công:</strong> Với HTML thuần, sau khi lưu, Giáo viên cần
+          tự thêm bài tập vào bảng danh sách ở trên và vào file
+          <code>sv_kiemtra.html</code> / <code>sv_thi.html</code>.
+        </li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <!-- ================= ĐIỀU HƯỚNG ================= -->
+    <section>
+      <h3>🔗 Điều hướng</h3>
+      <ul>
+        <li><a href="gv_dashboard.html">← Quay lại Dashboard Giáo viên</a></li>
+        <li><a href="gv_tao_dethi.html">📋 Sang trang Tạo Đề Thi</a></li>
+        <li><a href="gv_chamdiem.html">✅ Sang trang Chấm Điểm</a></li>
+        <li><a href="bai29.html">🏠 Về Trang chủ</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>
+      © 2024 <strong>Java Learning Hub</strong> — Website hỗ trợ dạy học môn Lập trình Java.
+    </p>
+    <p>
+      Liên hệ: <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>
+      | Hotline: 0123 456 789
+    </p>
+  </footer>
+<script src="app.js"></script>
+</body>
+</html>

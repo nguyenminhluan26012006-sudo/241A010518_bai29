@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 1 - Giới thiệu về Java và các khái niệm cơ bản</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+    <h1>CHƯƠNG 1: GIỚI THIỆU VỀ JAVA VÀ CÁC KHÁI NIỆM CƠ BẢN</h1>
+    <hr>
+
+    <h2>Mục tiêu chương</h2>
+    <ul>
+        <li>Hiểu được lịch sử ra đời, đặc điểm và ứng dụng của ngôn ngữ Java.</li>
+        <li>Biết cách cài đặt môi trường lập trình Java (JDK).</li>
+        <li>Nắm được cấu trúc cơ bản của một chương trình Java.</li>
+        <li>Hiểu và sử dụng được biến, hằng, kiểu dữ liệu, toán tử.</li>
+        <li>Biết cách nhập dữ liệu từ bàn phím và xuất dữ liệu ra màn hình.</li>
+    </ul>
+    <hr>
+
+    <!-- ================== PHẦN LÝ THUYẾT ================== -->
+    <h2>PHẦN LÝ THUYẾT</h2>
+
+    <h3>1.1. Giới thiệu về ngôn ngữ lập trình Java</h3>
+
+    <h4>1.1.1. Lịch sử hình thành</h4>
+    <p>
+        Java được khởi đầu bởi <b>James Gosling</b> và nhóm kỹ sư tại hãng Sun Microsystems
+        vào năm 1991, ban đầu với tên gọi <i>Oak</i>. Đến năm 1995, ngôn ngữ này chính thức
+        được đổi tên thành <b>Java</b> và công bố rộng rãi. Năm 2010, Oracle mua lại
+        Sun Microsystems và trở thành chủ sở hữu hiện tại của Java.
+    </p>
+    <p>
+        Java nổi tiếng với khẩu hiệu: <i>"Write Once, Run Anywhere"</i>
+        (Viết một lần, chạy mọi nơi) nhờ cơ chế biên dịch sang bytecode và chạy trên
+        Máy ảo Java (JVM – Java Virtual Machine).
+    </p>
+
+    <h4>1.1.2. Đặc điểm của Java</h4>
+    <ul>
+        <li><b>Hướng đối tượng (OOP)</b>: Tổ chức chương trình thành các lớp và đối tượng.</li>
+        <li><b>Độc lập nền tảng</b>: Cùng một file bytecode chạy được trên nhiều hệ điều hành (Windows, Linux, macOS…).</li>
+        <li><b>Đơn giản</b>: Loại bỏ các khái niệm phức tạp như con trỏ, đa kế thừa lớp.</li>
+        <li><b>An toàn</b>: Có cơ chế kiểm soát bộ nhớ, không cho phép truy cập trực tiếp bộ nhớ.</li>
+        <li><b>Mạnh mẽ</b>: Có cơ chế thu gom rác tự động (Garbage Collector) và xử lý ngoại lệ.</li>
+        <li><b>Đa luồng (Multithreading)</b>: Cho phép thực hiện nhiều công việc song song.</li>
+        <li><b>Phân tán</b>: Hỗ trợ lập trình mạng, tính toán phân tán mạnh mẽ.</li>
+    </ul>
+
+    <h4>1.1.3. Các nền tảng của Java</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Nền tảng</th><th>Viết tắt</th><th>Mô tả</th></tr>
+        <tr><td>Java Standard Edition</td><td>Java SE</td><td>Nền tảng cơ bản, dùng cho ứng dụng để bàn và ứng dụng cơ bản.</td></tr>
+        <tr><td>Java Enterprise Edition</td><td>Java EE</td><td>Nền tảng cho ứng dụng doanh nghiệp, máy chủ, web.</td></tr>
+        <tr><td>Java Micro Edition</td><td>Java ME</td><td>Nền tảng cho thiết bị di động, nhúng, IoT.</td></tr>
+    </table>
+
+    <h4>1.1.4. Ứng dụng của Java</h4>
+    <ul>
+        <li>Phát triển ứng dụng máy tính để bàn (Desktop).</li>
+        <li>Phát triển ứng dụng Web (Servlet, JSP, Spring Boot…).</li>
+        <li>Phát triển ứng dụng di động Android.</li>
+        <li>Lập trình máy chủ, hệ thống doanh nghiệp lớn.</li>
+        <li>Phát triển game, hệ thống nhúng, ứng dụng IoT.</li>
+    </ul>
+
+    <h3>1.2. Cài đặt môi trường lập trình Java</h3>
+
+    <h4>1.2.1. Các thành phần cần cài đặt</h4>
+    <ul>
+        <li><b>JDK (Java Development Kit)</b>: Bộ công cụ phát triển Java, bao gồm trình biên dịch
+            <code>javac</code>, máy ảo <code>java</code> và các thư viện chuẩn.</li>
+        <li><b>IDE (Integrated Development Environment)</b>: Môi trường phát triển tích hợp
+            như Eclipse, IntelliJ IDEA, NetBeans (không bắt buộc nhưng rất tiện lợi).</li>
+        <li><b>Trình soạn thảo văn bản</b>: Notepad, Notepad++, VS Code… nếu lập trình không dùng IDE.</li>
+    </ul>
+
+    <h4>1.2.2. Các bước cài đặt</h4>
+    <ol>
+        <li>Truy cập trang chủ Oracle (hoặc Adoptium) và tải JDK phiên bản phù hợp với hệ điều hành.</li>
+        <li>Chạy bộ cài đặt và làm theo hướng dẫn.</li>
+        <li>Thiết lập biến môi trường <code>JAVA_HOME</code> trỏ tới thư mục cài JDK
+            và thêm <code>%JAVA_HOME%\bin</code> (Windows) hoặc <code>$JAVA_HOME/bin</code> (Linux/macOS) vào biến <code>PATH</code>.</li>
+        <li>Kiểm tra bằng cách mở Command Prompt / Terminal và gõ:</li>
+    </ol>
+    <pre>
+java -version
+javac -version
+    </pre>
+    <p>Nếu hiển thị thông tin phiên bản Java là bạn đã cài đặt thành công.</p>
+
+    <h4>1.2.3. Quy trình biên dịch và thực thi chương trình Java</h4>
+    <ol>
+        <li><b>Soạn thảo</b>: Viết mã nguồn vào file có đuôi <code>.java</code>.</li>
+        <li><b>Biên dịch</b>: Dùng lệnh <code>javac TenFile.java</code> để tạo ra file
+            <code>.class</code> chứa <b>bytecode</b>.</li>
+        <li><b>Thực thi</b>: Dùng lệnh <code>java TenFile</code> để JVM nạp bytecode và chạy chương trình.</li>
+    </ol>
+    <pre>
+     [Mã nguồn .java] --(javac)--> [Bytecode .class] --(JVM)--> [Chạy trên HĐH]
+    </pre>
+
+    <h3>1.3. Cấu trúc cơ bản của một chương trình Java</h3>
+
+    <h4>1.3.1. Ví dụ chương trình đầu tiên</h4>
+    <pre>
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Xin chao the gioi Java!");
+    }
+}
+    </pre>
+
+    <h4>1.3.2. Giải thích các thành phần</h4>
+    <ul>
+        <li><code>public</code>: Từ khóa chỉ phạm vi truy cập công khai.</li>
+        <li><code>class HelloWorld</code>: Khai báo một lớp có tên <b>HelloWorld</b>. Tên lớp
+            <b>phải trùng</b> với tên file (HelloWorld.java).</li>
+        <li><code>public static void main(String[] args)</code>: Là phương thức đặc biệt – điểm
+            bắt đầu thực thi của mọi chương trình Java.</li>
+        <li><code>System.out.println(...)</code>: Lệnh in nội dung ra màn hình và xuống dòng.</li>
+        <li><code>{ }</code>: Cặp ngoặc nhọn bao khối lệnh.</li>
+        <li><code>;</code>: Kết thúc một câu lệnh.</li>
+    </ul>
+
+    <h4>1.3.3. Quy tắc đặt tên trong Java (Convention)</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Đối tượng</th><th>Quy tắc</th><th>Ví dụ</th></tr>
+        <tr><td>Tên lớp (class)</td><td>Viết hoa chữ cái đầu mỗi từ (PascalCase)</td><td>StudentManager, HelloWorld</td></tr>
+        <tr><td>Tên phương thức (method)</td><td>Chữ cái đầu viết thường (camelCase)</td><td>tinhTong, getHoTen</td></tr>
+        <tr><td>Tên biến</td><td>Chữ cái đầu viết thường (camelCase)</td><td>hoTen, diemTrungBinh</td></tr>
+        <tr><td>Hằng số</td><td>Viết hoa toàn bộ, cách nhau bởi dấu _</td><td>MAX_SIZE, PI</td></tr>
+        <tr><td>Tên gói (package)</td><td>Viết thường toàn bộ</td><td>com.example.demo</td></tr>
+    </table>
+
+    <h4>1.3.4. Chú thích (Comment) trong Java</h4>
+    <pre>
+// Chú thích một dòng
+/*
+   Chú thích nhiều dòng
+*/
+/**
+   Chú thích Javadoc - dùng để sinh tài liệu tự động
+   @param tenThamSo mo ta
+   @return mo ta ket qua
+*/
+    </pre>
+
+    <h3>1.4. Biến, hằng và kiểu dữ liệu</h3>
+
+    <h4>1.4.1. Biến (Variable)</h4>
+    <p>Biến là một vùng nhớ có tên dùng để lưu trữ dữ liệu. Giá trị của biến có thể thay đổi trong quá trình chương trình chạy.</p>
+    <pre>
+kieuDuLieu tenBien;                 // Khai báo
+kieuDuLieu tenBien = giaTri;        // Khai báo và khởi tạo
+kieuDuLieu a, b, c;                 // Khai báo nhiều biến cùng kiểu
+    </pre>
+    <pre>
+int tuoi = 20;
+double diemTrungBinh = 8.5;
+String hoTen = "Nguyen Van A";
+boolean daTotNghiep = true;
+    </pre>
+
+    <h4>1.4.2. Hằng số (Constant)</h4>
+    <p>Hằng là biến có giá trị <b>không thay đổi</b> trong suốt chương trình. Dùng từ khóa <code>final</code> khi khai báo.</p>
+    <pre>
+final double PI = 3.14159;
+final int MAX_SINH_VIEN = 100;
+    </pre>
+
+    <h4>1.4.3. Các kiểu dữ liệu nguyên thủy (Primitive Types)</h4>
+    <p>Java có <b>8 kiểu dữ liệu nguyên thủy</b> được chia thành 4 nhóm:</p>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Nhóm</th><th>Kiểu</th><th>Kích thước</th><th>Miền giá trị</th><th>Ví dụ</th></tr>
+        <tr><td rowspan="4">Số nguyên</td><td>byte</td><td>1 byte</td><td>-128 đến 127</td><td>byte b = 100;</td></tr>
+        <tr><td>short</td><td>2 byte</td><td>-32.768 đến 32.767</td><td>short s = 1000;</td></tr>
+        <tr><td>int</td><td>4 byte</td><td>-2^31 đến 2^31 - 1</td><td>int n = 2024;</td></tr>
+        <tr><td>long</td><td>8 byte</td><td>-2^63 đến 2^63 - 1</td><td>long l = 10000000000L;</td></tr>
+        <tr><td rowspan="2">Số thực</td><td>float</td><td>4 byte</td><td>~ ±3.4e-38 đến ±3.4e+38</td><td>float f = 3.14f;</td></tr>
+        <tr><td>double</td><td>8 byte</td><td>~ ±1.7e-308 đến ±1.7e+308</td><td>double d = 3.14;</td></tr>
+        <tr><td>Ký tự</td><td>char</td><td>2 byte</td><td>0 đến 65.535 (Unicode)</td><td>char c = 'A';</td></tr>
+        <tr><td>Logic</td><td>boolean</td><td>1 bit</td><td>true / false</td><td>boolean b = true;</td></tr>
+    </table>
+
+    <h4>1.4.4. Kiểu dữ liệu tham chiếu (Reference Types)</h4>
+    <p>Ngoài 8 kiểu nguyên thủy, Java còn có các kiểu tham chiếu như <code>String</code>, mảng, lớp, interface…</p>
+    <pre>
+String hoTen = "Tran Thi B";
+String diaChi = "Ha Noi";
+    </pre>
+
+    <h4>1.4.5. Ép kiểu (Type Casting)</h4>
+    <ul>
+        <li><b>Ép kiểu ngầm định (widening)</b>: Từ kiểu nhỏ sang kiểu lớn, không mất dữ liệu. Ví dụ: <code>int i = 10; double d = i;</code></li>
+        <li><b>Ép kiểu tường minh (narrowing)</b>: Từ kiểu lớn sang kiểu nhỏ, có thể mất dữ liệu. Ví dụ: <code>double d = 9.7; int i = (int) d; // i = 9</code></li>
+    </ul>
+
+    <h4>1.4.6. Ví dụ tổng hợp</h4>
+    <pre>
+public class KieuDuLieu {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 3;
+        double thuong = (double) a / b;
+        System.out.println("Thuong = " + thuong);
+
+        char chuCai = 'J';
+        String ten = "Java";
+        boolean hopLe = true;
+        final double PI = 3.14159;
+        double chuVi = 2 * PI * 5;
+
+        System.out.println("Ky tu: " + chuCai);
+        System.out.println("Ten: " + ten);
+        System.out.println("Hop le: " + hopLe);
+        System.out.println("Chu vi hinh tron r=5: " + chuVi);
+    }
+}
+    </pre>
+
+    <h3>1.5. Toán tử trong Java</h3>
+
+    <h4>1.5.1. Toán tử số học</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ (a=10, b=3)</th><th>Kết quả</th></tr>
+        <tr><td>+</td><td>Cộng</td><td>a + b</td><td>13</td></tr>
+        <tr><td>-</td><td>Trừ</td><td>a - b</td><td>7</td></tr>
+        <tr><td>*</td><td>Nhân</td><td>a * b</td><td>30</td></tr>
+        <tr><td>/</td><td>Chia lấy phần nguyên (nếu cả hai là int)</td><td>a / b</td><td>3</td></tr>
+        <tr><td>%</td><td>Chia lấy dư</td><td>a % b</td><td>1</td></tr>
+    </table>
+
+    <h4>1.5.2. Toán tử gán</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ</th><th>Tương đương</th></tr>
+        <tr><td>=</td><td>Gán</td><td>a = 5</td><td>a = 5</td></tr>
+        <tr><td>+=</td><td>Cộng rồi gán</td><td>a += 3</td><td>a = a + 3</td></tr>
+        <tr><td>-=</td><td>Trừ rồi gán</td><td>a -= 3</td><td>a = a - 3</td></tr>
+        <tr><td>*=</td><td>Nhân rồi gán</td><td>a *= 3</td><td>a = a * 3</td></tr>
+        <tr><td>/=</td><td>Chia rồi gán</td><td>a /= 3</td><td>a = a / 3</td></tr>
+        <tr><td>%=</td><td>Chia dư rồi gán</td><td>a %= 3</td><td>a = a % 3</td></tr>
+    </table>
+
+    <h4>1.5.3. Toán tử so sánh</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ (a=10, b=3)</th><th>Kết quả</th></tr>
+        <tr><td>==</td><td>Bằng</td><td>a == b</td><td>false</td></tr>
+        <tr><td>!=</td><td>Khác</td><td>a != b</td><td>true</td></tr>
+        <tr><td>&gt;</td><td>Lớn hơn</td><td>a &gt; b</td><td>true</td></tr>
+        <tr><td>&lt;</td><td>Nhỏ hơn</td><td>a &lt; b</td><td>false</td></tr>
+        <tr><td>&gt;=</td><td>Lớn hơn hoặc bằng</td><td>a &gt;= b</td><td>true</td></tr>
+        <tr><td>&lt;=</td><td>Nhỏ hơn hoặc bằng</td><td>a &lt;= b</td><td>false</td></tr>
+    </table>
+
+    <h4>1.5.4. Toán tử logic</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+        <tr><td>&amp;&amp;</td><td>VÀ (AND) – đúng khi cả hai đúng</td><td>(a &gt; 0) &amp;&amp; (b &gt; 0)</td></tr>
+        <tr><td>||</td><td>HOẶC (OR) – đúng khi ít nhất một đúng</td><td>(a &gt; 0) || (b &gt; 0)</td></tr>
+        <tr><td>!</td><td>PHỦ ĐỊNH (NOT)</td><td>!(a &gt; 0)</td></tr>
+    </table>
+
+    <h4>1.5.5. Toán tử tăng/giảm</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ (a=5)</th><th>Kết quả a</th></tr>
+        <tr><td>++a</td><td>Tăng trước</td><td>b = ++a</td><td>a = 6, b = 6</td></tr>
+        <tr><td>a++</td><td>Tăng sau</td><td>b = a++</td><td>b = 5, a = 6</td></tr>
+        <tr><td>--a</td><td>Giảm trước</td><td>b = --a</td><td>a = 4, b = 4</td></tr>
+        <tr><td>a--</td><td>Giảm sau</td><td>b = a--</td><td>b = 5, a = 4</td></tr>
+    </table>
+
+    <h4>1.5.6. Toán tử ba ngôi (Ternary)</h4>
+    <pre>
+kieuDuLieu tenBien = (dieuKien) ? giaTriDung : giaTriSai;
+    </pre>
+    <pre>
+int a = 10, b = 5;
+int max = (a &gt; b) ? a : b;  // max = 10
+    </pre>
+
+    <h4>1.5.7. Độ ưu tiên toán tử (giảm dần)</h4>
+    <ol>
+        <li>Nhóm ngoặc: <code>()</code>, <code>[]</code></li>
+        <li>Tăng/giảm: <code>++</code>, <code>--</code></li>
+        <li>Nhân/chia/lấy dư: <code>*</code>, <code>/</code>, <code>%</code></li>
+        <li>Cộng/trừ: <code>+</code>, <code>-</code></li>
+        <li>So sánh: <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+        <li>So sánh bằng: <code>==</code>, <code>!=</code></li>
+        <li>Logic AND: <code>&amp;&amp;</code></li>
+        <li>Logic OR: <code>||</code></li>
+        <li>Gán: <code>=</code>, <code>+=</code>, <code>-=</code>, …</li>
+    </ol>
+
+    <h3>1.6. Nhập xuất dữ liệu trong Java</h3>
+
+    <h4>1.6.1. Xuất dữ liệu với System.out</h4>
+    <ul>
+        <li><code>System.out.print(...)</code>: In ra màn hình <b>không</b> xuống dòng.</li>
+        <li><code>System.out.println(...)</code>: In ra màn hình và <b>xuống dòng</b>.</li>
+        <li><code>System.out.printf(...)</code>: In theo định dạng (giống C).</li>
+    </ul>
+    <pre>
+int tuoi = 20;
+String ten = "An";
+System.out.print("Xin chao ");
+System.out.println(ten);
+System.out.println("Tuoi: " + tuoi);
+System.out.printf("Ten: %s, Tuoi: %d%n", ten, tuoi);
+System.out.printf("Diem: %.2f%n", 8.456);
+    </pre>
+
+    <p>Các ký tự định dạng thường dùng với <code>printf</code>:</p>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Ký tự</th><th>Ý nghĩa</th></tr>
+        <tr><td>%d</td><td>Số nguyên</td></tr>
+        <tr><td>%f</td><td>Số thực (mặc định 6 chữ số sau dấu phẩy)</td></tr>
+        <tr><td>%.2f</td><td>Số thực với 2 chữ số sau dấu phẩy</td></tr>
+        <tr><td>%s</td><td>Chuỗi</td></tr>
+        <tr><td>%c</td><td>Ký tự</td></tr>
+        <tr><td>%b</td><td>Boolean</td></tr>
+        <tr><td>%n</td><td>Xuống dòng (an toàn đa nền tảng)</td></tr>
+    </table>
+
+    <h4>1.6.2. Nhập dữ liệu với Scanner</h4>
+    <p>Để nhập dữ liệu từ bàn phím, Java sử dụng lớp <code>Scanner</code> thuộc gói <code>java.util</code>.</p>
+    <pre>
+import java.util.Scanner;
+
+public class NhapXuat {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhap ho ten: ");
+        String hoTen = sc.nextLine();
+
+        System.out.print("Nhap tuoi: ");
+        int tuoi = sc.nextInt();
+
+        System.out.print("Nhap diem: ");
+        double diem = sc.nextDouble();
+
+        System.out.println("Ho ten: " + hoTen);
+        System.out.println("Tuoi: " + tuoi);
+        System.out.println("Diem: " + diem);
+
+        sc.close();
+    }
+}
+    </pre>
+
+    <p>Các phương thức nhập thường dùng của <code>Scanner</code>:</p>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Phương thức</th><th>Chức năng</th></tr>
+        <tr><td>nextLine()</td><td>Đọc cả dòng (chuỗi)</td></tr>
+        <tr><td>next()</td><td>Đọc một từ (không chứa khoảng trắng)</td></tr>
+        <tr><td>nextInt()</td><td>Đọc số nguyên</td></tr>
+        <tr><td>nextLong()</td><td>Đọc số nguyên dài</td></tr>
+        <tr><td>nextFloat()</td><td>Đọc số thực float</td></tr>
+        <tr><td>nextDouble()</td><td>Đọc số thực double</td></tr>
+        <tr><td>nextBoolean()</td><td>Đọc giá trị boolean</td></tr>
+    </table>
+
+    <p><b>Lưu ý:</b> Khi gặp lỗi "trôi lệnh" (bỏ qua lệnh nextLine sau nextInt), cần gọi thêm <code>sc.nextLine()</code> để xóa bộ đệm dòng.</p>
+
+    <hr>
+
+    <!-- ================== PHẦN BÀI TẬP – 4 MỨC ĐỘ ================== -->
+    <h2>PHẦN BÀI TẬP (4 MỨC ĐỘ)</h2>
+    <p>Bài tập được chia thành 4 mức từ dễ đến khó. Sinh viên nên làm tuần tự từ mức 1 đến mức 4. Mỗi bài đều có lời giải ẩn trong nút "Xem lời giải".</p>
+
+    <!-- ========== MỨC 1 ========== -->
+    <h3>🟢 MỨC 1 – NHẬN BIẾT (Dễ)</h3>
+    <p><i>Mục tiêu: Ghi nhớ cú pháp, kiểu dữ liệu, lệnh in cơ bản.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Kiểu dữ liệu nào dùng để lưu số nguyên?
+            <br>A. <code>double</code> &nbsp; B. <code>int</code> &nbsp; C. <code>String</code> &nbsp; D. <code>boolean</code>
+        </li>
+        <li>Lệnh nào in ra màn hình và xuống dòng?
+            <br>A. <code>System.out.print()</code> &nbsp; B. <code>System.out.println()</code>
+            <br>C. <code>System.in.read()</code> &nbsp; D. <code>System.out.write()</code>
+        </li>
+        <li>Từ khóa nào khai báo hằng số?
+            <br>A. <code>static</code> &nbsp; B. <code>const</code> &nbsp; C. <code>final</code> &nbsp; D. <code>var</code>
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – <code>int</code></li>
+            <li>B – <code>System.out.println()</code></li>
+            <li>C – <code>final</code></li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 1.1.</b> Viết chương trình in ra màn hình 2 dòng:</p>
+    <pre>
+Xin chao cac ban!
+Toi dang hoc lap trinh Java.
+    </pre>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_1 {
+    public static void main(String[] args) {
+        System.out.println("Xin chao cac ban!");
+        System.out.println("Toi dang hoc lap trinh Java.");
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 1.2.</b> Khai báo các biến: <code>hoTen</code> (String), <code>tuoi</code> (int), <code>diemTB</code> (double), <code>daTotNghiep</code> (boolean) với giá trị tùy ý. In tất cả ra màn hình.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_2 {
+    public static void main(String[] args) {
+        String hoTen = "Nguyen Van A";
+        int tuoi = 20;
+        double diemTB = 8.5;
+        boolean daTotNghiep = true;
+
+        System.out.println("Ho ten: " + hoTen);
+        System.out.println("Tuoi: " + tuoi);
+        System.out.println("Diem TB: " + diemTB);
+        System.out.println("Da tot nghiep: " + daTotNghiep);
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 1.3.</b> Cho <code>a = 10</code>, <code>b = 3</code> (khai báo trực tiếp trong code). Tính và in tổng, hiệu, tích, thương nguyên, chia dư của <code>a</code> và <code>b</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_3 {
+    public static void main(String[] args) {
+        int a = 10, b = 3;
+        System.out.println("Tong     = " + (a + b));   // 13
+        System.out.println("Hieu     = " + (a - b));   // 7
+        System.out.println("Tich     = " + (a * b));   // 30
+        System.out.println("Thuong   = " + (a / b));   // 3
+        System.out.println("Chia du  = " + (a % b));   // 1
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 2 ========== -->
+    <h3>🟡 MỨC 2 – THÔNG HIỂU (Trung bình)</h3>
+    <p><i>Mục tiêu: Hiểu cách nhập/xuất, ép kiểu, sử dụng toán tử.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Với <code>int a = 7, b = 2;</code> thì <code>a / b</code> cho kết quả:
+            <br>A. 3.5 &nbsp; B. 3 &nbsp; C. 4 &nbsp; D. 1
+        </li>
+        <li>Phương thức nào của <code>Scanner</code> đọc cả dòng văn bản?
+            <br>A. <code>next()</code> &nbsp; B. <code>nextLine()</code> &nbsp; C. <code>nextInt()</code> &nbsp; D. <code>nextDouble()</code>
+        </li>
+        <li>Ép kiểu <code>(int) 9.99</code> cho kết quả:
+            <br>A. 9 &nbsp; B. 10 &nbsp; C. 9.99 &nbsp; D. Lỗi
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – 3 (chia nguyên)</li>
+            <li>B – <code>nextLine()</code></li>
+            <li>A – 9 (cắt phần lẻ)</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 2.1.</b> Nhập vào hai số nguyên <code>a</code>, <code>b</code>. In ra tổng, hiệu, tích, thương (thương lấy phần thập phân, làm tròn 2 chữ số).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap a: ");
+        int a = sc.nextInt();
+        System.out.print("Nhap b: ");
+        int b = sc.nextInt();
+
+        System.out.println("Tong  = " + (a + b));
+        System.out.println("Hieu  = " + (a - b));
+        System.out.println("Tich  = " + (a * b));
+        if (b != 0) {
+            System.out.printf("Thuong = %.2f%n", (double) a / b);
+        } else {
+            System.out.println("Khong the chia cho 0!");
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.2.</b> Nhập chiều dài <code>d</code> và chiều rộng <code>r</code> (số thực). Tính chu vi và diện tích hình chữ nhật.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap chieu dai: ");
+        double d = sc.nextDouble();
+        System.out.print("Nhap chieu rong: ");
+        double r = sc.nextDouble();
+
+        double chuVi = 2 * (d + r);
+        double dienTich = d * r;
+
+        System.out.printf("Chu vi    = %.2f%n", chuVi);
+        System.out.printf("Dien tich = %.2f%n", dienTich);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.3.</b> Nhập một số nguyên <code>n</code>, kiểm tra và in ra <code>n</code> là số chẵn hay số lẻ.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        if (n % 2 == 0) {
+            System.out.println(n + " la so chan");
+        } else {
+            System.out.println(n + " la so le");
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 3 ========== -->
+    <h3>🟠 MỨC 3 – VẬN DỤNG (Khó)</h3>
+    <p><i>Mục tiêu: Kết hợp nhiều khái niệm, xử lý công thức, định dạng output.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Cho <code>int a = 5; int b = a++;</code> Sau khi thực hiện, giá trị <code>a</code> và <code>b</code> là:
+            <br>A. a = 5, b = 5 &nbsp; B. a = 6, b = 6 &nbsp; C. a = 6, b = 5 &nbsp; D. a = 5, b = 6
+        </li>
+        <li>Kết quả của <code>System.out.printf("%.2f", 3.14159)</code> là:
+            <br>A. 3.14 &nbsp; B. 3.14159 &nbsp; C. 3.142 &nbsp; D. 3.1
+        </li>
+        <li>Biểu thức <code>10 + 5 * 2</code> cho kết quả:
+            <br>A. 30 &nbsp; B. 20 &nbsp; C. 25 &nbsp; D. 15
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>C – a = 6, b = 5 (tăng sau)</li>
+            <li>A – 3.14 (2 chữ số sau dấu phẩy)</li>
+            <li>B – 20 (nhân trước, cộng sau)</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 3.1.</b> Nhập họ tên và điểm 3 môn Toán, Lý, Hóa (hệ số 1). In ra họ tên và điểm trung bình (làm tròn 2 chữ số).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap ho ten: ");
+        String hoTen = sc.nextLine();
+
+        System.out.print("Diem Toan: ");
+        double toan = sc.nextDouble();
+        System.out.print("Diem Ly: ");
+        double ly = sc.nextDouble();
+        System.out.print("Diem Hoa: ");
+        double hoa = sc.nextDouble();
+
+        double dtb = (toan + ly + hoa) / 3;
+
+        System.out.println("Ho ten: " + hoTen);
+        System.out.printf("Diem trung binh: %.2f%n", dtb);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.2.</b> Nhập nhiệt độ C, tính nhiệt độ F theo công thức <code>F = C * 9 / 5 + 32</code>. In kết quả làm tròn 1 chữ số thập phân.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap nhiet do C: ");
+        double c = sc.nextDouble();
+
+        double f = c * 9 / 5 + 32;
+        System.out.printf("%.1f C = %.1f F%n", c, f);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.3.</b> Nhập lương một ngày công và số ngày làm việc. Tính tiền lương thực nhận, biết rằng nếu tổng lương lớn hơn 10.000.000 thì phải trừ 10% thuế.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Luong 1 ngay: ");
+        double luongNgay = sc.nextDouble();
+        System.out.print("So ngay cong: ");
+        int soNgay = sc.nextInt();
+
+        double tongLuong = luongNgay * soNgay;
+        double thucNhan = (tongLuong > 10000000) ? tongLuong * 0.9 : tongLuong;
+
+        System.out.printf("Tong luong : %.2f%n", tongLuong);
+        System.out.printf("Thuc nhan  : %.2f%n", thucNhan);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 4 ========== -->
+    <h3>🔴 MỨC 4 – VẬN DỤNG CAO (Rất khó)</h3>
+    <p><i>Mục tiêu: Tổng hợp kiến thức, giải quyết bài toán phức tạp, tối ưu cách viết.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đoạn code sau in ra gì?
+            <pre>
+int a = 5;
+int b = ++a + a++;
+System.out.println("a = " + a + ", b = " + b);</pre>
+            A. a = 7, b = 12 &nbsp; B. a = 7, b = 13 &nbsp; C. a = 6, b = 12 &nbsp; D. a = 6, b = 11
+        </li>
+        <li>Cho <code>int x = 10;</code> Biểu thức <code>(x &gt; 5) &amp;&amp; (x &lt; 20) ? "OK" : "FAIL"</code> trả về:
+            <br>A. "OK" &nbsp; B. "FAIL" &nbsp; C. true &nbsp; D. Lỗi
+        </li>
+        <li>Để in số thực <code>8.456</code> với đúng 2 chữ số sau dấu phẩy, dùng:
+            <br>A. <code>%f</code> &nbsp; B. <code>%.1f</code> &nbsp; C. <code>%.2f</code> &nbsp; D. <code>%d</code>
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – a = 7, b = 13. Giải thích: <code>++a</code> tăng a lên 6 rồi trả về 6; <code>a++</code> trả về 6 rồi tăng a lên 7; vậy b = 6 + 6 = 12? Thực tế: <code>++a</code> → a=6, trả 6; <code>a++</code> → trả 6, a=7; b = 6+6 = 12; kết quả đúng là a=7, b=12 → đáp án A. (Lưu ý: thứ tự đánh giá biểu thức có thể gây nhầm lẫn – nên tránh viết code kiểu này.)</li>
+            <li>A – "OK"</li>
+            <li>C – <code>%.2f</code></li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 4.1.</b> Nhập hai số nguyên <code>a</code>, <code>b</code>. Dùng <b>toán tử ba ngôi</b> (không dùng <code>if</code>) để in ra số lớn hơn. Sau đó mở rộng: nhập 3 số, tìm số lớn nhất chỉ bằng toán tử ba ngôi.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhap a: ");
+        int a = sc.nextInt();
+        System.out.print("Nhap b: ");
+        int b = sc.nextInt();
+        System.out.print("Nhap c: ");
+        int c = sc.nextInt();
+
+        // Tìm max 2 số
+        int max2 = (a > b) ? a : b;
+        System.out.println("Max(a,b) = " + max2);
+
+        // Tìm max 3 số chỉ dùng ternary
+        int max3 = (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
+        System.out.println("Max(a,b,c) = " + max3);
+
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.2.</b> Nhập số nguyên dương <code>n</code>. Tính tổng <code>S = 1 + 2 + ... + n</code> (dùng vòng lặp <code>for</code>). In kết quả. Sau đó kiểm tra lại bằng công thức <code>n*(n+1)/2</code> xem có khớp không.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        int tong = 0;
+        for (int i = 1; i <= n; i++) {
+            tong += i;
+        }
+
+        int congThuc = n * (n + 1) / 2;
+
+        System.out.println("Tong (vong lap) = " + tong);
+        System.out.println("Tong (cong thuc) = " + congThuc);
+        System.out.println("Khop? " + (tong == congThuc));
+
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.3.</b> <b>Bài tổng hợp:</b> Nhập họ tên, năm sinh, điểm 3 môn. Tính tuổi (năm hiện tại 2026), điểm trung bình. In báo cáo theo định dạng:</p>
+    <pre>
+===== BAO CAO =====
+Ho ten   : Nguyen Van A
+Tuoi     : 20
+Diem TB  : 8.50
+Ket qua  : DAT
+===================
+    </pre>
+    <p>Biết rằng điểm TB &gt;= 5.0 là ĐẠT, ngược lại là KHÔNG ĐẠT. Dùng toán tử ba ngôi để xếp loại.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nhap ho ten: ");
+        String hoTen = sc.nextLine();
+
+        System.out.print("Nhap nam sinh: ");
+        int namSinh = sc.nextInt();
+
+        System.out.print("Diem Toan: ");
+        double toan = sc.nextDouble();
+        System.out.print("Diem Ly: ");
+        double ly = sc.nextDouble();
+        System.out.print("Diem Hoa: ");
+        double hoa = sc.nextDouble();
+
+        final int NAM_HIEN_TAI = 2026;
+        int tuoi = NAM_HIEN_TAI - namSinh;
+        double diemTB = (toan + ly + hoa) / 3;
+        String ketQua = (diemTB >= 5.0) ? "DAT" : "KHONG DAT";
+
+        System.out.println("===== BAO CAO =====");
+        System.out.printf("Ho ten   : %s%n", hoTen);
+        System.out.printf("Tuoi     : %d%n", tuoi);
+        System.out.printf("Diem TB  : %.2f%n", diemTB);
+        System.out.printf("Ket qua  : %s%n", ketQua);
+        System.out.println("===================");
+
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <hr>
+
+    <!-- ================== TỔNG KẾT CHƯƠNG ================== -->
+    <h2>Tổng kết chương 1</h2>
+    <ul>
+        <li>Java là ngôn ngữ lập trình hướng đối tượng, độc lập nền tảng, mạnh mẽ và phổ biến.</li>
+        <li>Chương trình Java được biên dịch thành bytecode và chạy trên JVM.</li>
+        <li>Điểm bắt đầu của mọi chương trình là phương thức <code>main</code>.</li>
+        <li>Java có 8 kiểu nguyên thủy và kiểu tham chiếu (String, mảng, lớp…).</li>
+        <li>Biến có thể thay đổi giá trị, hằng (final) thì không.</li>
+        <li>Thành thạo các nhóm toán tử: số học, gán, so sánh, logic, ba ngôi.</li>
+        <li>Biết nhập bằng <code>Scanner</code> và xuất bằng <code>System.out</code>.</li>
+    </ul>
+
+    <hr>
+    <p align="center">
+        <i>— Hết Chương 1 —</i><br>
+        <a href="bai29.html">Quay lại Trang chủ</a>
+    </p>
+<script src="app.js"></script>
+</body>
+</html>

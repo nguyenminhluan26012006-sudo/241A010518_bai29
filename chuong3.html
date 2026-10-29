@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 3 - Vòng lặp trong Java</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+    <h1>CHƯƠNG 3: VÒNG LẶP TRONG JAVA</h1>
+    <hr>
+
+    <h2>Mục tiêu chương</h2>
+    <ul>
+        <li>Hiểu được khái niệm vòng lặp và vai trò của vòng lặp trong lập trình.</li>
+        <li>Sử dụng thành thạo vòng lặp <code>for</code>, <code>while</code>, <code>do – while</code>.</li>
+        <li>Biết cách dùng <code>break</code>, <code>continue</code>, <code>return</code> trong vòng lặp.</li>
+        <li>Hiểu và sử dụng được vòng lặp lồng nhau.</li>
+        <li>Vận dụng vòng lặp để giải các bài toán cơ bản.</li>
+    </ul>
+    <hr>
+
+    <!-- ================== PHẦN LÝ THUYẾT ================== -->
+    <h2>PHẦN LÝ THUYẾT</h2>
+
+    <h3>3.1. Giới thiệu về vòng lặp</h3>
+    <p>
+        Vòng lặp (loop) là cấu trúc điều khiển cho phép chương trình
+        <b>thực hiện lặp đi lặp lại một khối lệnh</b> nhiều lần.
+        Thay vì viết lại cùng một đoạn code nhiều lần, ta dùng vòng lặp để
+        chương trình ngắn gọn, dễ bảo trì và dễ mở rộng.
+    </p>
+    <p>Trong Java có 3 loại vòng lặp chính:</p>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Vòng lặp</th>
+            <th>Kiểm tra điều kiện</th>
+            <th>Số lần thực hiện tối thiểu</th>
+            <th>Khi nào dùng</th>
+        </tr>
+        <tr>
+            <td><code>for</code></td>
+            <td>Trước khi lặp</td>
+            <td>0 lần</td>
+            <td>Biết trước số lần lặp.</td>
+        </tr>
+        <tr>
+            <td><code>while</code></td>
+            <td>Trước khi lặp</td>
+            <td>0 lần</td>
+            <td>Chưa biết số lần lặp, phụ thuộc điều kiện.</td>
+        </tr>
+        <tr>
+            <td><code>do – while</code></td>
+            <td>Sau khi lặp</td>
+            <td>1 lần</td>
+            <td>Cần thực hiện ít nhất 1 lần.</td>
+        </tr>
+    </table>
+
+    <h3>3.2. Vòng lặp for</h3>
+    <p>Cú pháp:</p>
+    <pre>
+for (khoiTao; dieuKien; buocNhay) {
+    // Khối lệnh lặp
+}
+    </pre>
+    <ul>
+        <li><b>khoiTao</b>: Chạy <b>một lần duy nhất</b> khi bắt đầu vòng lặp.</li>
+        <li><b>dieuKien</b>: Kiểm tra trước mỗi lần lặp. Nếu đúng thì thực hiện khối lệnh, sai thì thoát.</li>
+        <li><b>buocNhay</b>: Chạy sau mỗi lần lặp (thường dùng <code>i++</code>).</li>
+    </ul>
+    <p>Ví dụ: in các số từ 1 đến 5:</p>
+    <pre>
+for (int i = 1; i &lt;= 5; i++) {
+    System.out.println("i = " + i);
+}
+    </pre>
+    <p>Ví dụ: tính tổng 1 + 2 + ... + n:</p>
+    <pre>
+int n = 10;
+int tong = 0;
+for (int i = 1; i &lt;= n; i++) {
+    tong += i;
+}
+System.out.println("Tong = " + tong);   // 55
+    </pre>
+
+    <p>Vòng lặp <code>for</code> còn có dạng <b>for-each</b> (dùng để duyệt mảng, collection):</p>
+    <pre>
+int[] arr = {1, 2, 3, 4, 5};
+for (int x : arr) {
+    System.out.println(x);
+}
+    </pre>
+
+    <h3>3.3. Vòng lặp while</h3>
+    <p>Cú pháp:</p>
+    <pre>
+while (dieuKien) {
+    // Khối lệnh lặp
+}
+    </pre>
+    <p>
+        <b>Kiểm tra điều kiện trước</b> khi thực hiện khối lệnh. Nếu điều kiện sai ngay từ đầu,
+        khối lệnh <b>không được thực hiện lần nào</b>.
+    </p>
+    <p>Ví dụ: in các số từ 1 đến 5:</p>
+    <pre>
+int i = 1;
+while (i &lt;= 5) {
+    System.out.println("i = " + i);
+    i++;
+}
+    </pre>
+    <p>Ví dụ: nhập số dương từ bàn phím:</p>
+    <pre>
+import java.util.Scanner;
+
+Scanner sc = new Scanner(System.in);
+int n = -1;
+
+while (n &lt;= 0) {
+    System.out.print("Nhap n &gt; 0: ");
+    n = sc.nextInt();
+}
+System.out.println("Ban da nhap: " + n);
+    </pre>
+
+    <h3>3.4. Vòng lặp do – while</h3>
+    <p>Cú pháp:</p>
+    <pre>
+do {
+    // Khối lệnh lặp
+} while (dieuKien);
+    </pre>
+    <p>
+        Khác với <code>while</code>, <code>do – while</code> <b>thực hiện khối lệnh trước</b>,
+        rồi mới kiểm tra điều kiện. Vì vậy khối lệnh <b>luôn được thực hiện ít nhất 1 lần</b>.
+    </p>
+    <p>Ví dụ: nhập dữ liệu đến khi nhập 0:</p>
+    <pre>
+import java.util.Scanner;
+
+Scanner sc = new Scanner(System.in);
+int n;
+int tong = 0;
+
+do {
+    System.out.print("Nhap n (0 de thoat): ");
+    n = sc.nextInt();
+    tong += n;
+} while (n != 0);
+
+System.out.println("Tong = " + tong);
+    </pre>
+
+    <h3>3.5. So sánh các vòng lặp</h3>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Vòng lặp</th>
+            <th>Kiểm tra điều kiện</th>
+            <th>Số lần thực hiện tối thiểu</th>
+            <th>Khi nào dùng</th>
+        </tr>
+        <tr>
+            <td><code>for</code></td>
+            <td>Trước khi lặp</td>
+            <td>0 lần</td>
+            <td>Biết trước số lần lặp.</td>
+        </tr>
+        <tr>
+            <td><code>while</code></td>
+            <td>Trước khi lặp</td>
+            <td>0 lần</td>
+            <td>Chưa biết số lần lặp, phụ thuộc điều kiện.</td>
+        </tr>
+        <tr>
+            <td><code>do – while</code></td>
+            <td>Sau khi lặp</td>
+            <td>1 lần</td>
+            <td>Cần thực hiện ít nhất 1 lần.</td>
+        </tr>
+    </table>
+
+    <h3>3.6. Các câu lệnh nhảy trong vòng lặp</h3>
+
+    <h4>3.6.1. Câu lệnh break</h4>
+    <p>
+        <code>break</code> dùng để <b>thoát khỏi vòng lặp</b> ngay lập tức,
+        không thực hiện các lệnh còn lại trong khối.
+    </p>
+    <pre>
+for (int i = 1; i &lt;= 10; i++) {
+    if (i == 5) {
+        break;  // Thoát vòng lặp khi i == 5
+    }
+    System.out.println("i = " + i);
+}
+// Kết quả in: 1 2 3 4
+    </pre>
+
+    <h4>3.6.2. Câu lệnh continue</h4>
+    <p>
+        <code>continue</code> dùng để <b>bỏ qua phần còn lại của lần lặp hiện tại</b> và
+        chuyển sang lần lặp tiếp theo.
+    </p>
+    <pre>
+for (int i = 1; i &lt;= 10; i++) {
+    if (i % 2 == 0) {
+        continue;   // Bỏ qua các số chẵn
+    }
+    System.out.println("So le: " + i);
+}
+// Kết quả in: 1 3 5 7 9
+    </pre>
+
+    <h4>3.6.3. Câu lệnh return</h4>
+    <p>
+        <code>return</code> dùng để <b>kết thúc phương thức</b> và trả về giá trị (nếu có).
+        Khi <code>return</code> được gọi trong vòng lặp, cả vòng lặp và phương thức đều kết thúc.
+    </p>
+    <pre>
+public static int timViTri(int[] arr, int x) {
+    for (int i = 0; i &lt; arr.length; i++) {
+        if (arr[i] == x) {
+            return i;   // Tìm thấy, thoát ngay khỏi phương thức
+        }
+    }
+    return -1;          // Không tìm thấy
+}
+    </pre>
+
+    <h3>3.7. Vòng lặp lồng nhau</h3>
+    <p>
+        Có thể đặt vòng lặp bên trong một vòng lặp khác. Vòng lặp ngoài thực hiện một lần
+        thì vòng lặp trong thực hiện toàn bộ chu trình của nó.
+    </p>
+    <p>Ví dụ: in bảng cửu chương:</p>
+    <pre>
+for (int i = 1; i &lt;= 9; i++) {
+    for (int j = 1; j &lt;= 9; j++) {
+        System.out.printf("%3d", i * j);
+    }
+    System.out.println();
+}
+    </pre>
+    <p>Ví dụ: in tam giác sao:</p>
+    <pre>
+int n = 5;
+for (int i = 1; i &lt;= n; i++) {
+    for (int j = 1; j &lt;= i; j++) {
+        System.out.print("* ");
+    }
+    System.out.println();
+}
+    </pre>
+    <p>Kết quả:</p>
+    <pre>
+*
+* *
+* * *
+* * * *
+* * * * *
+    </pre>
+
+    <p><b>Lưu ý khi dùng vòng lặp lồng nhau:</b></p>
+    <ul>
+        <li>Độ phức tạp tăng nhanh theo số tầng lặp (O(n²), O(n³)...), nên hạn chế lồng quá nhiều.</li>
+        <li><code>break</code> và <code>continue</code> chỉ tác dụng lên <b>vòng lặp gần nhất</b>.</li>
+        <li>Để thoát cả vòng ngoài, có thể dùng <b>nhãn (label)</b>:</li>
+    </ul>
+    <pre>
+outer:
+for (int i = 1; i &lt;= 3; i++) {
+    for (int j = 1; j &lt;= 3; j++) {
+        if (i == 2 &amp;&amp; j == 2) {
+            break outer;   // Thoát cả vòng lặp ngoài
+        }
+        System.out.println("i=" + i + ", j=" + j);
+    }
+}
+    </pre>
+
+    <h3>3.8. Ví dụ tổng hợp</h3>
+
+    <h4>3.8.1. Kiểm tra số nguyên tố</h4>
+    <pre>
+import java.util.Scanner;
+
+public class KiemTraNguyenTo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        boolean laNguyenTo = (n &gt;= 2);
+        for (int i = 2; i &lt;= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                laNguyenTo = false;
+                break;
+            }
+        }
+
+        if (laNguyenTo)
+            System.out.println(n + " la so nguyen to");
+        else
+            System.out.println(n + " khong phai la so nguyen to");
+
+        sc.close();
+    }
+}
+    </pre>
+
+    <h4>3.8.2. Tính giai thừa</h4>
+    <pre>
+public class GiaiThua {
+    public static void main(String[] args) {
+        int n = 5;
+        long giaiThua = 1;
+
+        for (int i = 1; i &lt;= n; i++) {
+            giaiThua *= i;
+        }
+        System.out.println(n + "! = " + giaiThua);   // 120
+    }
+}
+    </pre>
+
+    <h4>3.8.3. Dãy Fibonacci</h4>
+    <pre>
+public class Fibonacci {
+    public static void main(String[] args) {
+        int n = 10;
+        int a = 0, b = 1;
+
+        System.out.print("Day Fibonacci: " + a + " " + b);
+        for (int i = 2; i &lt; n; i++) {
+            int c = a + b;
+            System.out.print(" " + c);
+            a = b;
+            b = c;
+        }
+    }
+}
+    </pre>
+
+    <h4>3.8.4. Vẽ tam giác Pascal</h4>
+    <pre>
+public class PascalTriangle {
+    public static void main(String[] args) {
+        int n = 6;
+        for (int i = 0; i &lt; n; i++) {
+            // In khoảng trắng để căn đều
+            for (int k = 0; k &lt; n - i - 1; k++) System.out.print(" ");
+
+            int c = 1;
+            for (int j = 0; j &lt;= i; j++) {
+                System.out.print(c + " ");
+                c = c * (i - j) / (j + 1);
+            }
+            System.out.println();
+        }
+    }
+}
+    </pre>
+
+    <h4>3.8.5. Tính tổng đến khi nhập 0</h4>
+    <pre>
+import java.util.Scanner;
+
+public class TongDenKhiGap0 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n;
+        int tong = 0;
+
+        do {
+            System.out.print("Nhap n (0 de thoat): ");
+            n = sc.nextInt();
+            tong += n;
+        } while (n != 0);
+
+        System.out.println("Tong = " + tong);
+        sc.close();
+    }
+}
+    </pre>
+
+    <hr>
+
+    <!-- ================== PHẦN BÀI TẬP – 4 MỨC ĐỘ ================== -->
+    <h2>PHẦN BÀI TẬP (4 MỨC ĐỘ)</h2>
+    <p>Bài tập được chia thành 4 mức từ dễ đến khó. Sinh viên nên làm tuần tự từ mức 1 đến mức 4. Mỗi bài đều có lời giải ẩn trong nút "Xem lời giải".</p>
+
+    <!-- ========== MỨC 1 ========== -->
+    <h3>🟢 MỨC 1 – NHẬN BIẾT (Dễ)</h3>
+    <p><i>Mục tiêu: Ghi nhớ cú pháp 3 loại vòng lặp, biết vòng lặp nào kiểm tra điều kiện trước/sau.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Vòng lặp nào <b>luôn thực hiện khối lệnh ít nhất 1 lần</b>?
+            <br>A. <code>for</code> &nbsp; B. <code>while</code> &nbsp;
+                C. <code>do – while</code> &nbsp; D. Cả 3
+        </li>
+        <li>Cú pháp nào sau đây của vòng lặp <code>for</code> là <b>đúng</b>?
+            <br>A. <code>for (int i = 0; i &lt; 10; i++)</code>
+            <br>B. <code>for (int i = 0; i &lt; 10)</code>
+            <br>C. <code>for (i = 0; i &lt; 10; i++)</code> (không khai báo kiểu)
+            <br>D. <code>for int i = 0 to 10</code>
+        </li>
+        <li>Vòng lặp <code>while</code> kiểm tra điều kiện khi nào?
+            <br>A. Sau khi thực hiện khối lệnh &nbsp; B. Trước khi thực hiện khối lệnh
+            <br>C. Không kiểm tra &nbsp; D. Chỉ kiểm tra lần đầu
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>C – <code>do – while</code></li>
+            <li>A – Đúng cú pháp <code>for (khoiTao; dieuKien; buocNhay)</code></li>
+            <li>B – Kiểm tra trước khi thực hiện khối lệnh</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 1.1.</b> Dùng vòng lặp <code>for</code> in ra các số từ 1 đến 10, mỗi số trên một dòng.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_1 {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt;= 10; i++) {
+            System.out.println(i);
+        }
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 1.2.</b> Dùng vòng lặp <code>while</code> in ra các số từ 10 về 1 (giảm dần).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_2 {
+    public static void main(String[] args) {
+        int i = 10;
+        while (i &gt;= 1) {
+            System.out.println(i);
+            i--;
+        }
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 1.3.</b> Dùng vòng lặp <code>for</code> in ra các số <b>chẵn</b> từ 2 đến 20.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_3 {
+    public static void main(String[] args) {
+        for (int i = 2; i &lt;= 20; i += 2) {
+            System.out.print(i + " ");
+        }
+        // Kết quả: 2 4 6 8 10 12 14 16 18 20
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 2 ========== -->
+    <h3>🟡 MỨC 2 – THÔNG HIỂU (Trung bình)</h3>
+    <p><i>Mục tiêu: Hiểu cách tích lũy biến trong vòng lặp, phân biệt break/continue, dùng do-while đúng chỗ.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đoạn code sau in ra gì?
+            <pre>
+for (int i = 1; i &lt;= 5; i++) {
+    if (i == 3) break;
+    System.out.print(i + " ");
+}</pre>
+            A. <code>1 2 3 4 5</code> &nbsp; B. <code>1 2</code> &nbsp;
+                C. <code>1 2 3</code> &nbsp; D. <code>1 2 4 5</code>
+        </li>
+        <li>Đoạn code sau in ra gì?
+            <pre>
+for (int i = 1; i &lt;= 5; i++) {
+    if (i == 3) continue;
+    System.out.print(i + " ");
+}</pre>
+            A. <code>1 2 3 4 5</code> &nbsp; B. <code>1 2</code> &nbsp;
+                C. <code>1 2 4 5</code> &nbsp; D. <code>3</code>
+        </li>
+        <li>Sau khi chạy đoạn code sau, biến <code>tong</code> có giá trị bao nhiêu?
+            <pre>
+int tong = 0;
+for (int i = 1; i &lt;= 10; i++) {
+    tong += i;
+}</pre>
+            A. 10 &nbsp; B. 45 &nbsp; C. 55 &nbsp; D. 100
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – <code>1 2</code> (break thoát ngay khi i = 3)</li>
+            <li>C – <code>1 2 4 5</code> (continue bỏ qua i = 3)</li>
+            <li>C – 55 (tổng 1 + 2 + ... + 10)</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 2.1.</b> Nhập số nguyên dương <code>n</code>. Tính tổng <code>S = 1 + 2 + ... + n</code> bằng vòng lặp <code>for</code> và in kết quả.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        int tong = 0;
+        for (int i = 1; i &lt;= n; i++) {
+            tong += i;
+        }
+
+        System.out.println("Tong 1 + 2 + ... + " + n + " = " + tong);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.2.</b> Nhập số nguyên dương <code>n</code>. Đếm xem từ 1 đến <code>n</code> có bao nhiêu số chẵn, bao nhiêu số lẻ.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        int demChan = 0, demLe = 0;
+        for (int i = 1; i &lt;= n; i++) {
+            if (i % 2 == 0) demChan++;
+            else            demLe++;
+        }
+
+        System.out.println("So chan: " + demChan);
+        System.out.println("So le  : " + demLe);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.3.</b> Viết chương trình nhập các số nguyên từ bàn phím, tính tổng của chúng. Dừng nhập khi người dùng nhập <code>0</code>. Dùng vòng lặp <code>do – while</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n;
+        int tong = 0;
+
+        do {
+            System.out.print("Nhap n (0 de thoat): ");
+            n = sc.nextInt();
+            tong += n;
+        } while (n != 0);
+
+        System.out.println("Tong = " + tong);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 3 ========== -->
+    <h3>🟠 MỨC 3 – VẬN DỤNG (Khó)</h3>
+    <p><i>Mục tiêu: Vận dụng vòng lặp để giải bài toán số học, hiểu vòng lặp lồng nhau và break có điều kiện.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đoạn code sau in ra bao nhiêu dòng?
+            <pre>
+for (int i = 1; i &lt;= 3; i++) {
+    for (int j = 1; j &lt;= 4; j++) {
+        System.out.println(i + "-" + j);
+    }
+}</pre>
+            A. 3 &nbsp; B. 4 &nbsp; C. 7 &nbsp; D. 12
+        </li>
+        <li>Vòng lặp nào sau đây là <b>vòng lặp vô hạn</b>?
+            <br>A. <code>for (int i = 0; i &lt; 10; i++)</code>
+            <br>B. <code>while (true) { ... }</code>
+            <br>C. <code>for (int i = 10; i &gt; 0; i--)</code>
+            <br>D. <code>do { ... } while (false);</code>
+        </li>
+        <li>Với <code>n = 7</code>, đoạn code kiểm tra số nguyên tố sau in ra gì?
+            <pre>
+boolean ok = (n &gt;= 2);
+for (int i = 2; i &lt;= Math.sqrt(n); i++) {
+    if (n % i == 0) { ok = false; break; }
+}
+System.out.println(ok ? "Nguyen to" : "Khong");</pre>
+            A. Nguyen to &nbsp; B. Khong &nbsp; C. Lỗi biên dịch &nbsp; D. Không in gì
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>D – 12 (3 × 4 = 12 dòng)</li>
+            <li>B – <code>while (true)</code> không bao giờ dừng nếu không có break/return bên trong</li>
+            <li>A – 7 là số nguyên tố (không chia hết cho 2, 3, ..., √7 ≈ 2.6)</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 3.1.</b> Nhập số nguyên <code>n</code>. Kiểm tra <code>n</code> có phải số nguyên tố không (dùng vòng lặp <code>for</code> kết hợp <code>break</code>).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        boolean laNguyenTo = (n &gt;= 2);
+        for (int i = 2; i &lt;= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                laNguyenTo = false;
+                break;
+            }
+        }
+
+        System.out.println(laNguyenTo
+            ? n + " la so nguyen to"
+            : n + " khong phai la so nguyen to");
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.2.</b> Nhập số nguyên dương <code>n</code>. Tính <code>n!</code> (giai thừa) bằng vòng lặp <code>for</code>. Dùng kiểu <code>long</code> để tránh tràn sớm.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        long giaiThua = 1;
+        for (int i = 1; i &lt;= n; i++) {
+            giaiThua *= i;
+        }
+
+        System.out.println(n + "! = " + giaiThua);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.3.</b> Nhập số nguyên dương <code>n</code>. In ra <code>n</code> số Fibonacci đầu tiên: <code>0, 1, 1, 2, 3, 5, 8, ...</code></p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        long a = 0, b = 1;
+        System.out.print("Day Fibonacci: ");
+
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print(a + " ");
+            long c = a + b;
+            a = b;
+            b = c;
+        }
+        System.out.println();
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 4 ========== -->
+    <h3>🔴 MỨC 4 – VẬN DỤNG CAO (Rất khó)</h3>
+    <p><i>Mục tiêu: Xử lý vòng lặp lồng nhau phức tạp, dùng nhãn (label), tối ưu thuật toán, giải bài toán số học nâng cao.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đoạn code có nhãn sau in ra gì?
+            <pre>
+outer:
+for (int i = 1; i &lt;= 3; i++) {
+    for (int j = 1; j &lt;= 3; j++) {
+        if (i == 2 &amp;&amp; j == 2) break outer;
+        System.out.print(i + "-" + j + " ");
+    }
+}</pre>
+            A. <code>1-1 1-2 1-3 2-1</code> &nbsp; B. <code>1-1 2-2</code>
+            <br>C. <code>1-1 1-2 1-3</code> &nbsp; D. <code>1-1 1-2 1-3 2-1 2-2</code>
+        </li>
+        <li>Đoạn code sau in ra tổng bằng bao nhiêu?
+            <pre>
+int s = 0;
+for (int i = 1; i &lt;= 5; i++) {
+    if (i % 2 == 0) continue;
+    s += i;
+}</pre>
+            A. 6 &nbsp; B. 9 &nbsp; C. 15 &nbsp; D. 3
+        </li>
+        <li>Vòng lặp lồng nhau dưới đây in ra <b>bao nhiêu ký tự <code>*</code></b>?
+            <pre>
+for (int i = 1; i &lt;= 4; i++) {
+    for (int j = 1; j &lt;= i; j++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}</pre>
+            A. 4 &nbsp; B. 10 &nbsp; C. 16 &nbsp; D. 6
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>A – In lần lượt <code>1-1 1-2 1-3 2-1</code>, rồi khi i=2, j=2 thì <code>break outer</code> thoát cả vòng ngoài</li>
+            <li>B – 9 (cộng các số lẻ: 1 + 3 + 5)</li>
+            <li>B – 10 (1 + 2 + 3 + 4 = 10 dấu <code>*</code>)</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 4.1.</b> Nhập chiều cao <code>h</code>. Vẽ tam giác sao cân đối (mỗi dòng có số sao lẻ: 1, 3, 5, ...):</p>
+    <pre>
+    *
+   ***
+  *****
+ *******
+    </pre>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap chieu cao h: ");
+        int h = sc.nextInt();
+
+        for (int i = 1; i &lt;= h; i++) {
+            // In khoảng trắng bên trái
+            for (int k = 1; k &lt;= h - i; k++) {
+                System.out.print(" ");
+            }
+            // In dấu *
+            for (int j = 1; j &lt;= 2 * i - 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.2.</b> Tìm và in ra tất cả các <b>số hoàn hảo</b> trong khoảng từ 1 đến <code>N</code> (N nhập từ bàn phím). Số hoàn hảo là số có tổng các ước thực sự (không kể chính nó) bằng chính nó. Ví dụ: 6 = 1 + 2 + 3, 28 = 1 + 2 + 4 + 7 + 14.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap N: ");
+        int N = sc.nextInt();
+
+        System.out.print("Cac so hoan hao tu 1 den " + N + ": ");
+        for (int n = 2; n &lt;= N; n++) {
+            int tong = 0;
+            for (int i = 1; i &lt;= n / 2; i++) {
+                if (n % i == 0) tong += i;
+            }
+            if (tong == n) System.out.print(n + " ");
+        }
+        System.out.println();
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.3.</b> Nhập một số nguyên dương <code>n</code>. Tính tổng các chữ số của <code>n</code> và in ra số đảo ngược của <code>n</code>. Ví dụ: <code>n = 1234</code> → tổng chữ số = 10, số đảo ngược = 4321. Gợi ý: dùng <code>n % 10</code> để lấy chữ số cuối và <code>n /= 10</code> để bỏ chữ số cuối.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        int tam = n;
+        int tongChuSo = 0;
+        int daoNguoc  = 0;
+
+        while (tam &gt; 0) {
+            int chuSo = tam % 10;
+            tongChuSo += chuSo;
+            daoNguoc  = daoNguoc * 10 + chuSo;
+            tam /= 10;
+        }
+
+        System.out.println("Tong cac chu so = " + tongChuSo);
+        System.out.println("So dao nguoc    = " + daoNguoc);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.4.</b> <b>Bài thách thức:</b> Vẽ tam giác Pascal có chiều cao <code>n</code> (nhập từ bàn phím), mỗi phần tử căn lề đều. Gợi ý: dùng vòng lặp lồng nhau và công thức <code>C(i, j) = C(i, j-1) * (i - j + 1) / j</code>.</p>
+    <pre>
+      1
+     1 1
+    1 2 1
+   1 3 3 1
+  1 4 6 4 1
+    </pre>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap chieu cao n: ");
+        int n = sc.nextInt();
+
+        for (int i = 0; i &lt; n; i++) {
+            // In khoảng trắng căn đều
+            for (int k = 0; k &lt; n - i - 1; k++) System.out.print(" ");
+
+            int c = 1;
+            for (int j = 0; j &lt;= i; j++) {
+                System.out.print(c + " ");
+                c = c * (i - j) / (j + 1);
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <hr>
+
+    <!-- ================== TỔNG KẾT CHƯƠNG ================== -->
+    <h2>Tổng kết chương 3</h2>
+    <ul>
+        <li>Vòng lặp giúp thực hiện lặp lại một khối lệnh nhiều lần, tránh viết code trùng lặp.</li>
+        <li><code>for</code> phù hợp khi biết trước số lần lặp.</li>
+        <li><code>while</code> kiểm tra điều kiện trước, có thể không thực hiện lần nào.</li>
+        <li><code>do – while</code> thực hiện ít nhất 1 lần rồi mới kiểm tra điều kiện.</li>
+        <li><code>break</code> thoát vòng lặp, <code>continue</code> bỏ qua lần lặp hiện tại, <code>return</code> thoát phương thức.</li>
+        <li>Có thể lồng các vòng lặp và dùng nhãn (label) để điều khiển linh hoạt hơn.</li>
+        <li>Luôn chú ý điều kiện dừng để tránh <b>vòng lặp vô hạn</b>.</li>
+    </ul>
+
+    <hr>
+    <p align="center">
+        <i>— Hết Chương 3: Vòng lặp —</i><br>
+        <a href="bai29.html">Quay lại Trang chủ</a>
+    </p>
+<script src="app.js"></script>
+</body>
+</html>

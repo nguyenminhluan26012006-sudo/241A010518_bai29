@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 4 - Mảng trong Java</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="index.html">Trang chủ</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+    <h1>CHƯƠNG 4: MẢNG TRONG JAVA</h1>
+    <hr>
+
+    <h2>Mục tiêu chương</h2>
+    <ul>
+        <li>Hiểu khái niệm mảng, đặc điểm của mảng trong Java (kích thước cố định, chỉ số từ 0).</li>
+        <li>Biết cách khai báo, khởi tạo mảng theo nhiều cách khác nhau.</li>
+        <li>Phân biệt mảng một chiều, mảng hai chiều và mảng răng cưa (jagged array).</li>
+        <li>Sử dụng thành thạo vòng lặp <code>for</code> và <code>for-each</code> để duyệt mảng.</li>
+        <li>Nắm được các thao tác cơ bản: tính tổng, tìm max/min, đảo mảng, tìm kiếm, sắp xếp.</li>
+        <li>Sử dụng lớp tiện ích <code>java.util.Arrays</code> và <code>System.arraycopy()</code>.</li>
+        <li>Hiểu mối quan hệ giữa mảng và tham chiếu, tránh các lỗi thường gặp.</li>
+        <li>Biết cách truyền mảng vào phương thức và trả về mảng từ phương thức.</li>
+    </ul>
+    <hr>
+
+    <!-- ================== PHẦN LÝ THUYẾT ================== -->
+    <h2 id="chapters">PHẦN LÝ THUYẾT</h2>
+
+    <h3>4.1. Mảng là gì? – Nhìn sâu hơn</h3>
+
+    <h4>4.1.1. Khái niệm và đặc điểm</h4>
+    <p>
+        <b>Mảng (array)</b> là một tập hợp các phần tử <b>cùng kiểu dữ liệu</b> được lưu trữ
+        <b>liên tiếp nhau</b> trong bộ nhớ, và được truy cập thông qua <b>chỉ số (index)</b>.
+        Mảng trong Java là <b>đối tượng (object)</b> – được tạo bằng từ khóa <code>new</code>
+        và có thuộc tính <code>length</code>.
+    </p>
+    <ul>
+        <li>Kích thước mảng <b>cố định</b> sau khi khởi tạo – không thể thay đổi.</li>
+        <li>Chỉ số bắt đầu từ <b>0</b> đến <b>length - 1</b>.</li>
+        <li>Các phần tử có cùng kiểu dữ liệu (nguyên thủy hoặc tham chiếu).</li>
+        <li>Truy cập phần tử có độ phức tạp <b>O(1)</b> – rất nhanh.</li>
+        <li>Mảng lưu <b>tham chiếu</b> tới vùng nhớ trên heap, biến mảng chỉ giữ địa chỉ.</li>
+    </ul>
+    <p>
+        <b>Lưu ý:</b> truy cập chỉ số ngoài phạm vi <code>[0, length - 1]</code> sẽ gây ra ngoại lệ
+        <code>ArrayIndexOutOfBoundsException</code>.
+    </p>
+
+    <h4>4.1.2. Cú pháp khai báo</h4>
+    <p>Có hai cách viết tương đương (Java ưu tiên cách 1):</p>
+    <pre>
+// Cách 1: kiểu[] tenMang  (khuyến nghị)
+int[] diem;
+String[] hoTen;
+
+// Cách 2: kiểu tenMang[]  (kiểu C/C++, vẫn hợp lệ)
+int diem[];
+String hoTen[];
+    </pre>
+    <p>
+        Khai báo chỉ tạo <b>biến tham chiếu</b>, <b>chưa cấp phát</b> vùng nhớ cho các phần tử.
+        Muốn dùng phải khởi tạo bằng <code>new</code> hoặc gán trực tiếp bằng mảng literal.
+    </p>
+
+    <h4>4.1.3. Khởi tạo mảng</h4>
+    <pre>
+// 1. Khởi tạo với kích thước cho trước (phần tử nhận giá trị mặc định)
+int[] a = new int[5];              // {0, 0, 0, 0, 0}
+String[] ten = new String[3];      // {null, null, null}
+
+// 2. Khởi tạo kèm giá trị (mảng literal)
+int[] b = {1, 2, 3, 4, 5};
+String[] mau = {"Đỏ", "Xanh", "Vàng"};
+
+// 3. Khởi tạo bằng new + literal
+int[] c = new int[]{10, 20, 30};
+
+// 4. Khai báo trước, gán sau
+int[] d;
+d = new int[]{7, 8, 9};
+    </pre>
+    <p>
+        <b>Lưu ý:</b> khi dùng <code>{...}</code> thì <b>không</b> được ghi kích thước trong <code>[]</code>:
+        <code>new int[3]{1,2,3}</code> là <b>sai</b>.
+    </p>
+
+    <h4>4.1.4. Giá trị mặc định của phần tử mảng</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Kiểu phần tử</th>
+            <th>Giá trị mặc định</th>
+        </tr>
+        <tr><td>byte, short, int, long</td><td>0</td></tr>
+        <tr><td>float, double</td><td>0.0</td></tr>
+        <tr><td>char</td><td>'\u0000'</td></tr>
+        <tr><td>boolean</td><td>false</td></tr>
+        <tr><td>Kiểu tham chiếu (String, Object…)</td><td>null</td></tr>
+    </table>
+    <p>Mảng vừa tạo bằng <code>new</code> luôn được gán giá trị mặc định theo kiểu tương ứng.</p>
+
+    <hr>
+
+    <h3>4.2. Truy cập và duyệt mảng</h3>
+
+    <h4>4.2.1. Truy cập phần tử theo chỉ số</h4>
+    <pre>
+int[] a = {10, 20, 30, 40, 50};
+
+System.out.println(a[0]);     // 10
+System.out.println(a[4]);     // 50
+System.out.println(a.length); // 5
+
+a[2] = 99;                     // Gán lại phần tử
+// a[5] = 100;                 // LỖI: ArrayIndexOutOfBoundsException
+    </pre>
+
+    <h4>4.2.2. Duyệt mảng bằng <code>for</code> cổ điển</h4>
+    <pre>
+int[] a = {1, 2, 3, 4, 5};
+
+for (int i = 0; i &lt; a.length; i++) {
+    System.out.println("a[" + i + "] = " + a[i]);
+}
+    </pre>
+    <p>Dùng <code>for</code> cổ điển khi cần biết chỉ số (để gán, đảo mảng, sắp xếp…).</p>
+
+    <h4>4.2.3. Duyệt mảng bằng <code>for-each</code></h4>
+    <pre>
+int[] a = {1, 2, 3, 4, 5};
+
+for (int x : a) {
+    System.out.println(x);
+}
+    </pre>
+    <p>
+        <b>Lưu ý:</b> <code>for-each</code> chỉ <b>đọc</b> phần tử, <b>không</b> gán lại được
+        giá trị vào mảng. Nếu cần thay đổi phần tử phải dùng <code>for</code> cổ điển.
+    </p>
+
+    <hr>
+
+    <h3>4.3. Các thao tác cơ bản trên mảng một chiều</h3>
+
+    <h4>4.3.1. Tính tổng, trung bình cộng</h4>
+    <pre>
+int[] a = {4, 8, 15, 16, 23, 42};
+int tong = 0;
+for (int x : a) tong += x;
+double tb = (double) tong / a.length;
+
+System.out.println("Tong = " + tong);  // 108
+System.out.println("TB   = " + tb);    // 18.0
+    </pre>
+
+    <h4>4.3.2. Tìm giá trị lớn nhất / nhỏ nhất</h4>
+    <pre>
+int[] a = {4, 8, 15, 16, 23, 42};
+int max = a[0], min = a[0];
+
+for (int i = 1; i &lt; a.length; i++) {
+    if (a[i] &gt; max) max = a[i];
+    if (a[i] &lt; min) min = a[i];
+}
+System.out.println("Max = " + max + ", Min = " + min);
+    </pre>
+
+    <h4>4.3.3. Đảo ngược mảng</h4>
+    <pre>
+int[] a = {1, 2, 3, 4, 5};
+
+for (int i = 0, j = a.length - 1; i &lt; j; i++, j--) {
+    int tmp = a[i];
+    a[i] = a[j];
+    a[j] = tmp;
+}
+// a = {5, 4, 3, 2, 1}
+    </pre>
+
+    <h4>4.3.4. Đếm số phần tử thỏa điều kiện</h4>
+    <pre>
+int[] a = {1, 2, 3, 4, 5, 6, 7, 8};
+int demChan = 0;
+for (int x : a) {
+    if (x % 2 == 0) demChan++;
+}
+System.out.println("So phan tu chan = " + demChan); // 4
+    </pre>
+
+    <h4>4.3.5. Tìm kiếm tuyến tính (Linear Search)</h4>
+    <pre>
+int[] a = {4, 8, 15, 16, 23, 42};
+int canTim = 16;
+int viTri = -1;
+
+for (int i = 0; i &lt; a.length; i++) {
+    if (a[i] == canTim) {
+        viTri = i;
+        break;
+    }
+}
+System.out.println("Tim thay tai vi tri: " + viTri); // 3
+    </pre>
+
+    <hr>
+
+    <h3>4.4. Mảng hai chiều</h3>
+
+    <h4>4.4.1. Khái niệm</h4>
+    <p>
+        Mảng hai chiều là <b>mảng của các mảng</b> – mỗi phần tử là một mảng một chiều.
+        Dùng để biểu diễn ma trận, bảng số liệu, bàn cờ…
+    </p>
+
+    <h4>4.4.2. Khai báo và khởi tạo</h4>
+    <pre>
+// Cách 1: mảng đều (rectangular)
+int[][] m = new int[3][4];             // 3 dòng, 4 cột
+
+// Cách 2: literal
+int[][] m2 = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+
+// Cách 3: mảng răng cưa (jagged) - mỗi dòng có số cột khác nhau
+int[][] m3 = new int[3][];
+m3[0] = new int[]{1, 2};
+m3[1] = new int[]{3, 4, 5};
+m3[2] = new int[]{6};
+    </pre>
+
+    <h4>4.4.3. Truy cập và duyệt</h4>
+    <pre>
+int[][] m = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+
+System.out.println(m[0][1]);  // 2
+System.out.println(m.length);     // 2 (số dòng)
+System.out.println(m[0].length);  // 3 (số cột của dòng 0)
+
+// Duyệt bằng 2 vòng for
+for (int i = 0; i &lt; m.length; i++) {
+    for (int j = 0; j &lt; m[i].length; j++) {
+        System.out.print(m[i][j] + " ");
+    }
+    System.out.println();
+}
+
+// Duyệt bằng for-each lồng
+for (int[] dong : m) {
+    for (int x : dong) {
+        System.out.print(x + " ");
+    }
+    System.out.println();
+}
+    </pre>
+    <p>
+        <b>Lưu ý:</b> với mảng răng cưa, <b>không</b> dùng <code>m[0].length</code> cho tất cả
+        các dòng – phải dùng <code>m[i].length</code>.
+    </p>
+
+    <hr>
+
+    <h3>4.5. Lớp tiện ích <code>java.util.Arrays</code></h3>
+    <p>
+        Java cung cấp lớp <code>Arrays</code> với nhiều phương thức tĩnh hữu ích để làm việc
+        với mảng. Cần <code>import java.util.Arrays;</code> trước khi dùng.
+    </p>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Phương thức</th><th>Chức năng</th><th>Ví dụ</th></tr>
+        <tr><td><code>toString(arr)</code></td><td>Chuyển mảng thành chuỗi để in</td>
+            <td><code>Arrays.toString(a)</code></td></tr>
+        <tr><td><code>sort(arr)</code></td><td>Sắp xếp tăng dần (tại chỗ)</td>
+            <td><code>Arrays.sort(a)</code></td></tr>
+        <tr><td><code>sort(arr, from, to)</code></td><td>Sắp xếp một đoạn</td>
+            <td><code>Arrays.sort(a, 1, 4)</code></td></tr>
+        <tr><td><code>binarySearch(arr, key)</code></td><td>Tìm kiếm nhị phân (mảng phải sắp xếp)</td>
+            <td><code>Arrays.binarySearch(a, 5)</code></td></tr>
+        <tr><td><code>fill(arr, val)</code></td><td>Gán tất cả phần tử bằng <code>val</code></td>
+            <td><code>Arrays.fill(a, 0)</code></td></tr>
+        <tr><td><code>copyOf(arr, n)</code></td><td>Sao chép sang mảng mới kích thước <code>n</code></td>
+            <td><code>Arrays.copyOf(a, 10)</code></td></tr>
+        <tr><td><code>copyOfRange(arr, from, to)</code></td><td>Sao chép đoạn</td>
+            <td><code>Arrays.copyOfRange(a, 2, 5)</code></td></tr>
+        <tr><td><code>equals(a, b)</code></td><td>So sánh nội dung hai mảng</td>
+            <td><code>Arrays.equals(a, b)</code></td></tr>
+        <tr><td><code>deepToString(m)</code></td><td>In mảng hai chiều</td>
+            <td><code>Arrays.deepToString(m2d)</code></td></tr>
+    </table>
+
+    <h4>Ví dụ minh họa</h4>
+    <pre>
+import java.util.Arrays;
+
+public class ViDuArrays {
+    public static void main(String[] args) {
+        int[] a = {5, 2, 8, 1, 9, 3};
+
+        System.out.println("Ban dau: " + Arrays.toString(a));
+
+        Arrays.sort(a);
+        System.out.println("Sau sort: " + Arrays.toString(a));  // [1,2,3,5,8,9]
+
+        int idx = Arrays.binarySearch(a, 5);
+        System.out.println("Vi tri cua 5: " + idx);             // 3
+
+        int[] b = Arrays.copyOf(a, 10);
+        System.out.println("Sau copy: " + Arrays.toString(b));  // 10 phần tử
+
+        Arrays.fill(b, 0);
+        System.out.println("Sau fill: " + Arrays.toString(b));  // toàn 0
+    }
+}
+    </pre>
+
+    <h4>Sao chép mảng bằng <code>System.arraycopy()</code></h4>
+    <pre>
+int[] src = {1, 2, 3, 4, 5};
+int[] dest = new int[5];
+
+System.arraycopy(src, 0, dest, 0, src.length);
+// dest = {1, 2, 3, 4, 5}
+    </pre>
+    <p>Cú pháp: <code>System.arraycopy(mangNguon, viTriNguon, mangDich, viTriDich, soPhanTu)</code>.</p>
+
+    <hr>
+
+    <h3>4.6. Mảng và tham chiếu – Lỗi thường gặp</h3>
+
+    <h4>4.6.1. Gán mảng là gán tham chiếu</h4>
+    <pre>
+int[] a = {1, 2, 3};
+int[] b = a;               // b trỏ CÙNG mảng với a
+
+b[0] = 99;
+System.out.println(a[0]);  // 99 – vì a và b cùng tham chiếu
+    </pre>
+    <p>
+        Muốn <b>sao chép thật sự</b> (tạo mảng mới), phải dùng <code>Arrays.copyOf()</code>
+        hoặc <code>System.arraycopy()</code> hoặc <code>a.clone()</code>.
+    </p>
+
+    <h4>4.6.2. Lỗi <code>ArrayIndexOutOfBoundsException</code></h4>
+    <pre>
+int[] a = {1, 2, 3};
+System.out.println(a[3]);   // LỖI: chỉ số hợp lệ là 0, 1, 2
+    </pre>
+
+    <h4>4.6.3. Lỗi <code>NullPointerException</code> khi mảng chưa khởi tạo</h4>
+    <pre>
+int[] a;
+// a[0] = 1;                // LỖI: a chưa được khởi tạo (null)
+    </pre>
+
+    <h4>4.6.4. So sánh mảng: <code>==</code> vs <code>Arrays.equals()</code></h4>
+    <pre>
+int[] a = {1, 2, 3};
+int[] b = {1, 2, 3};
+
+System.out.println(a == b);                    // false (khác tham chiếu)
+System.out.println(Arrays.equals(a, b));       // true  (cùng nội dung)
+    </pre>
+
+    <hr>
+
+    <h3>4.7. Truyền mảng vào phương thức và trả về mảng</h3>
+
+    <h4>4.7.1. Truyền mảng vào phương thức</h4>
+    <p>
+        Khi truyền mảng vào phương thức, Java truyền <b>tham chiếu</b> – nghĩa là phương thức
+        có thể <b>thay đổi nội dung mảng gốc</b>.
+    </p>
+    <pre>
+public static void tangMoiPhanTu(int[] arr) {
+    for (int i = 0; i &lt; arr.length; i++) {
+        arr[i] += 1;
+    }
+}
+
+public static void main(String[] args) {
+    int[] a = {1, 2, 3};
+    tangMoiPhanTu(a);
+    System.out.println(Arrays.toString(a));   // [2, 3, 4]
+}
+    </pre>
+
+    <h4>4.7.2. Trả về mảng từ phương thức</h4>
+    <pre>
+public static int[] taoMangChan(int n) {
+    int[] kq = new int[n];
+    for (int i = 0; i &lt; n; i++) {
+        kq[i] = i * 2;
+    }
+    return kq;
+}
+    </pre>
+
+    <hr>
+
+    <h3>4.8. Ví dụ tổng hợp</h3>
+    <p>
+        Chương trình minh họa khai báo mảng, tính toán, sắp xếp, tìm kiếm và mảng hai chiều:
+    </p>
+    <pre>
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class MangTongHop {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // 1. Nhập mảng
+        System.out.print("Nhap so phan tu: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print("a[" + i + "] = ");
+            a[i] = sc.nextInt();
+        }
+
+        // 2. Thống kê
+        int tong = 0, max = a[0], min = a[0];
+        for (int x : a) {
+            tong += x;
+            if (x &gt; max) max = x;
+            if (x &lt; min) min = x;
+        }
+        double tb = (double) tong / n;
+
+        System.out.println("Mang vua nhap: " + Arrays.toString(a));
+        System.out.println("Tong: " + tong);
+        System.out.println("Trung binh: " + tb);
+        System.out.println("Max: " + max);
+        System.out.println("Min: " + min);
+
+        // 3. Sắp xếp và tìm kiếm nhị phân
+        Arrays.sort(a);
+        System.out.println("Sau sort: " + Arrays.toString(a));
+
+        System.out.print("Nhap gia tri can tim: ");
+        int key = sc.nextInt();
+        int idx = Arrays.binarySearch(a, key);
+        if (idx &gt;= 0) {
+            System.out.println("Tim thay tai vi tri " + idx);
+        } else {
+            System.out.println("Khong tim thay");
+        }
+
+        // 4. Mảng hai chiều
+        int[][] m = new int[3][3];
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                m[i][j] = i * 3 + j + 1;
+            }
+        }
+        System.out.println("Ma tran 3x3: " + Arrays.deepToString(m));
+
+        sc.close();
+    }
+}
+    </pre>
+
+    <!-- ================== PHẦN BÀI TẬP – 4 MỨC ĐỘ ================== -->
+    <h2>PHẦN BÀI TẬP (4 MỨC ĐỘ)</h2>
+    <p>Bài tập được chia thành 4 mức từ dễ đến khó. Sinh viên nên làm tuần tự từ mức 1 đến mức 4. Mỗi bài đều có lời giải ẩn trong nút "Xem lời giải".</p>
+
+    <!-- ========== MỨC 1 ========== -->
+    <h3>🟢 MỨC 1 – NHẬN BIẾT (Dễ)</h3>
+    <p><i>Mục tiêu: Ghi nhớ khái niệm mảng, chỉ số, thuộc tính length, khai báo và khởi tạo.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Chỉ số phần tử đầu tiên của mảng trong Java là:
+            <br>A. 1 &nbsp; B. 0 &nbsp; C. -1 &nbsp; D. Tùy khai báo
+        </li>
+        <li>Thuộc tính nào cho biết số phần tử của mảng <code>a</code>?
+            <br>A. <code>a.size()</code> &nbsp; B. <code>a.length()</code>
+            <br>C. <code>a.length</code> &nbsp; D. <code>a.count</code>
+        </li>
+        <li>Khởi tạo nào sau đây <b>hợp lệ</b>?
+            <br>A. <code>int[] a = new int[5]{1,2,3,4,5};</code> &nbsp;
+            B. <code>int a[] = {1,2,3};</code>
+            <br>C. <code>int[3] a = {1,2,3};</code> &nbsp;
+            D. <code>int[] a = new int(5);</code>
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – Chỉ số bắt đầu từ 0</li>
+            <li>C – <code>length</code> là thuộc tính, không phải phương thức</li>
+            <li>B – Cả 2 cách viết <code>int[] a</code> và <code>int a[]</code> đều hợp lệ</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 1.1.</b> Khai báo một mảng 5 số nguyên với các giá trị tùy ý, in các phần tử ra màn hình theo định dạng <code>a[i] = ...</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_1 {
+    public static void main(String[] args) {
+        int[] a = {10, 20, 30, 40, 50};
+
+        for (int i = 0; i &lt; a.length; i++) {
+            System.out.println("a[" + i + "] = " + a[i]);
+        }
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 1.2.</b> Khai báo mảng <code>double[] diem = new double[5];</code> rồi gán giá trị lần lượt là 7.5, 8.0, 6.5, 9.0, 8.5. In ra tất cả phần tử và số phần tử của mảng.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Bai1_2 {
+    public static void main(String[] args) {
+        double[] diem = new double[5];
+        diem[0] = 7.5;
+        diem[1] = 8.0;
+        diem[2] = 6.5;
+        diem[3] = 9.0;
+        diem[4] = 8.5;
+
+        for (double d : diem) {
+            System.out.println("Diem = " + d);
+        }
+        System.out.println("So phan tu = " + diem.length);
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 2 ========== -->
+    <h3>🟡 MỨC 2 – THÔNG HIỂU (Trung bình)</h3>
+    <p><i>Mục tiêu: Hiểu duyệt mảng, tính toán cơ bản, lớp <code>Arrays</code>.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đoạn code <code>int[] a = new int[3];</code> – các phần tử của <code>a</code> có giá trị là:
+            <br>A. null &nbsp; B. 0 &nbsp; C. Giá trị ngẫu nhiên &nbsp; D. Lỗi biên dịch
+        </li>
+        <li>Phương thức nào của <code>Arrays</code> dùng để in mảng một chiều?
+            <br>A. <code>Arrays.print(a)</code> &nbsp; B. <code>Arrays.toString(a)</code>
+            <br>C. <code>a.toString()</code> &nbsp; D. <code>Arrays.display(a)</code>
+        </li>
+        <li>Đoạn code sau in gì?
+            <pre>
+int[] a = {3, 1, 2};
+Arrays.sort(a);
+System.out.println(Arrays.toString(a));</pre>
+            A. [3, 1, 2] &nbsp; B. [1, 2, 3] &nbsp; C. [3, 2, 1] &nbsp; D. Lỗi
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – <code>int</code> mặc định là 0</li>
+            <li>B – <code>Arrays.toString(a)</code></li>
+            <li>B – <code>sort</code> sắp xếp tăng dần</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 2.1.</b> Nhập vào mảng <code>n</code> số nguyên. Tính tổng, trung bình cộng, tìm giá trị lớn nhất và nhỏ nhất.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print("a[" + i + "] = ");
+            a[i] = sc.nextInt();
+        }
+
+        int tong = 0, max = a[0], min = a[0];
+        for (int x : a) {
+            tong += x;
+            if (x &gt; max) max = x;
+            if (x &lt; min) min = x;
+        }
+        System.out.println("Tong = " + tong);
+        System.out.println("TB   = " + ((double) tong / n));
+        System.out.println("Max  = " + max);
+        System.out.println("Min  = " + min);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.2.</b> Nhập mảng số nguyên, đếm số phần tử chẵn, số phần tử lẻ, số phần tử âm, số phần tử dương.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai2_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print("a[" + i + "] = ");
+            a[i] = sc.nextInt();
+        }
+
+        int chan = 0, le = 0, am = 0, duong = 0;
+        for (int x : a) {
+            if (x % 2 == 0) chan++; else le++;
+            if (x &lt; 0) am++;
+            else if (x &gt; 0) duong++;
+        }
+        System.out.println("Chan  = " + chan);
+        System.out.println("Le    = " + le);
+        System.out.println("Am    = " + am);
+        System.out.println("Duong = " + duong);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.3.</b> Nhập mảng số nguyên, in mảng đảo ngược (không dùng mảng phụ).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Bai2_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+
+        for (int i = 0; i &lt; n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        for (int i = 0, j = a.length - 1; i &lt; j; i++, j--) {
+            int tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+        }
+        System.out.println("Mang dao: " + Arrays.toString(a));
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 3 ========== -->
+    <h3>🟠 MỨC 3 – VẬN DỤNG (Khó)</h3>
+    <p><i>Mục tiêu: Sắp xếp, tìm kiếm nhị phân, mảng hai chiều, sao chép mảng.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Phương thức <code>Arrays.binarySearch()</code> yêu cầu mảng phải:
+            <br>A. Có kích thước chẵn &nbsp; B. Đã được sắp xếp tăng dần
+            <br>C. Chỉ chứa số dương &nbsp; D. Không có yêu cầu gì
+        </li>
+        <li>Đoạn code sau in gì?
+            <pre>
+int[] a = {1, 2, 3};
+int[] b = a;
+b[0] = 99;
+System.out.println(a[0]);</pre>
+            A. 1 &nbsp; B. 99 &nbsp; C. null &nbsp; D. Lỗi
+        </li>
+        <li>Cách nào sao chép <b>nội dung</b> mảng <code>a</code> sang mảng mới?
+            <br>A. <code>int[] b = a;</code> &nbsp; B. <code>int[] b = Arrays.copyOf(a, a.length);</code>
+            <br>C. <code>int[] b = a.clone();</code> &nbsp; D. Cả B và C đều đúng
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – Phải sắp xếp tăng dần trước khi tìm kiếm nhị phân</li>
+            <li>B – <code>b</code> là tham chiếu cùng mảng với <code>a</code></li>
+            <li>D – Cả <code>copyOf</code> và <code>clone</code> đều tạo mảng mới độc lập</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 3.1.</b> Nhập mảng số nguyên, sắp xếp tăng dần bằng <code>Arrays.sort()</code>, sau đó nhập một giá trị <code>x</code> và dùng <code>Arrays.binarySearch()</code> để kiểm tra <code>x</code> có trong mảng không, in vị trí nếu có.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Bai3_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+
+        for (int i = 0; i &lt; n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        Arrays.sort(a);
+        System.out.println("Mang sau sort: " + Arrays.toString(a));
+
+        System.out.print("Nhap x can tim: ");
+        int x = sc.nextInt();
+        int idx = Arrays.binarySearch(a, x);
+        if (idx &gt;= 0) {
+            System.out.println("Tim thay " + x + " tai vi tri " + idx);
+        } else {
+            System.out.println("Khong tim thay " + x);
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.2.</b> Nhập ma trận <code>m x n</code> số nguyên. Tính tổng các phần tử, tìm phần tử lớn nhất, in ma trận chuyển vị (transpose).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai3_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap m, n: ");
+        int m = sc.nextInt(), n = sc.nextInt();
+
+        int[][] a = new int[m][n];
+        int tong = 0, max = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                a[i][j] = sc.nextInt();
+                tong += a[i][j];
+                if (a[i][j] &gt; max) max = a[i][j];
+            }
+        }
+
+        System.out.println("Tong = " + tong);
+        System.out.println("Max  = " + max);
+        System.out.println("Ma tran chuyen vi:");
+        for (int j = 0; j &lt; n; j++) {
+            for (int i = 0; i &lt; m; i++) {
+                System.out.print(a[i][j] + " ");
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.3.</b> Viết phương thức <code>public static int[] locChan(int[] a)</code> trả về mảng chỉ gồm các số chẵn trong mảng đầu vào. Trong <code>main</code>, nhập mảng, gọi phương thức và in kết quả.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Bai3_3 {
+    public static int[] locChan(int[] a) {
+        int dem = 0;
+        for (int x : a) if (x % 2 == 0) dem++;
+
+        int[] kq = new int[dem];
+        int k = 0;
+        for (int x : a) if (x % 2 == 0) kq[k++] = x;
+        return kq;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i &lt; n; i++) a[i] = sc.nextInt();
+
+        int[] chan = locChan(a);
+        System.out.println("Cac so chan: " + Arrays.toString(chan));
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 4 ========== -->
+    <h3>🔴 MỨC 4 – VẬN DỤNG CAO (Rất khó)</h3>
+    <p><i>Mục tiêu: Tổng hợp kiến thức mảng, thuật toán sắp xếp, xử lý mảng nâng cao.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Với mảng <code>int[][] m = new int[3][];</code>, phát biểu nào <b>đúng</b>?
+            <br>A. Mảng có 3 dòng, mỗi dòng 0 cột
+            <br>B. Lỗi biên dịch
+            <br>C. Các dòng phải được khởi tạo riêng trước khi dùng
+            <br>D. Cả A và C đều đúng
+        </li>
+        <li>Đoạn code sau in gì?
+            <pre>
+int[] a = {1, 2, 3};
+int[] b = Arrays.copyOf(a, 5);
+System.out.println(Arrays.toString(b));</pre>
+            A. [1, 2, 3] &nbsp; B. [1, 2, 3, 0, 0] &nbsp; C. Lỗi &nbsp; D. [null, null]
+        </li>
+        <li>Để sắp xếp mảng chuỗi theo bảng chữ cái, dùng:
+            <br>A. <code>Arrays.sort(a)</code> &nbsp; B. <code>Arrays.sort(a, Comparator.reverseOrder())</code>
+            <br>C. Không sắp xếp được &nbsp; D. <code>a.sort()</code>
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>D – Mảng răng cưa: các dòng chưa khởi tạo (null)</li>
+            <li>B – <code>copyOf</code> điền 0 cho phần tử thiếu</li>
+            <li>A – <code>Arrays.sort()</code> sắp xếp theo thứ tự tự nhiên (String đã implement Comparable)</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 4.1.</b> Cài đặt thuật toán <b>sắp xếp nổi bọt (Bubble Sort)</b> để sắp xếp mảng số nguyên tăng dần mà <b>không</b> dùng <code>Arrays.sort()</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Arrays;
+
+public class Bai4_1 {
+    public static void bubbleSort(int[] a) {
+        int n = a.length;
+        for (int i = 0; i &lt; n - 1; i++) {
+            boolean swapped = false;
+            for (int j = 0; j &lt; n - 1 - i; j++) {
+                if (a[j] &gt; a[j + 1]) {
+                    int tmp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = tmp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;   // tối ưu: mảng đã sắp xếp
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] a = {5, 2, 8, 1, 9, 3};
+        bubbleSort(a);
+        System.out.println(Arrays.toString(a));  // [1,2,3,5,8,9]
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.2.</b> Nhập mảng số nguyên, đếm số lần xuất hiện của mỗi phần tử bằng cách dùng mảng phụ (không dùng <code>Map</code>).</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Bai4_2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i &lt; n; i++) a[i] = sc.nextInt();
+
+        // Sắp xếp để nhóm các phần tử giống nhau lại gần nhau
+        Arrays.sort(a);
+
+        int i = 0;
+        while (i &lt; n) {
+            int dem = 1;
+            while (i + dem &lt; n &amp;&amp; a[i + dem] == a[i]) dem++;
+            System.out.println(a[i] + " xuat hien " + dem + " lan");
+            i += dem;
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.3.</b> Nhập hai ma trận <code>A</code> và <code>B</code> cùng kích thước <code>m x n</code>. Tính ma trận tổng <code>C = A + B</code> và in kết quả dưới dạng bảng.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap m, n: ");
+        int m = sc.nextInt(), n = sc.nextInt();
+
+        int[][] A = new int[m][n];
+        int[][] B = new int[m][n];
+        int[][] C = new int[m][n];
+
+        System.out.println("Nhap ma tran A:");
+        for (int i = 0; i &lt; m; i++)
+            for (int j = 0; j &lt; n; j++) A[i][j] = sc.nextInt();
+
+        System.out.println("Nhap ma tran B:");
+        for (int i = 0; i &lt; m; i++)
+            for (int j = 0; j &lt; n; j++) B[i][j] = sc.nextInt();
+
+        for (int i = 0; i &lt; m; i++)
+            for (int j = 0; j &lt; n; j++) C[i][j] = A[i][j] + B[i][j];
+
+        System.out.println("Ma tran tong C:");
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                System.out.printf("%5d", C[i][j]);
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.4.</b> <b>Bài thách thức:</b> Viết chương trình kiểm tra một mảng số nguyên có phải là <b>cấp số cộng</b> không (các phần tử liên tiếp sai khác nhau một hằng số <code>d</code>). Ví dụ: <code>{2, 5, 8, 11, 14}</code> là cấp số cộng với <code>d = 3</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+public class Bai4_4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i &lt; n; i++) a[i] = sc.nextInt();
+
+        if (n &lt; 2) {
+            System.out.println("Mang qua ngan de kiem tra.");
+            return;
+        }
+
+        int d = a[1] - a[0];
+        boolean laCSC = true;
+        for (int i = 2; i &lt; n; i++) {
+            if (a[i] - a[i - 1] != d) {
+                laCSC = false;
+                break;
+            }
+        }
+
+        if (laCSC) {
+            System.out.println("La cap so cong voi d = " + d);
+        } else {
+            System.out.println("Khong phai cap so cong");
+        }
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.5.</b> <b>Bài tổng hợp:</b> Viết chương trình cho phép người dùng nhập một dãy số nguyên, sau đó hiển thị menu cho phép chọn: (1) In mảng, (2) Tính tổng, (3) Tìm max, (4) Sắp xếp, (5) Thoát. Vòng lặp cho đến khi chọn thoát.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Bai4_5 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nhap n: ");
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i &lt; n; i++) a[i] = sc.nextInt();
+
+        int chon;
+        do {
+            System.out.println("\n=== MENU ===");
+            System.out.println("1. In mang");
+            System.out.println("2. Tinh tong");
+            System.out.println("3. Tim max");
+            System.out.println("4. Sap xep");
+            System.out.println("5. Thoat");
+            System.out.print("Chon: ");
+            chon = sc.nextInt();
+
+            switch (chon) {
+                case 1:
+                    System.out.println(Arrays.toString(a));
+                    break;
+                case 2:
+                    int tong = 0;
+                    for (int x : a) tong += x;
+                    System.out.println("Tong = " + tong);
+                    break;
+                case 3:
+                    int max = a[0];
+                    for (int x : a) if (x &gt; max) max = x;
+                    System.out.println("Max = " + max);
+                    break;
+                case 4:
+                    Arrays.sort(a);
+                    System.out.println("Da sap xep: " + Arrays.toString(a));
+                    break;
+                case 5:
+                    System.out.println("Tam biet!");
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le!");
+            }
+        } while (chon != 5);
+
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <hr>
+
+    <!-- ================== TỔNG KẾT CHƯƠNG ================== -->
+    <h2>Tổng kết chương 4</h2>
+    <ul>
+        <li>Mảng là tập hợp các phần tử cùng kiểu, kích thước <b>cố định</b>, chỉ số từ <b>0</b> đến <b>length - 1</b>.</li>
+        <li>Mảng trong Java là <b>đối tượng</b>, biến mảng lưu <b>tham chiếu</b>; gán mảng là gán tham chiếu.</li>
+        <li>Duyệt mảng bằng <code>for</code> cổ điển (cần chỉ số) hoặc <code>for-each</code> (chỉ đọc).</li>
+        <li>Mảng hai chiều là <b>mảng của các mảng</b>; hỗ trợ cả mảng đều và mảng răng cưa.</li>
+        <li>Lớp <code>java.util.Arrays</code> cung cấp nhiều tiện ích: <code>sort</code>, <code>binarySearch</code>, <code>copyOf</code>, <code>fill</code>, <code>toString</code>, <code>equals</code>, <code>deepToString</code>.</li>
+        <li>Sao chép nội dung mảng dùng <code>Arrays.copyOf()</code>, <code>System.arraycopy()</code> hoặc <code>clone()</code>.</li>
+        <li>So sánh nội dung mảng dùng <code>Arrays.equals()</code>, không dùng <code>==</code>.</li>
+        <li>Cẩn thận với <code>ArrayIndexOutOfBoundsException</code> và <code>NullPointerException</code>.</li>
+        <li>Mảng có thể truyền vào phương thức và trả về từ phương thức; nội dung mảng có thể bị thay đổi từ phương thức.</li>
+    </ul>
+
+    <hr>
+    <p align="center">
+        <i>— Hết Chương 4 —</i><br>
+        <a href="index.html">Quay lại Trang chủ</a> |
+        <a href="chuong3.html">← Chương 3</a> |
+        <a href="chuong5.html">Chương 5 →</a>
+    </p>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khu vực Giáo viên - Java Learning Hub</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="bai29.html#chapters">Lý thuyết</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <!-- ========== LỜI CHÀO ========== -->
+    <section>
+      <h2>👨‍🏫 Khu Vực Giáo Viên</h2>
+      <p>
+        Chào mừng <strong>Giáo viên</strong> đến với bảng điều khiển
+        <strong>Java Learning Hub</strong>.
+      </p>
+      <p>
+        Từ đây, bạn có thể <strong>tạo bài tập</strong>,
+        <strong>quản lý bộ test</strong>, <strong>giao đề thi</strong>
+        và <strong>chấm điểm trực tiếp</strong> cho sinh viên.
+      </p>
+    </section>
+
+    <hr>
+
+    <!-- ========== 3 CHỨC NĂNG CHÍNH ========== -->
+    <section>
+      <h2>🎛️ Chức Năng Chính</h2>
+      <p>Chọn một chức năng bên dưới để bắt đầu:</p>
+
+      <!-- ---------- CHỨC NĂNG 1: TẠO BÀI TẬP ---------- -->
+      <article>
+        <h3>📝 1. Tạo Bài Tập</h3>
+        <p>
+          Tạo bài tập mới gồm <strong>đề bài</strong>,
+          <strong>5 bộ test</strong> (input/output) và
+          <strong>phân loại mức độ</strong> (Dễ – Trung bình – Khó).
+        </p>
+        <ul>
+          <li>Nhập tiêu đề và mô tả đề bài.</li>
+          <li>Chọn mức độ: Dễ / Trung bình / Khó.</li>
+          <li>Nhập 5 cặp input – output (5 bộ test).</li>
+          <li>Lưu bài tập vào hệ thống.</li>
+        </ul>
+        <p>
+          👉 <a href="gv_tao_baitap.html"><strong>Vào trang Tạo Bài Tập</strong></a>
+        </p>
+      </article>
+
+      <hr>
+
+      <!-- ---------- CHỨC NĂNG 2: TẠO ĐỀ THI ---------- -->
+      <article>
+        <h3>📋 2. Tạo Đề Thi</h3>
+        <p>
+          Tạo <strong>đề kiểm tra</strong> hoặc <strong>đề thi</strong>
+          bằng cách chọn các bài tập đã tạo trước đó.
+        </p>
+        <ul>
+          <li><strong>Đề Kiểm tra:</strong> chọn 1 bài tập.</li>
+          <li><strong>Đề Thi:</strong> chọn 2–3 bài tập.</li>
+          <li>Lọc bài theo mức độ Dễ / Trung bình / Khó.</li>
+          <li>Lưu đề và giao cho sinh viên làm bài.</li>
+        </ul>
+        <p>
+          👉 <a href="gv_tao_dethi.html"><strong>Vào trang Tạo Đề Thi</strong></a>
+        </p>
+      </article>
+
+      <hr>
+
+      <!-- ---------- CHỨC NĂNG 3: CHẤM ĐIỂM ---------- -->
+      <article>
+        <h3>✅ 3. Chấm Điểm Trực Tiếp</h3>
+        <p>
+          Xem <strong>danh sách bài nộp</strong> của sinh viên và
+          <strong>chấm điểm</strong> theo bộ test đã chuẩn bị.
+        </p>
+        <ul>
+          <li>Xem danh sách bài nộp (theo MSSV, họ tên, đề thi).</li>
+          <li>Xem lời giải của sinh viên.</li>
+          <li>Chấm điểm tự động hoặc thủ công theo 5 test.</li>
+          <li>Công bố điểm cho sinh viên.</li>
+        </ul>
+        <p>
+          👉 <a href="gv_chamdiem.html"><strong>Vào trang Chấm Điểm</strong></a>
+        </p>
+      </article>
+    </section>
+
+    <hr>
+
+    <!-- ========== THỐNG KÊ NHANH ========== -->
+    <section>
+      <h3>📊 Thống Kê Nhanh</h3>
+      <p>
+        <em>
+          Ghi chú: Đây là số liệu <strong>minh họa</strong>.
+          Số liệu thực tế được cập nhật khi bạn tạo bài tập / đề thi / chấm bài.
+        </em>
+      </p>
+
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Hạng mục</th>
+            <th>Số lượng</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>📝 Bài tập đã tạo</td>
+            <td>—</td>
+            <td>Xem chi tiết tại <a href="gv_tao_baitap.html">Tạo Bài Tập</a></td>
+          </tr>
+          <tr>
+            <td>📋 Đề thi đã tạo</td>
+            <td>—</td>
+            <td>Xem chi tiết tại <a href="gv_tao_dethi.html">Tạo Đề Thi</a></td>
+          </tr>
+          <tr>
+            <td>✅ Bài nộp đã chấm</td>
+            <td>—</td>
+            <td>Xem chi tiết tại <a href="gv_chamdiem.html">Chấm Điểm</a></td>
+          </tr>
+          <tr>
+            <td>👥 Sinh viên đã làm bài</td>
+            <td>—</td>
+            <td>Xem chi tiết tại <a href="gv_chamdiem.html">Chấm Điểm</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- ========== HƯỚNG DẪN QUY TRÌNH ========== -->
+    <section>
+      <h3>🧭 Quy Trình Làm Việc Đề Xuất</h3>
+      <p>Để tổ chức một buổi kiểm tra / thi cho sinh viên, hãy làm theo thứ tự:</p>
+
+      <ol>
+        <li>
+          <strong>Bước 1 — Tạo bài tập:</strong>
+          Vào <a href="gv_tao_baitap.html">Tạo Bài Tập</a> để nhập đề bài
+          và 5 bộ test cho từng bài.
+        </li>
+        <li>
+          <strong>Bước 2 — Tạo đề thi:</strong>
+          Vào <a href="gv_tao_dethi.html">Tạo Đề Thi</a> để chọn các bài tập
+          vừa tạo thành một đề kiểm tra (1 bài) hoặc đề thi (2–3 bài).
+        </li>
+        <li>
+          <strong>Bước 3 — Giao đề cho sinh viên:</strong>
+          Thông báo cho sinh viên vào
+          <a href="sv_nhapthongtin.html">phần Thực hành</a> để làm bài.
+        </li>
+        <li>
+          <strong>Bước 4 — Chấm điểm:</strong>
+          Sau khi sinh viên nộp bài, vào
+          <a href="gv_chamdiem.html">Chấm Điểm</a> để xem và chấm bài.
+        </li>
+        <li>
+          <strong>Bước 5 — Công bố điểm:</strong>
+          Thông báo kết quả cho sinh viên qua lớp học hoặc email.
+        </li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <!-- ========== QUY TẮC CHẤM ĐIỂM ========== -->
+    <section>
+      <h3>📏 Quy Tắc Chấm Điểm</h3>
+      <ul>
+        <li>Mỗi bài tập có <strong>5 bộ test</strong>.</li>
+        <li>Mỗi test đúng được <strong>2 điểm</strong>.</li>
+        <li>Điểm tối đa mỗi bài: <strong>10 điểm</strong>.</li>
+        <li>
+          <strong>Kiểm tra:</strong> 1 bài → tối đa 10 điểm.
+        </li>
+        <li>
+          <strong>Thi:</strong> 2–3 bài → điểm trung bình hoặc tổng điểm
+          tùy quy định.
+        </li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <!-- ========== ĐIỀU HƯỚNG ========== -->
+    <section>
+      <h3>🔗 Điều Hướng</h3>
+      <ul>
+        <li><a href="bai29.html">🏠 Về Trang chủ</a></li>
+        <li><a href="bai29.html#chapters">📚 Xem lý thuyết 5 chương</a></li>
+        <li><a href="sv_nhapthongtin.html">🎓 Xem giao diện Sinh viên</a></li>
+        <li><a href="login.html">🚪 Đăng xuất / Đổi vai trò</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>
+      © 2024 <strong>Java Learning Hub</strong> — Website hỗ trợ dạy học môn Lập trình Java.
+    </p>
+    <p>
+      Liên hệ: <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>
+      | Hotline: 0123 456 789
+    </p>
+  </footer>
+<script src="app.js"></script>
+</body>
+</html>

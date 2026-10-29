@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạo đề thi - Java Learning Hub</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="bai29.html#chapters">Lý thuyết</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <h2>📋 Tạo Đề Thi / Đề Kiểm Tra</h2>
+    <p>
+      Chọn các bài tập đã tạo để tạo thành một đề.
+      <strong>Kiểm tra:</strong> chọn 1 bài.
+      <strong>Thi:</strong> chọn 2–3 bài.
+    </p>
+
+    <p>
+      <a href="gv_dashboard.html">← Quay lại Dashboard Giáo viên</a> |
+      <a href="gv_tao_baitap.html">📝 Tạo thêm bài tập</a>
+    </p>
+
+    <hr>
+
+    <!-- ================= FORM TẠO ĐỀ ================= -->
+    <form action="gv_tao_dethi_thanhcong.html" method="get">
+
+      <!-- ========== PHẦN 1: THÔNG TIN ĐỀ ========== -->
+      <fieldset>
+        <legend>1️⃣ Thông tin đề</legend>
+
+        <p>
+          <label for="ma_de">Mã đề:</label><br>
+          <input type="text"
+                 id="ma_de"
+                 name="ma_de"
+                 placeholder="VD: KT01, THI01"
+                 size="20"
+                 maxlength="20"
+                 required>
+          <br>
+          <small><em>Quy ước: KT = Kiểm tra, THI = Thi.</em></small>
+        </p>
+
+        <p>
+          <label for="ten_de">Tên đề:</label><br>
+          <input type="text"
+                 id="ten_de"
+                 name="ten_de"
+                 placeholder="VD: Kiểm tra 15 phút - Chương 3"
+                 size="60"
+                 maxlength="200"
+                 required>
+        </p>
+
+        <p>
+          <strong>Loại đề:</strong><br>
+          <input type="radio" name="loai_de" value="kiem_tra" id="loai_kt" required>
+          <label for="loai_kt">📝 Kiểm tra (chọn 1 bài)</label>
+          &nbsp;&nbsp;
+          <input type="radio" name="loai_de" value="thi" id="loai_thi">
+          <label for="loai_thi">🏆 Thi (chọn 2–3 bài)</label>
+        </p>
+
+        <p>
+          <label for="ghi_chu">Ghi chú (tùy chọn):</label><br>
+          <textarea id="ghi_chu"
+                    name="ghi_chu"
+                    rows="3"
+                    cols="100"
+                    placeholder="VD: Thời gian làm bài 45 phút, không dùng tài liệu..."></textarea>
+        </p>
+      </fieldset>
+
+      <br>
+
+      <!-- ========== PHẦN 2: CHỌN BÀI TẬP ========== -->
+      <fieldset>
+        <legend>2️⃣ Chọn bài tập cho đề</legend>
+
+        <p>
+          <strong>⚠️ Lưu ý:</strong><br>
+          - Nếu chọn loại <strong>Kiểm tra</strong> → tick <strong>đúng 1 bài</strong>.<br>
+          - Nếu chọn loại <strong>Thi</strong> → tick <strong>từ 2 đến 3 bài</strong>.
+        </p>
+
+        <!-- ---------- MỨC ĐỘ DỄ ---------- -->
+        <article>
+          <h4>🟢 Mức độ DỄ</h4>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="D1" id="de_D1">
+            <label for="de_D1">
+              <strong>D1</strong> — Tính tổng hai số nguyên (5 test)
+            </label>
+          </p>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="D2" id="de_D2">
+            <label for="de_D2">
+              <strong>D2</strong> — Kiểm tra số chẵn lẻ (5 test)
+            </label>
+          </p>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="D3" id="de_D3">
+            <label for="de_D3">
+              <strong>D3</strong> — Tìm số lớn nhất trong 3 số (5 test)
+            </label>
+          </p>
+        </article>
+
+        <br>
+
+        <!-- ---------- MỨC ĐỘ TRUNG BÌNH ---------- -->
+        <article>
+          <h4>🟡 Mức độ TRUNG BÌNH</h4>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="TB1" id="de_TB1">
+            <label for="de_TB1">
+              <strong>TB1</strong> — Tính tổng mảng (5 test)
+            </label>
+          </p>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="TB2" id="de_TB2">
+            <label for="de_TB2">
+              <strong>TB2</strong> — Đếm số nguyên tố trong mảng (5 test)
+            </label>
+          </p>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="TB3" id="de_TB3">
+            <label for="de_TB3">
+              <strong>TB3</strong> — Đảo ngược chuỗi (5 test)
+            </label>
+          </p>
+        </article>
+
+        <br>
+
+        <!-- ---------- MỨC ĐỘ KHÓ ---------- -->
+        <article>
+          <h4>🔴 Mức độ KHÓ</h4>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="K1" id="de_K1">
+            <label for="de_K1">
+              <strong>K1</strong> — Sắp xếp mảng tăng dần (5 test)
+            </label>
+          </p>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="K2" id="de_K2">
+            <label for="de_K2">
+              <strong>K2</strong> — Tìm ƯCLN của 2 số (5 test)
+            </label>
+          </p>
+
+          <p>
+            <input type="checkbox" name="bai_chon" value="K3" id="de_K3">
+            <label for="de_K3">
+              <strong>K3</strong> — Kiểm tra chuỗi đối xứng (5 test)
+            </label>
+          </p>
+        </article>
+      </fieldset>
+
+      <br>
+
+      <!-- ========== PHẦN 3: TÓM TẮT & LƯU ========== -->
+      <fieldset>
+        <legend>3️⃣ Tóm tắt quy tắc</legend>
+
+        <ul>
+          <li>Mỗi bài có <strong>5 bộ test</strong>, mỗi test đúng = <strong>2 điểm</strong>.</li>
+          <li>Điểm tối đa mỗi bài: <strong>10 điểm</strong>.</li>
+          <li>
+            <strong>Kiểm tra:</strong> 1 bài → tối đa 10 điểm.
+          </li>
+          <li>
+            <strong>Thi:</strong> 2–3 bài → điểm trung bình hoặc tổng điểm tùy quy định.
+          </li>
+        </ul>
+      </fieldset>
+
+      <br>
+
+      <!-- ========== NÚT LƯU ========== -->
+      <p>
+        <button type="submit">💾 Lưu đề thi</button>
+        <button type="reset">Xóa toàn bộ</button>
+      </p>
+
+    </form>
+
+    <hr>
+
+    <!-- ================= DANH SÁCH ĐỀ ĐÃ TẠO ================= -->
+    <section>
+      <h3>📋 Danh sách đề đã tạo</h3>
+      <p>
+        <em>
+          Ghi chú: Bảng dưới đây là <strong>dữ liệu mẫu</strong>.
+          Với HTML thuần, đề mới tạo <strong>không tự động xuất hiện</strong> ở đây —
+          Giáo viên cần <strong>cập nhật thủ công</strong> vào file HTML này.
+        </em>
+      </p>
+
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã đề</th>
+            <th>Tên đề</th>
+            <th>Loại</th>
+            <th>Bài tập</th>
+            <th>Số bài</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>KT01</td>
+            <td>Kiểm tra 15 phút - Chương 1</td>
+            <td>📝 Kiểm tra</td>
+            <td>D1</td>
+            <td>1</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>KT02</td>
+            <td>Kiểm tra 15 phút - Chương 2</td>
+            <td>📝 Kiểm tra</td>
+            <td>D2</td>
+            <td>1</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>THI01</td>
+            <td>Thi giữa kỳ - Chương 3–4</td>
+            <td>🏆 Thi</td>
+            <td>TB1, K1</td>
+            <td>2</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>THI02</td>
+            <td>Thi cuối kỳ - Tổng hợp</td>
+            <td>🏆 Thi</td>
+            <td>D3, TB2, K2</td>
+            <td>3</td>
+            <td>
+              <a href="#">Xem</a> |
+              <a href="#">Sửa</a> |
+              <a href="#">Xóa</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="6">Tổng cộng: 4 đề</th>
+            <th>—</th>
+          </tr>
+        </tfoot>
+      </table>
+
+      <p>
+        <em>
+          Các nút "Xem / Sửa / Xóa" chỉ là <strong>liên kết mẫu</strong> —
+          với HTML thuần, chúng chưa hoạt động thực tế.
+        </em>
+      </p>
+    </section>
+
+    <hr>
+
+    <!-- ================= HƯỚNG DẪN ================= -->
+    <section>
+      <h3>📌 Hướng dẫn sử dụng</h3>
+      <ol>
+        <li>
+          <strong>Nhập mã đề:</strong> Quy ước KT01, KT02… (Kiểm tra), THI01, THI02… (Thi).
+        </li>
+        <li>
+          <strong>Nhập tên đề:</strong> Mô tả ngắn gọn nội dung đề.
+        </li>
+        <li>
+          <strong>Chọn loại đề:</strong> Kiểm tra (1 bài) hoặc Thi (2–3 bài).
+        </li>
+        <li>
+          <strong>Tick bài tập:</strong> Chọn đúng số lượng theo loại đề.
+        </li>
+        <li>
+          <strong>Bấm "Lưu đề thi":</strong> Hệ thống ghi nhận (chuyển trang xác nhận).
+        </li>
+        <li>
+          <strong>Cập nhật thủ công:</strong> Với HTML thuần, sau khi lưu, Giáo viên cần
+          tự thêm đề vào bảng danh sách ở trên và <strong>thông báo thủ công</strong>
+          cho sinh viên biết làm bài nào.
+        </li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <!-- ================= ĐIỀU HƯỚNG ================= -->
+    <section>
+      <h3>🔗 Điều hướng</h3>
+      <ul>
+        <li><a href="gv_dashboard.html">← Quay lại Dashboard Giáo viên</a></li>
+        <li><a href="gv_tao_baitap.html">📝 Sang trang Tạo Bài Tập</a></li>
+        <li><a href="gv_chamdiem.html">✅ Sang trang Chấm Điểm</a></li>
+        <li><a href="bai29.html">🏠 Về Trang chủ</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>
+      © 2024 <strong>Java Learning Hub</strong> — Website hỗ trợ dạy học môn Lập trình Java.
+    </p>
+    <p>
+      Liên hệ: <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>
+      | Hotline: 0123 456 789
+    </p>
+  </footer>
+<script src="app.js"></script>
+</body>
+</html>

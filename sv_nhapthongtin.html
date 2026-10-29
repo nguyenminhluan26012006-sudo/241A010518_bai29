@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhập thông tin Sinh viên - Java Learning Hub</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="bai29.html#chapters">Lý thuyết</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <h2>Nhập Thông Tin Sinh Viên</h2>
+    <p>
+      Vui lòng nhập <strong>Họ tên</strong> và <strong>Mã số sinh viên (MSSV)</strong>
+      trước khi bắt đầu làm bài. Thông tin này dùng để <em>định danh bài nộp</em>
+      và <em>tính điểm</em> cho bạn.
+    </p>
+
+    <hr>
+
+    <!-- ========== PHẦN 1: NHẬP THÔNG TIN ========== -->
+    <section>
+      <h3>1️⃣ Thông tin cá nhân</h3>
+
+      <form id="form-info">
+        <fieldset>
+          <legend>Thông tin bắt buộc</legend>
+
+          <p>
+            <label for="sv_mssv">Mã số sinh viên (MSSV):</label><br>
+            <input type="text"
+                   id="sv_mssv"
+                   name="mssv"
+                   placeholder="VD: 20210001"
+                   size="40"
+                   maxlength="20"
+                   required>
+            <br>
+            <small><em>MSSV dùng để định danh bài nộp của bạn.</em></small>
+          </p>
+
+          <p>
+            <label for="sv_hoten">Họ và tên:</label><br>
+            <input type="text"
+                   id="sv_hoten"
+                   name="hoten"
+                   placeholder="VD: Nguyễn Văn A"
+                   size="40"
+                   maxlength="80"
+                   required>
+          </p>
+        </fieldset>
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ========== PHẦN 2: CHỌN HÌNH THỨC ========== -->
+    <section>
+      <h3>2️⃣ Chọn hình thức làm bài</h3>
+      <p>
+        Bạn có thể chọn <strong>Kiểm tra</strong> (làm 1 bài) hoặc
+        <strong>Thi</strong> (làm 2–3 bài). Hãy chọn đúng hình thức mà
+        Giáo viên đã giao cho bạn.
+      </p>
+
+      <!-- ---------- LỰA CHỌN A: KIỂM TRA ---------- -->
+      <article>
+        <h4>📝 Hình thức: KIỂM TRA</h4>
+        <ul>
+          <li>Sinh viên chọn <strong>1 bài tập</strong> từ danh sách bài đã chuẩn bị.</li>
+          <li>Mỗi bài có <strong>5 bộ test</strong>, mỗi test đúng = <strong>2 điểm</strong>.</li>
+          <li>Điểm tối đa: <strong>10 điểm</strong>.</li>
+        </ul>
+
+        <form action="sv_kiemtra.html" method="get">
+          <!-- Mang thông tin MSSV + Họ tên sang trang kiemtra qua hidden input -->
+          <p>
+            <label for="kt_mssv">Xác nhận lại MSSV:</label><br>
+            <input type="text"
+                   id="kt_mssv"
+                   name="mssv"
+                   placeholder="Nhập lại MSSV để xác nhận"
+                   size="40"
+                   maxlength="20"
+                   required>
+          </p>
+          <p>
+            <label for="kt_hoten">Xác nhận lại Họ tên:</label><br>
+            <input type="text"
+                   id="kt_hoten"
+                   name="hoten"
+                   placeholder="Nhập lại họ tên để xác nhận"
+                   size="40"
+                   maxlength="80"
+                   required>
+          </p>
+          <p>
+            <button type="submit">📝 Bắt đầu KIỂM TRA</button>
+            <button type="reset">Xóa</button>
+          </p>
+        </form>
+      </article>
+
+      <hr>
+
+      <!-- ---------- LỰA CHỌN B: THI ---------- -->
+      <article>
+        <h4>🏆 Hình thức: THI</h4>
+        <ul>
+          <li>Sinh viên chọn <strong>2 đến 3 bài tập</strong> từ danh sách có sẵn.</li>
+          <li>Mỗi bài có <strong>5 bộ test</strong>, mỗi test đúng = <strong>2 điểm</strong>.</li>
+          <li>Điểm tối đa mỗi bài: <strong>10 điểm</strong>.</li>
+          <li>Tổng điểm được tính theo quy định của Giáo viên.</li>
+        </ul>
+
+        <form action="sv_thi.html" method="get">
+          <p>
+            <label for="thi_mssv">Xác nhận lại MSSV:</label><br>
+            <input type="text"
+                   id="thi_mssv"
+                   name="mssv"
+                   placeholder="Nhập lại MSSV để xác nhận"
+                   size="40"
+                   maxlength="20"
+                   required>
+          </p>
+          <p>
+            <label for="thi_hoten">Xác nhận lại Họ tên:</label><br>
+            <input type="text"
+                   id="thi_hoten"
+                   name="hoten"
+                   placeholder="Nhập lại họ tên để xác nhận"
+                   size="40"
+                   maxlength="80"
+                   required>
+          </p>
+          <p>
+            <button type="submit">🏆 Bắt đầu THI</button>
+            <button type="reset">Xóa</button>
+          </p>
+        </form>
+      </article>
+    </section>
+
+    <hr>
+
+    <!-- ========== PHẦN 3: LƯU Ý ========== -->
+    <section>
+      <h3>⚠️ Lưu ý trước khi làm bài</h3>
+      <ul>
+        <li>Kiểm tra kỹ <strong>MSSV</strong> và <strong>Họ tên</strong> trước khi bấm bắt đầu.</li>
+        <li>Mỗi bài có <strong>5 bộ test</strong>, mỗi test đúng được <strong>2 điểm</strong>.</li>
+        <li>Bài tập được chia theo 3 mức độ: <strong>Dễ – Trung bình – Khó</strong>.</li>
+        <li>Sau khi <strong>Nộp bài</strong>, hệ thống sẽ <strong>chấm điểm ngay</strong> và hiển thị kết quả.</li>
+        <li>Không thoát trình duyệt giữa chừng để tránh mất bài làm.</li>
+        <li>Nếu gặp sự cố, liên hệ Giáo viên phụ trách hoặc gửi email tới
+            <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>.
+        </li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <!-- ========== ĐIỀU HƯỚNG PHỤ ========== -->
+    <section>
+      <h3>🔗 Điều hướng khác</h3>
+      <ul>
+        <li><a href="bai29.html">← Quay lại Trang chủ</a></li>
+        <li><a href="login.html">← Quay lại Đăng nhập</a></li>
+        <li><a href="bai29.html#chapters">📚 Xem lại Lý thuyết 5 chương</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>
+      © 2024 <strong>Java Learning Hub</strong> — Website hỗ trợ dạy học môn Lập trình Java.
+    </p>
+    <p>
+      Liên hệ: <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>
+      | Hotline: 0123 456 789
+    </p>
+  </footer>
+<script src="app.js"></script>
+</body>
+</html>

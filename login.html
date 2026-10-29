@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập - Java Learning Hub</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="bai29.html">Trang chủ</a> |
+      <a href="bai29.html#chapters">Lý thuyết</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <h2>Đăng Nhập Hệ Thống</h2>
+    <p>
+      Vui lòng chọn <strong>vai trò</strong> của bạn để tiếp tục sử dụng hệ thống.
+      Mỗi vai trò có một cổng đăng nhập riêng ở bên dưới.
+    </p>
+
+    <hr>
+
+    <!-- ========== CỔNG ĐĂNG NHẬP GIÁO VIÊN ========== -->
+    <section>
+      <h3>👨‍🏫 Khu vực Giáo viên</h3>
+      <p>
+        Giáo viên đăng nhập để <strong>tạo bài tập</strong>,
+        <strong>quản lý bộ test</strong>, <strong>giao đề thi</strong>
+        và <strong>chấm điểm trực tiếp</strong> cho sinh viên.
+      </p>
+
+      <form action="gv_dashboard.html" method="get">
+        <fieldset>
+          <legend>Thông tin đăng nhập Giáo viên</legend>
+
+          <p>
+            <label for="gv_user">Tên đăng nhập:</label><br>
+            <input type="text"
+                   id="gv_user"
+                   name="username"
+                   placeholder="VD: gv_nguyenvanA"
+                   size="35"
+                   maxlength="50"
+                   required>
+          </p>
+
+          <p>
+            <label for="gv_pass">Mật khẩu:</label><br>
+            <input type="password"
+                   id="gv_pass"
+                   name="password"
+                   placeholder="Nhập mật khẩu"
+                   size="35"
+                   maxlength="50"
+                   required>
+          </p>
+
+          <p>
+            <button type="submit">🔓 Đăng nhập Giáo viên</button>
+            <button type="reset">Xóa</button>
+          </p>
+        </fieldset>
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ========== CỔNG ĐĂNG NHẬP SINH VIÊN ========== -->
+    <section>
+      <h3>🎓 Khu vực Sinh viên</h3>
+      <p>
+        Sinh viên truy cập để <strong>làm bài kiểm tra</strong>,
+        <strong>thi trực tuyến</strong> và <strong>nhận điểm ngay</strong>
+        sau khi nộp bài.
+      </p>
+
+      <form action="sv_nhapthongtin.html" method="get">
+        <fieldset>
+          <legend>Thông tin Sinh viên</legend>
+
+          <p>
+            <label for="sv_mssv">Mã số sinh viên:</label><br>
+            <input type="text"
+                   id="sv_mssv"
+                   name="mssv"
+                   placeholder="VD: 20210001"
+                   size="35"
+                   maxlength="20"
+                   required>
+          </p>
+
+          <p>
+            <label for="sv_hoten">Họ và tên:</label><br>
+            <input type="text"
+                   id="sv_hoten"
+                   name="hoten"
+                   placeholder="VD: Nguyễn Văn A"
+                   size="35"
+                   maxlength="80"
+                   required>
+          </p>
+
+          <p>
+            <button type="submit">🚀 Vào khu vực Sinh viên</button>
+            <button type="reset">Xóa</button>
+          </p>
+        </fieldset>
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ========== HƯỚNG DẪN ========== -->
+    <section>
+      <h3>📌 Hướng dẫn sử dụng</h3>
+      <ul>
+        <li>
+          <strong>Giáo viên:</strong> Đăng nhập bằng tài khoản do nhà trường cấp
+          để quản lý bài tập, bộ test, đề thi và chấm điểm sinh viên.
+        </li>
+        <li>
+          <strong>Sinh viên:</strong> Nhập MSSV và họ tên để bắt đầu làm bài
+          kiểm tra hoặc thi. Kết quả sẽ được hiển thị ngay sau khi nộp bài.
+        </li>
+        <li>
+          Nếu gặp sự cố đăng nhập, vui lòng liên hệ phòng đào tạo hoặc gửi email tới
+          <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>.
+        </li>
+        <li>
+          Chưa có tài khoản? Quay lại
+          <a href="bai29.html">Trang chủ</a> để xem hướng dẫn.
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>
+      © 2024 <strong>Java Learning Hub</strong> — Website hỗ trợ dạy học môn Lập trình Java.
+    </p>
+    <p>
+      Liên hệ: <a href="mailto:support@javalearninghub.edu.vn">support@javalearninghub.edu.vn</a>
+      | Hotline: 0123 456 789
+    </p>
+  </footer>
+<script src="app.js"></script>
+</body>
+</html>

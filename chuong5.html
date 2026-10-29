@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 5 - Lập trình hướng đối tượng trong Java</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Java Learning Hub</h1>
+    <p><em>Website hỗ trợ dạy học môn Lập trình Java</em></p>
+    <hr>
+    <nav>
+      <a href="index.html">Trang chủ</a> |
+      <a href="sv_nhapthongtin.html">Thực hành</a> |
+      <a href="login.html">Đăng nhập</a>
+    </nav>
+    <hr>
+  </header>
+
+    <h1>CHƯƠNG 5: LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG (OOP)</h1>
+    <hr>
+
+    <h2>Mục tiêu chương</h2>
+    <ul>
+        <li>Hiểu được tư tưởng của lập trình hướng đối tượng (OOP) và sự khác biệt so với lập trình hướng thủ tục.</li>
+        <li>Phân biệt rõ <b>lớp (class)</b> và <b>đối tượng (object)</b>.</li>
+        <li>Biết khai báo lớp, thuộc tính, phương thức, constructor và tạo đối tượng bằng <code>new</code>.</li>
+        <li>Nắm vững bốn tính chất cốt lõi của OOP: <b>Đóng gói</b>, <b>Kế thừa</b>, <b>Đa hình</b>, <b>Trừu tượng</b>.</li>
+        <li>Sử dụng được các từ khóa <code>this</code>, <code>super</code>, <code>static</code>, <code>final</code>, <code>private/protected/public</code>.</li>
+        <li>Hiểu và cài đặt được <b>abstract class</b> và <b>interface</b>.</li>
+        <li>Ghi đè phương thức (<code>@Override</code>) và nạp chồng phương thức (overloading).</li>
+        <li>Vận dụng OOP để mô hình hóa bài toán thực tế đơn giản.</li>
+    </ul>
+    <hr>
+
+    <!-- ================== PHẦN LÝ THUYẾT ================== -->
+    <h2 id="chapters">PHẦN LÝ THUYẾT</h2>
+
+    <h3>5.1. Tổng quan về lập trình hướng đối tượng</h3>
+
+    <h4>5.1.1. Vì sao cần OOP?</h4>
+    <p>
+        Lập trình hướng thủ tục (procedural) tổ chức chương trình thành các hàm, dữ liệu và xử lý
+        tách rời nhau. Khi dự án lớn lên, cách này khiến mã khó bảo trì, khó mở rộng và dễ sinh lỗi.
+        <b>Lập trình hướng đối tượng (OOP – Object-Oriented Programming)</b> giải quyết vấn đề đó
+        bằng cách <b>gom dữ liệu và các hành vi liên quan vào cùng một đơn vị</b> gọi là <b>đối tượng</b>.
+    </p>
+    <ul>
+        <li>Chương trình = tập hợp các đối tượng tương tác với nhau.</li>
+        <li>Mỗi đối tượng đóng gói <b>trạng thái (thuộc tính)</b> và <b>hành vi (phương thức)</b>.</li>
+        <li>Giúp mã nguồn gần với thế giới thực, dễ tái sử dụng và mở rộng.</li>
+    </ul>
+
+    <h4>5.1.2. Bốn tính chất cốt lõi của OOP</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Tính chất</th>
+            <th>Ý nghĩa</th>
+            <th>Từ khóa / công cụ</th>
+        </tr>
+        <tr>
+            <td><b>Đóng gói</b> (Encapsulation)</td>
+            <td>Che giấu dữ liệu bên trong, chỉ cho phép truy cập qua phương thức công khai</td>
+            <td><code>private</code>, getter/setter</td>
+        </tr>
+        <tr>
+            <td><b>Kế thừa</b> (Inheritance)</td>
+            <td>Lớp con dùng lại thuộc tính, phương thức của lớp cha</td>
+            <td><code>extends</code></td>
+        </tr>
+        <tr>
+            <td><b>Đa hình</b> (Polymorphism)</td>
+            <td>Cùng một lời gọi phương thức nhưng có nhiều cách thực thi khác nhau</td>
+            <td>Overloading, Overriding</td>
+        </tr>
+        <tr>
+            <td><b>Trừu tượng</b> (Abstraction)</td>
+            <td>Chỉ quan tâm "làm gì", ẩn đi "làm như thế nào"</td>
+            <td><code>abstract</code>, <code>interface</code></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h3>5.2. Lớp và đối tượng</h3>
+
+    <h4>5.2.1. Khái niệm</h4>
+    <p>
+        <b>Lớp (class)</b> là <b>bản thiết kế (khuôn mẫu)</b> mô tả thuộc tính và hành vi
+        của một tập các đối tượng cùng loại.
+        <b>Đối tượng (object)</b> là <b>một thể hiện (instance)</b> cụ thể của lớp, được tạo ra
+        trong bộ nhớ bằng từ khóa <code>new</code>.
+    </p>
+    <p>
+        <b>Ví dụ:</b> <code>SinhVien</code> là lớp – còn <i>"Nguyễn Văn A"</i>, <i>"Trần Thị B"</i>
+        là các đối tượng cụ thể của lớp đó.
+    </p>
+
+    <h4>5.2.2. Cú pháp khai báo lớp</h4>
+    <pre>
+[phạm vi truy cập] class TenLop {
+    // thuộc tính (fields)
+    // constructor
+    // phương thức (methods)
+}
+    </pre>
+    <p>Ví dụ lớp <code>SinhVien</code> đơn giản:</p>
+    <pre>
+public class SinhVien {
+    String maSV;
+    String hoTen;
+    int namSinh;
+
+    public void gioiThieu() {
+        System.out.println("Toi la " + hoTen + ", MSSV " + maSV);
+    }
+}
+    </pre>
+
+    <h4>5.2.3. Tạo đối tượng</h4>
+    <pre>
+SinhVien sv1 = new SinhVien();
+sv1.maSV = "SV001";
+sv1.hoTen = "Nguyễn Văn A";
+sv1.namSinh = 2004;
+sv1.gioiThieu();  // Toi la Nguyễn Văn A, MSSV SV001
+    </pre>
+    <p>
+        <b>Ghi nhớ:</b> biến đối tượng chỉ lưu <b>tham chiếu</b> tới vùng nhớ trên heap.
+        Nếu chưa gán bằng <code>new</code>, biến có giá trị <code>null</code>.
+    </p>
+
+    <hr>
+
+    <h3>5.3. Thuộc tính và phương thức</h3>
+
+    <h4>5.3.1. Thuộc tính (field)</h4>
+    <p>Mỗi đối tượng có bản sao riêng của các thuộc tính <b>không phải static</b>.</p>
+    <pre>
+public class HinhTron {
+    double banKinh;
+    String mauSac;
+}
+    </pre>
+
+    <h4>5.3.2. Phương thức (method)</h4>
+    <p>Cú pháp khai báo phương thức:</p>
+    <pre>
+[phạm vi] [static] kieuTraVe tenPhuongThuc(danhSachThamSo) {
+    // thân phương thức
+    // return ...;
+}
+    </pre>
+    <p>Ví dụ:</p>
+    <pre>
+public class HinhTron {
+    double banKinh;
+
+    public double dienTich() {
+        return Math.PI * banKinh * banKinh;
+    }
+
+    public double chuVi() {
+        return 2 * Math.PI * banKinh;
+    }
+}
+    </pre>
+    <p>
+        Phương thức không có giá trị trả về thì dùng <code>void</code>.
+        Phương thức có giá trị trả về phải có <code>return</code> đúng kiểu.
+    </p>
+
+    <hr>
+
+    <h3>5.4. Constructor – Phương thức khởi tạo</h3>
+
+    <h4>5.4.1. Đặc điểm</h4>
+    <ul>
+        <li><b>Trùng tên</b> với lớp.</li>
+        <li><b>Không có kiểu trả về</b> (kể cả <code>void</code>).</li>
+        <li>Được gọi <b>tự động</b> khi dùng <code>new</code>.</li>
+        <li>Nếu không viết constructor nào, Java tự sinh constructor mặc định không tham số.</li>
+    </ul>
+
+    <h4>5.4.2. Các loại constructor</h4>
+    <pre>
+public class SinhVien {
+    String maSV;
+    String hoTen;
+
+    // Constructor không tham số
+    public SinhVien() {
+        this.maSV = "Chua co";
+        this.hoTen = "Chua co";
+    }
+
+    // Constructor có tham số
+    public SinhVien(String maSV, String hoTen) {
+        this.maSV = maSV;
+        this.hoTen = hoTen;
+    }
+}
+    </pre>
+    <p>
+        <b>Nạp chồng constructor (constructor overloading):</b> nhiều constructor trong cùng lớp,
+        khác nhau về <b>danh sách tham số</b>.
+    </p>
+
+    <h4>5.4.3. Từ khóa <code>this</code></h4>
+    <p>Dùng <code>this</code> để tham chiếu tới chính đối tượng hiện tại:</p>
+    <ul>
+        <li>Phân biệt thuộc tính và tham số trùng tên.</li>
+        <li>Gọi constructor khác trong cùng lớp: <code>this(...)</code>.</li>
+    </ul>
+    <pre>
+public SinhVien(String maSV) {
+    this(maSV, "Chua co");   // gọi constructor 2 tham số
+}
+    </pre>
+
+    <hr>
+
+    <h3>5.5. Đóng gói (Encapsulation)</h3>
+
+    <h4>5.5.1. Khái niệm</h4>
+    <p>
+        Đóng gói là <b>che giấu</b> thuộc tính khỏi bên ngoài, chỉ cho phép truy cập thông qua
+        các <b>phương thức công khai</b> (getter / setter). Mục đích: bảo vệ dữ liệu khỏi bị sửa
+        tùy tiện, đảm bảo tính nhất quán.
+    </p>
+
+    <h4>5.5.2. Phạm vi truy cập (Access Modifier)</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Phạm vi</th>
+            <th>Cùng lớp</th>
+            <th>Cùng package</th>
+            <th>Lớp con khác package</th>
+            <th>Ngoài package</th>
+        </tr>
+        <tr><td><code>private</code></td><td>✔</td><td>✘</td><td>✘</td><td>✘</td></tr>
+        <tr><td>(mặc định)</td><td>✔</td><td>✔</td><td>✘</td><td>✘</td></tr>
+        <tr><td><code>protected</code></td><td>✔</td><td>✔</td><td>✔</td><td>✘</td></tr>
+        <tr><td><code>public</code></td><td>✔</td><td>✔</td><td>✔</td><td>✔</td></tr>
+    </table>
+
+    <h4>5.5.3. Ví dụ đóng gói</h4>
+    <pre>
+public class TaiKhoan {
+    private String soTK;
+    private double soDu;
+
+    public TaiKhoan(String soTK, double soDu) {
+        this.soTK = soTK;
+        this.soDu = soDu;
+    }
+
+    // getter
+    public double getSoDu() {
+        return soDu;
+    }
+
+    // setter có kiểm tra
+    public void napTien(double soTien) {
+        if (soTien > 0) {
+            soDu += soTien;
+        }
+    }
+
+    public void rutTien(double soTien) {
+        if (soTien > 0 && soTien <= soDu) {
+            soDu -= soTien;
+        } else {
+            System.out.println("So du khong du!");
+        }
+    }
+}
+    </pre>
+    <p>
+        Nhờ đóng gói, bên ngoài <b>không thể</b> làm <code>taiKhoan.soDu = -100;</code> –
+        việc gán luôn đi qua phương thức có kiểm tra.
+    </p>
+
+    <hr>
+
+    <h3>5.6. Kế thừa (Inheritance)</h3>
+
+    <h4>5.6.1. Khái niệm</h4>
+    <p>
+        Kế thừa cho phép lớp con (<b>subclass</b>) dùng lại thuộc tính và phương thức của lớp cha
+        (<b>superclass</b>). Java dùng từ khóa <code>extends</code>. Java chỉ hỗ trợ <b>đơn kế thừa</b>
+        (một lớp con chỉ extends một lớp cha).
+    </p>
+
+    <h4>5.6.2. Cú pháp và ví dụ</h4>
+    <pre>
+// Lớp cha
+public class DongVat {
+    protected String ten;
+
+    public void an() {
+        System.out.println(ten + " dang an...");
+    }
+}
+
+// Lớp con
+public class Cho extends DongVat {
+    public void sua() {
+        System.out.println(ten + " dang sua: gau gau!");
+    }
+}
+
+// Sử dụng
+Cho c = new Cho();
+c.ten = "Milu";
+c.an();    // kế thừa từ DongVat
+c.sua();   // phương thức riêng của Cho
+    </pre>
+
+    <h4>5.6.3. Từ khóa <code>super</code></h4>
+    <ul>
+        <li><code>super(...)</code> – gọi constructor của lớp cha (phải đặt ở dòng đầu tiên).</li>
+        <li><code>super.tenPhuongThuc()</code> – gọi phương thức của lớp cha (khi lớp con ghi đè).</li>
+        <li><code>super.thuocTinh</code> – truy cập thuộc tính của lớp cha.</li>
+    </ul>
+    <pre>
+public class Cho extends DongVat {
+    public Cho() {
+        super();                // gọi constructor DongVat()
+        this.ten = "Milu";
+    }
+
+    @Override
+    public void an() {
+        super.an();             // gọi lại phương thức của lớp cha
+        System.out.println("Cho an nhieu hon!");
+    }
+}
+    </pre>
+
+    <h4>5.6.4. Ghi đè phương thức (<code>@Override</code>)</h4>
+    <p>
+        Lớp con có thể <b>định nghĩa lại</b> phương thức đã có ở lớp cha với cùng tên, cùng tham số,
+        cùng kiểu trả về (hoặc kiểu trả về hẹp hơn). Nên thêm annotation <code>@Override</code>
+        để trình biên dịch kiểm tra.
+    </p>
+
+    <p><b>Lưu ý:</b> không thể ghi đè phương thức <code>final</code> và phương thức <code>static</code>.</p>
+
+    <hr>
+
+    <h3>5.7. Đa hình (Polymorphism)</h3>
+
+    <h4>5.7.1. Hai loại đa hình</h4>
+    <ul>
+        <li>
+            <b>Nạp chồng (Overloading)</b> – đa hình <b>tĩnh</b> (compile-time):
+            nhiều phương thức cùng tên, khác danh sách tham số, <b>trong cùng lớp</b>.
+        </li>
+        <li>
+            <b>Ghi đè (Overriding)</b> – đa hình <b>động</b> (runtime):
+            lớp con định nghĩa lại phương thức của lớp cha. Phương thức nào được gọi phụ thuộc
+            vào <b>kiểu thực</b> của đối tượng tại runtime.
+        </li>
+    </ul>
+
+    <h4>5.7.2. Ví dụ Overloading</h4>
+    <pre>
+public class MayTinh {
+    public int cong(int a, int b) {
+        return a + b;
+    }
+
+    public double cong(double a, double b) {
+        return a + b;
+    }
+
+    public int cong(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+    </pre>
+
+    <h4>5.7.3. Ví dụ Overriding – đa hình runtime</h4>
+    <pre>
+class Hinh {
+    public void ve() {
+        System.out.println("Ve hinh...");
+    }
+}
+
+class HinhVuong extends Hinh {
+    @Override
+    public void ve() {
+        System.out.println("Ve hinh vuong");
+    }
+}
+
+class HinhTron extends Hinh {
+    @Override
+    public void ve() {
+        System.out.println("Ve hinh tron");
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        Hinh[] ds = { new HinhVuong(), new HinhTron() };
+        for (Hinh h : ds) {
+            h.ve();   // gọi phương thức theo KIỂU THỰC của đối tượng
+        }
+    }
+}
+    </pre>
+
+    <hr>
+
+    <h3>5.8. Trừu tượng (Abstraction)</h3>
+
+    <h4>5.8.1. Lớp trừu tượng – <code>abstract class</code></h4>
+    <ul>
+        <li>Khai báo bằng <code>abstract class</code>, <b>không thể</b> tạo đối tượng trực tiếp.</li>
+        <li>Có thể chứa <b>phương thức trừu tượng</b> (chỉ khai báo, không có thân) và phương thức thường.</li>
+        <li>Lớp con <b>phải</b> cài đặt tất cả phương thức trừu tượng (hoặc chính nó cũng abstract).</li>
+    </ul>
+    <pre>
+public abstract class Hinh {
+    protected String ten;
+
+    public abstract double dienTich();    // không có thân
+
+    public void inThongTin() {
+        System.out.println(ten + " co dien tich = " + dienTich());
+    }
+}
+
+class HinhChuNhat extends Hinh {
+    private double dai, rong;
+
+    public HinhChuNhat(double dai, double rong) {
+        this.ten = "HCN";
+        this.dai = dai;
+        this.rong = rong;
+    }
+
+    @Override
+    public double dienTich() {
+        return dai * rong;
+    }
+}
+    </pre>
+
+    <h4>5.8.2. Interface</h4>
+    <ul>
+        <li>Là một "hợp đồng" – chỉ chứa <b>phương thức trừu tượng</b> (mặc định) và hằng số.</li>
+        <li>Khai báo bằng <code>interface</code>, lớp hiện thực bằng <code>implements</code>.</li>
+        <li>Một lớp có thể <b>implements nhiều interface</b>.</li>
+        <li>Từ Java 8 trở đi, interface có thể có <b>default method</b> và <b>static method</b>.</li>
+    </ul>
+    <pre>
+public interface CoTheBay {
+    void bay();
+}
+
+public interface CoTheBoi {
+    void boi();
+}
+
+public class VitTroi implements CoTheBay, CoTheBoi {
+    @Override
+    public void bay() {
+        System.out.println("Vit troi bay...");
+    }
+
+    @Override
+    public void boi() {
+        System.out.println("Vit troi boi...");
+    }
+}
+    </pre>
+
+    <h4>5.8.3. Abstract class vs Interface</h4>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>Tiêu chí</th><th>Abstract class</th><th>Interface</th></tr>
+        <tr><td>Tạo đối tượng</td><td>Không</td><td>Không</td></tr>
+        <tr><td>Đa kế thừa</td><td>Không (chỉ 1 lớp)</td><td>Có (nhiều interface)</td></tr>
+        <tr><td>Thuộc tính</td><td>Có thể có (kể cả non-static)</td><td>Chỉ hằng số (static final)</td></tr>
+        <tr><td>Constructor</td><td>Có</td><td>Không</td></tr>
+        <tr><td>Phương thức thường</td><td>Có</td><td>Chỉ default/static (từ Java 8)</td></tr>
+        <tr><td>Khi nào dùng</td><td>Chia sẻ mã chung</td><td>Định nghĩa "hợp đồng" hành vi</td></tr>
+    </table>
+
+    <hr>
+
+    <h3>5.9. Từ khóa <code>static</code> và <code>final</code></h3>
+
+    <h4>5.9.1. <code>static</code></h4>
+    <ul>
+        <li><b>Thuộc tính static</b>: dùng chung cho <b>tất cả</b> đối tượng (không phụ thuộc instance).</li>
+        <li><b>Phương thức static</b>: gọi trực tiếp qua tên lớp, không cần đối tượng.</li>
+        <li><b>Khối static</b>: chạy một lần khi lớp được nạp.</li>
+    </ul>
+    <pre>
+public class Dem {
+    public static int soLuong = 0;   // dùng chung
+
+    public Dem() {
+        soLuong++;                    // mỗi lần new, tăng 1
+    }
+
+    public static void inSoLuong() {
+        System.out.println("Da tao " + soLuong + " doi tuong");
+    }
+}
+    </pre>
+
+    <h4>5.9.2. <code>final</code></h4>
+    <ul>
+        <li><b>Biến final</b>: hằng số, không thể gán lại.</li>
+        <li><b>Phương thức final</b>: không thể bị ghi đè.</li>
+        <li><b>Lớp final</b>: không thể bị kế thừa.</li>
+    </ul>
+    <pre>
+public final class Constants {
+    public static final double PI = 3.14159;
+    public static final int MAX_SIZE = 100;
+}
+    </pre>
+
+    <hr>
+
+    <h3>5.10. Ví dụ tổng hợp</h3>
+    <p>
+        Chương trình quản lý nhân viên minh họa đầy đủ <b>đóng gói – kế thừa – đa hình – trừu tượng</b>:
+    </p>
+    <pre>
+// Lớp trừu tượng
+abstract class NhanVien {
+    private String maNV;
+    private String hoTen;
+
+    public NhanVien(String maNV, String hoTen) {
+        this.maNV = maNV;
+        this.hoTen = hoTen;
+    }
+
+    public String getMaNV() { return maNV; }
+    public String getHoTen() { return hoTen; }
+
+    public abstract double tinhLuong();
+
+    public void inThongTin() {
+        System.out.printf("%-8s %-20s Luong: %.2f%n",
+                maNV, hoTen, tinhLuong());
+    }
+}
+
+// Lớp con 1
+class NVVanPhong extends NhanVien {
+    private double luongCoBan;
+    private int ngayCong;
+
+    public NVVanPhong(String maNV, String hoTen, double luongCoBan, int ngayCong) {
+        super(maNV, hoTen);
+        this.luongCoBan = luongCoBan;
+        this.ngayCong = ngayCong;
+    }
+
+    @Override
+    public double tinhLuong() {
+        return luongCoBan * ngayCong / 26.0;
+    }
+}
+
+// Lớp con 2
+class NVSale extends NhanVien {
+    private double doanhSo;
+    private double hoaHong;
+
+    public NVSale(String maNV, String hoTen, double doanhSo, double hoaHong) {
+        super(maNV, hoTen);
+        this.doanhSo = doanhSo;
+        this.hoaHong = hoaHong;
+    }
+
+    @Override
+    public double tinhLuong() {
+        return doanhSo * hoaHong;
+    }
+}
+
+// Chương trình chính
+public class QuanLyNV {
+    public static void main(String[] args) {
+        NhanVien[] ds = {
+            new NVVanPhong("VP01", "Nguyen Van A", 12000000, 22),
+            new NVSale("SL01", "Tran Thi B", 50000000, 0.05),
+            new NVVanPhong("VP02", "Le Van C", 10000000, 25)
+        };
+
+        for (NhanVien nv : ds) {
+            nv.inThongTin();    // đa hình runtime
+        }
+    }
+}
+    </pre>
+
+    <!-- ================== PHẦN BÀI TẬP – 4 MỨC ĐỘ ================== -->
+    <h2>PHẦN BÀI TẬP (4 MỨC ĐỘ)</h2>
+    <p>Bài tập được chia thành 4 mức từ dễ đến khó. Sinh viên nên làm tuần tự từ mức 1 đến mức 4. Mỗi bài đều có lời giải ẩn trong nút "Xem lời giải".</p>
+
+    <!-- ========== MỨC 1 ========== -->
+    <h3>🟢 MỨC 1 – NHẬN BIẾT (Dễ)</h3>
+    <p><i>Mục tiêu: Ghi nhớ khái niệm lớp, đối tượng, thuộc tính, phương thức, constructor.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đối tượng trong Java được tạo bằng từ khóa nào?
+            <br>A. <code>create</code> &nbsp; B. <code>new</code> &nbsp; C. <code>alloc</code> &nbsp; D. <code>instanceof</code>
+        </li>
+        <li>Constructor trong Java có đặc điểm gì?
+            <br>A. Có kiểu trả về <code>void</code>
+            <br>B. Trùng tên với lớp và không có kiểu trả về
+            <br>C. Phải có từ khóa <code>static</code>
+            <br>D. Bắt buộc phải có tham số
+        </li>
+        <li>Từ khóa nào dùng để kế thừa một lớp?
+            <br>A. <code>implements</code> &nbsp; B. <code>inherits</code> &nbsp; C. <code>extends</code> &nbsp; D. <code>super</code>
+        </li>
+        <li>Thuộc tính <code>private</code> có thể truy cập từ đâu?
+            <br>A. Mọi nơi &nbsp; B. Chỉ trong cùng lớp
+            <br>C. Trong cùng package &nbsp; D. Từ lớp con
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – <code>new</code></li>
+            <li>B – Trùng tên lớp, không có kiểu trả về</li>
+            <li>C – <code>extends</code></li>
+            <li>B – Chỉ trong cùng lớp</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 1.1.</b> Viết lớp <code>HinhChuNhat</code> có hai thuộc tính <code>dai</code>, <code>rong</code> (double), có phương thức <code>dienTich()</code>, <code>chuVi()</code>. Trong <code>main</code>, tạo một đối tượng và in kết quả.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class HinhChuNhat {
+    double dai;
+    double rong;
+
+    public double dienTich() {
+        return dai * rong;
+    }
+
+    public double chuVi() {
+        return 2 * (dai + rong);
+    }
+
+    public static void main(String[] args) {
+        HinhChuNhat h = new HinhChuNhat();
+        h.dai = 5;
+        h.rong = 3;
+        System.out.println("Dien tich: " + h.dienTich());
+        System.out.println("Chu vi: " + h.chuVi());
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 1.2.</b> Viết lớp <code>SinhVien</code> gồm <code>maSV</code>, <code>hoTen</code>, <code>diemTB</code>. Có constructor đầy đủ tham số, có phương thức <code>inThongTin()</code>. Tạo 2 đối tượng và in ra.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class SinhVien {
+    String maSV;
+    String hoTen;
+    double diemTB;
+
+    public SinhVien(String maSV, String hoTen, double diemTB) {
+        this.maSV = maSV;
+        this.hoTen = hoTen;
+        this.diemTB = diemTB;
+    }
+
+    public void inThongTin() {
+        System.out.println(maSV + " - " + hoTen + " - " + diemTB);
+    }
+
+    public static void main(String[] args) {
+        SinhVien sv1 = new SinhVien("SV01", "Nguyen Van A", 8.5);
+        SinhVien sv2 = new SinhVien("SV02", "Tran Thi B", 9.0);
+        sv1.inThongTin();
+        sv2.inThongTin();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 2 ========== -->
+    <h3>🟡 MỨC 2 – THÔNG HIỂU (Trung bình)</h3>
+    <p><i>Mục tiêu: Hiểu đóng gói, getter/setter, nạp chồng, static.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Để che giấu dữ liệu, ta dùng phạm vi truy cập nào cho thuộc tính?
+            <br>A. <code>public</code> &nbsp; B. <code>protected</code> &nbsp; C. <code>private</code> &nbsp; D. Không cần
+        </li>
+        <li>Phương thức <code>static</code> có thể gọi qua đâu?
+            <br>A. Chỉ thông qua đối tượng &nbsp; B. Qua tên lớp hoặc tên đối tượng
+            <br>C. Chỉ qua <code>this</code> &nbsp; D. Không thể gọi
+        </li>
+        <li>Đoạn code sau có lỗi gì?
+            <pre>
+public class A {
+    private int x;
+}
+public class B {
+    void test() { A a = new A(); a.x = 10; }
+}</pre>
+            A. Không lỗi &nbsp; B. Lỗi vì <code>x</code> là <code>private</code>
+            <br>C. Lỗi vì <code>A</code> không có constructor &nbsp; D. Lỗi vì <code>B</code> thiếu <code>public</code>
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>C – <code>private</code></li>
+            <li>B – Qua tên lớp hoặc đối tượng đều được</li>
+            <li>B – <code>private</code> không truy cập được từ lớp khác</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 2.1.</b> Viết lớp <code>TaiKhoan</code> có <code>soTK</code>, <code>soDu</code> (private). Cung cấp getter cho <code>soDu</code>, phương thức <code>napTien()</code>, <code>rutTien()</code> có kiểm tra số tiền &gt; 0 và không vượt quá số dư. Trong <code>main</code>, kiểm thử các trường hợp.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class TaiKhoan {
+    private String soTK;
+    private double soDu;
+
+    public TaiKhoan(String soTK, double soDu) {
+        this.soTK = soTK;
+        this.soDu = soDu;
+    }
+
+    public double getSoDu() { return soDu; }
+
+    public void napTien(double soTien) {
+        if (soTien > 0) {
+            soDu += soTien;
+            System.out.println("Nap " + soTien + " thanh cong. So du: " + soDu);
+        } else {
+            System.out.println("So tien nap phai > 0");
+        }
+    }
+
+    public void rutTien(double soTien) {
+        if (soTien <= 0) {
+            System.out.println("So tien rut phai > 0");
+        } else if (soTien > soDu) {
+            System.out.println("So du khong du!");
+        } else {
+            soDu -= soTien;
+            System.out.println("Rut " + soTien + " thanh cong. So du: " + soDu);
+        }
+    }
+
+    public static void main(String[] args) {
+        TaiKhoan tk = new TaiKhoan("TK001", 100000);
+        tk.napTien(50000);   // 150000
+        tk.rutTien(200000);  // khong du
+        tk.rutTien(80000);   // 70000
+        tk.napTien(-10);     // loi
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.2.</b> Viết lớp <code>MayTinh</code> có 3 phương thức nạp chồng <code>cong()</code>: cộng 2 số nguyên, cộng 2 số thực, cộng 3 số nguyên. Kiểm thử trong <code>main</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class MayTinh {
+    public int cong(int a, int b) { return a + b; }
+
+    public double cong(double a, double b) { return a + b; }
+
+    public int cong(int a, int b, int c) { return a + b + c; }
+
+    public static void main(String[] args) {
+        MayTinh mt = new MayTinh();
+        System.out.println(mt.cong(3, 5));          // 8
+        System.out.println(mt.cong(2.5, 1.5));      // 4.0
+        System.out.println(mt.cong(1, 2, 3));       // 6
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 2.3.</b> Viết lớp <code>Dem</code> có thuộc tính <code>static int soLuong</code>, tăng lên mỗi lần một đối tượng được tạo. Tạo 5 đối tượng và in giá trị <code>soLuong</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+public class Dem {
+    public static int soLuong = 0;
+
+    public Dem() {
+        soLuong++;
+    }
+
+    public static void main(String[] args) {
+        new Dem();
+        new Dem();
+        new Dem();
+        new Dem();
+        new Dem();
+        System.out.println("So doi tuong da tao: " + Dem.soLuong);  // 5
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 3 ========== -->
+    <h3>🟠 MỨC 3 – VẬN DỤNG (Khó)</h3>
+    <p><i>Mục tiêu: Kế thừa, ghi đè, đa hình, abstract, interface.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Từ khóa nào dùng để chỉ lớp con đã ghi đè phương thức của lớp cha?
+            <br>A. <code>@Implements</code> &nbsp; B. <code>@Override</code>
+            <br>C. <code>@OverrideMethod</code> &nbsp; D. Không cần annotation
+        </li>
+        <li>Phát biểu nào <b>đúng</b> về <code>abstract class</code>?
+            <br>A. Có thể tạo đối tượng trực tiếp
+            <br>B. Không thể có phương thức thường
+            <br>C. Không thể tạo đối tượng, có thể có cả phương thức trừu tượng và không trừu tượng
+            <br>D. Phải implement tất cả phương thức trừu tượng ngay trong lớp đó
+        </li>
+        <li>Một lớp có thể <code>implements</code> bao nhiêu interface?
+            <br>A. Chỉ 1 &nbsp; B. Tối đa 2 &nbsp; C. Nhiều (không giới hạn) &nbsp; D. Không được
+        </li>
+        <li>Đoạn code sau in gì?
+            <pre>
+class A { void show() { System.out.println("A"); } }
+class B extends A {
+    @Override void show() { System.out.println("B"); }
+}
+A a = new B();
+a.show();</pre>
+            A. A &nbsp; B. B &nbsp; C. A B &nbsp; D. Lỗi
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>B – <code>@Override</code></li>
+            <li>C</li>
+            <li>C – Không giới hạn số interface</li>
+            <li>B – Đa hình runtime, gọi theo kiểu thực của đối tượng</li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 3.1.</b> Viết lớp <code>DongVat</code> có phương thức <code>keu()</code>. Tạo các lớp con <code>Cho</code>, <code>Meo</code>, <code>Vit</code> ghi đè <code>keu()</code> với âm thanh riêng. Trong <code>main</code>, tạo mảng <code>DongVat[]</code> chứa các con vật và cho tất cả kêu.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+class DongVat {
+    public void keu() {
+        System.out.println("...");
+    }
+}
+
+class Cho extends DongVat {
+    @Override
+    public void keu() { System.out.println("Gau gau!"); }
+}
+
+class Meo extends DongVat {
+    @Override
+    public void keu() { System.out.println("Meo meo!"); }
+}
+
+class Vit extends DongVat {
+    @Override
+    public void keu() { System.out.println("Quac quac!"); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        DongVat[] ds = { new Cho(), new Meo(), new Vit() };
+        for (DongVat dv : ds) {
+            dv.keu();
+        }
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.2.</b> Viết lớp trừu tượng <code>Hinh</code> có phương thức trừu tượng <code>dienTich()</code> và <code>chuVi()</code>. Tạo các lớp con <code>HinhTron</code>, <code>HinhChuNhat</code>, <code>HinhTamGiac</code> cài đặt hai phương thức đó. Trong <code>main</code>, tính và in thông tin từng hình.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+abstract class Hinh {
+    public abstract double dienTich();
+    public abstract double chuVi();
+    public void inThongTin() {
+        System.out.printf("%s - DT: %.2f, CV: %.2f%n",
+                getClass().getSimpleName(), dienTich(), chuVi());
+    }
+}
+
+class HinhTron extends Hinh {
+    private double r;
+    public HinhTron(double r) { this.r = r; }
+    public double dienTich() { return Math.PI * r * r; }
+    public double chuVi() { return 2 * Math.PI * r; }
+}
+
+class HinhChuNhat extends Hinh {
+    private double dai, rong;
+    public HinhChuNhat(double d, double r) { dai = d; rong = r; }
+    public double dienTich() { return dai * rong; }
+    public double chuVi() { return 2 * (dai + rong); }
+}
+
+class HinhTamGiac extends Hinh {
+    private double a, b, c;
+    public HinhTamGiac(double a, double b, double c) {
+        this.a = a; this.b = b; this.c = c;
+    }
+    public double dienTich() {
+        double p = (a + b + c) / 2;
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    }
+    public double chuVi() { return a + b + c; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Hinh[] ds = {
+            new HinhTron(3),
+            new HinhChuNhat(4, 5),
+            new HinhTamGiac(3, 4, 5)
+        };
+        for (Hinh h : ds) h.inThongTin();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 3.3.</b> Viết interface <code>CoTheBay</code> có phương thức <code>bay()</code>, interface <code>CoTheBoi</code> có phương thức <code>boi()</code>. Tạo lớp <code>VitTroi</code> implements cả hai interface. Trong <code>main</code>, minh họa gọi cả hai phương thức.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+interface CoTheBay {
+    void bay();
+}
+
+interface CoTheBoi {
+    void boi();
+}
+
+class VitTroi implements CoTheBay, CoTheBoi {
+    @Override
+    public void bay() { System.out.println("Vit troi dang bay..."); }
+
+    @Override
+    public void boi() { System.out.println("Vit troi dang boi..."); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        VitTroi vt = new VitTroi();
+        vt.bay();
+        vt.boi();
+    }
+}
+        </pre>
+    </details>
+
+    <!-- ========== MỨC 4 ========== -->
+    <h3>🔴 MỨC 4 – VẬN DỤNG CAO (Rất khó)</h3>
+    <p><i>Mục tiêu: Tổng hợp 4 tính chất OOP để mô hình hóa bài toán thực tế.</i></p>
+
+    <h4>Trắc nghiệm</h4>
+    <ol>
+        <li>Đoạn code sau in gì?
+            <pre>
+class A {
+    public A() { System.out.println("A"); }
+}
+class B extends A {
+    public B() {
+        super();
+        System.out.println("B");
+    }
+}
+new B();</pre>
+            A. A &nbsp; B. B &nbsp; C. A B &nbsp; D. B A
+        </li>
+        <li>Phương thức nào <b>không thể</b> bị ghi đè?
+            <br>A. Phương thức <code>public</code> &nbsp; B. Phương thức <code>protected</code>
+            <br>C. Phương thức <code>final</code> &nbsp; D. Phương thức <code>abstract</code>
+        </li>
+        <li>Để lớp con gọi constructor của lớp cha, dùng cú pháp nào?
+            <br>A. <code>this(...)</code> &nbsp; B. <code>super(...)</code>
+            <br>C. <code>parent(...)</code> &nbsp; D. <code>extends(...)</code>
+        </li>
+    </ol>
+    <details>
+        <summary>Xem đáp án</summary>
+        <ol>
+            <li>C – <code>super()</code> chạy trước, in "A"; sau đó tới "B"</li>
+            <li>C – Phương thức <code>final</code></li>
+            <li>B – <code>super(...)</code></li>
+        </ol>
+    </details>
+
+    <h4>Bài tập lập trình</h4>
+
+    <p><b>Bài 4.1.</b> Viết hệ thống quản lý nhân viên: lớp trừu tượng <code>NhanVien</code> có <code>maNV</code>, <code>hoTen</code>, phương thức trừu tượng <code>tinhLuong()</code>. Lớp <code>NVVanPhong</code> (lương = lương cơ bản × ngày công / 26), lớp <code>NVSale</code> (lương = doanh số × hoa hồng). Trong <code>main</code>, tạo mảng nhân viên, in thông tin và tính tổng lương công ty.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+abstract class NhanVien {
+    protected String maNV, hoTen;
+    public NhanVien(String maNV, String hoTen) {
+        this.maNV = maNV; this.hoTen = hoTen;
+    }
+    public abstract double tinhLuong();
+    public void inThongTin() {
+        System.out.printf("%-8s %-15s Luong: %10.2f%n", maNV, hoTen, tinhLuong());
+    }
+}
+
+class NVVanPhong extends NhanVien {
+    private double luongCoBan;
+    private int ngayCong;
+    public NVVanPhong(String maNV, String hoTen, double luongCoBan, int ngayCong) {
+        super(maNV, hoTen);
+        this.luongCoBan = luongCoBan;
+        this.ngayCong = ngayCong;
+    }
+    @Override
+    public double tinhLuong() { return luongCoBan * ngayCong / 26.0; }
+}
+
+class NVSale extends NhanVien {
+    private double doanhSo, hoaHong;
+    public NVSale(String maNV, String hoTen, double doanhSo, double hoaHong) {
+        super(maNV, hoTen);
+        this.doanhSo = doanhSo;
+        this.hoaHong = hoaHong;
+    }
+    @Override
+    public double tinhLuong() { return doanhSo * hoaHong; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        NhanVien[] ds = {
+            new NVVanPhong("VP01", "Nguyen Van A", 12000000, 22),
+            new NVSale("SL01", "Tran Thi B", 50000000, 0.05),
+            new NVVanPhong("VP02", "Le Van C", 10000000, 25)
+        };
+
+        double tong = 0;
+        for (NhanVien nv : ds) {
+            nv.inThongTin();
+            tong += nv.tinhLuong();
+        }
+        System.out.printf("Tong luong: %.2f%n", tong);
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.2.</b> Xây dựng hệ thống quản lý thư viện: lớp <code>Sach</code> gồm <code>maSach</code>, <code>tenSach</code>, <code>tacGia</code>, <code>namXB</code>, <code>gia</code> (private, có getter/setter). Lớp <code>ThuVien</code> quản lý danh sách sách dùng <code>ArrayList&lt;Sach&gt;</code> với các phương thức: <code>themSach()</code>, <code>timTheoTen()</code>, <code>xoaTheoMa()</code>, <code>inDanhSach()</code>, <code>tinhTongGia()</code>. Viết menu cho người dùng trong <code>main</code>.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Sach {
+    private String maSach, tenSach, tacGia;
+    private int namXB;
+    private double gia;
+
+    public Sach(String maSach, String tenSach, String tacGia, int namXB, double gia) {
+        this.maSach = maSach;
+        this.tenSach = tenSach;
+        this.tacGia = tacGia;
+        this.namXB = namXB;
+        this.gia = gia;
+    }
+
+    public String getMaSach() { return maSach; }
+    public String getTenSach() { return tenSach; }
+    public double getGia() { return gia; }
+
+    @Override
+    public String toString() {
+        return maSach + " - " + tenSach + " - " + tacGia + " - " + namXB + " - " + gia;
+    }
+}
+
+class ThuVien {
+    private ArrayList&lt;Sach&gt; ds = new ArrayList&lt;&gt;();
+
+    public void themSach(Sach s) { ds.add(s); }
+
+    public ArrayList&lt;Sach&gt; timTheoTen(String tuKhoa) {
+        ArrayList&lt;Sach&gt; kq = new ArrayList&lt;&gt;();
+        for (Sach s : ds) {
+            if (s.getTenSach().toLowerCase().contains(tuKhoa.toLowerCase())) {
+                kq.add(s);
+            }
+        }
+        return kq;
+    }
+
+    public boolean xoaTheoMa(String maSach) {
+        for (int i = 0; i &lt; ds.size(); i++) {
+            if (ds.get(i).getMaSach().equals(maSach)) {
+                ds.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void inDanhSach() {
+        if (ds.isEmpty()) {
+            System.out.println("Danh sach rong!");
+            return;
+        }
+        for (Sach s : ds) System.out.println(s);
+    }
+
+    public double tinhTongGia() {
+        double tong = 0;
+        for (Sach s : ds) tong += s.getGia();
+        return tong;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ThuVien tv = new ThuVien();
+        int chon;
+
+        do {
+            System.out.println("\n=== MENU THU VIEN ===");
+            System.out.println("1. Them sach");
+            System.out.println("2. In danh sach");
+            System.out.println("3. Tim theo ten");
+            System.out.println("4. Xoa theo ma");
+            System.out.println("5. Tinh tong gia");
+            System.out.println("0. Thoat");
+            System.out.print("Chon: ");
+            chon = sc.nextInt();
+            sc.nextLine();
+
+            switch (chon) {
+                case 1:
+                    System.out.print("Ma: "); String ma = sc.nextLine();
+                    System.out.print("Ten: "); String ten = sc.nextLine();
+                    System.out.print("Tac gia: "); String tg = sc.nextLine();
+                    System.out.print("Nam XB: "); int nam = sc.nextInt();
+                    System.out.print("Gia: "); double gia = sc.nextDouble();
+                    tv.themSach(new Sach(ma, ten, tg, nam, gia));
+                    break;
+                case 2: tv.inDanhSach(); break;
+                case 3:
+                    System.out.print("Nhap tu khoa: ");
+                    String tk = sc.nextLine();
+                    for (Sach s : tv.timTheoTen(tk)) System.out.println(s);
+                    break;
+                case 4:
+                    System.out.print("Nhap ma can xoa: ");
+                    String mx = sc.nextLine();
+                    System.out.println(tv.xoaTheoMa(mx) ? "Da xoa" : "Khong tim thay");
+                    break;
+                case 5:
+                    System.out.printf("Tong gia: %.2f%n", tv.tinhTongGia());
+                    break;
+                case 0: System.out.println("Tam biet!"); break;
+                default: System.out.println("Lua chon khong hop le!");
+            }
+        } while (chon != 0);
+
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.3.</b> <b>Bài thách thức:</b> Xây dựng hệ thống hình học động: interface <code>Hinh</code> có <code>dienTich()</code>, <code>chuVi()</code>. Các lớp <code>HinhTron</code>, <code>HinhChuNhat</code>, <code>HinhVuong</code> (kế thừa <code>HinhChuNhat</code>) implements <code>Hinh</code>. Viết phương thức <code>main</code> cho phép người dùng chọn loại hình và nhập thông số, in kết quả. Chương trình lặp cho đến khi chọn thoát.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.Scanner;
+
+interface Hinh {
+    double dienTich();
+    double chuVi();
+    String tenHinh();
+}
+
+class HinhTron implements Hinh {
+    private double r;
+    public HinhTron(double r) { this.r = r; }
+    public double dienTich() { return Math.PI * r * r; }
+    public double chuVi() { return 2 * Math.PI * r; }
+    public String tenHinh() { return "Hinh Tron"; }
+}
+
+class HinhChuNhat implements Hinh {
+    protected double dai, rong;
+    public HinhChuNhat(double dai, double rong) { this.dai = dai; this.rong = rong; }
+    public double dienTich() { return dai * rong; }
+    public double chuVi() { return 2 * (dai + rong); }
+    public String tenHinh() { return "Hinh Chu Nhat"; }
+}
+
+class HinhVuong extends HinhChuNhat {
+    public HinhVuong(double canh) { super(canh, canh); }
+    @Override
+    public String tenHinh() { return "Hinh Vuong"; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int chon;
+        do {
+            System.out.println("\n1. Hinh tron");
+            System.out.println("2. Hinh chu nhat");
+            System.out.println("3. Hinh vuong");
+            System.out.println("0. Thoat");
+            System.out.print("Chon: ");
+            chon = sc.nextInt();
+            Hinh h = null;
+            switch (chon) {
+                case 1:
+                    System.out.print("Ban kinh: ");
+                    h = new HinhTron(sc.nextDouble());
+                    break;
+                case 2:
+                    System.out.print("Dai: ");
+                    double d = sc.nextDouble();
+                    System.out.print("Rong: ");
+                    double r = sc.nextDouble();
+                    h = new HinhChuNhat(d, r);
+                    break;
+                case 3:
+                    System.out.print("Canh: ");
+                    h = new HinhVuong(sc.nextDouble());
+                    break;
+                case 0:
+                    System.out.println("Tam biet!");
+                    break;
+                default:
+                    System.out.println("Khong hop le!");
+            }
+            if (h != null) {
+                System.out.printf("%s - DT: %.2f, CV: %.2f%n",
+                        h.tenHinh(), h.dienTich(), h.chuVi());
+            }
+        } while (chon != 0);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <p><b>Bài 4.4.</b> <b>Bài tổng hợp:</b> Xây dựng hệ thống quản lý sinh viên theo mô hình OOP đầy đủ: lớp trừu tượng <code>Nguoi</code> (có <code>hoTen</code>, <code>namSinh</code>, phương thức trừu tượng <code>moTa()</code>), lớp <code>SinhVien</code> kế thừa <code>Nguoi</code> (thêm <code>maSV</code>, <code>diemTB</code>), lớp <code>GiangVien</code> kế thừa <code>Nguoi</code> (thêm <code>maGV</code>, <code>hocVi</code>). Lớp <code>QuanLy</code> dùng <code>ArrayList&lt;Nguoi&gt;</code> với menu: thêm, in danh sách, tìm theo tên, đếm số sinh viên/giảng viên.</p>
+    <details>
+        <summary>Xem lời giải</summary>
+        <pre>
+import java.util.ArrayList;
+import java.util.Scanner;
+
+abstract class Nguoi {
+    protected String hoTen;
+    protected int namSinh;
+
+    public Nguoi(String hoTen, int namSinh) {
+        this.hoTen = hoTen;
+        this.namSinh = namSinh;
+    }
+
+    public abstract String moTa();
+
+    @Override
+    public String toString() {
+        return hoTen + " (" + namSinh + ") - " + moTa();
+    }
+
+    public String getHoTen() { return hoTen; }
+}
+
+class SinhVien extends Nguoi {
+    private String maSV;
+    private double diemTB;
+
+    public SinhVien(String hoTen, int namSinh, String maSV, double diemTB) {
+        super(hoTen, namSinh);
+        this.maSV = maSV;
+        this.diemTB = diemTB;
+    }
+
+    @Override
+    public String moTa() {
+        return "SV " + maSV + ", diem TB = " + diemTB;
+    }
+}
+
+class GiangVien extends Nguoi {
+    private String maGV;
+    private String hocVi;
+
+    public GiangVien(String hoTen, int namSinh, String maGV, String hocVi) {
+        super(hoTen, namSinh);
+        this.maGV = maGV;
+        this.hocVi = hocVi;
+    }
+
+    @Override
+    public String moTa() {
+        return "GV " + maGV + ", hoc vi: " + hocVi;
+    }
+}
+
+class QuanLy {
+    private ArrayList&lt;Nguoi&gt; ds = new ArrayList&lt;&gt;();
+
+    public void them(Nguoi n) { ds.add(n); }
+
+    public void inDanhSach() {
+        if (ds.isEmpty()) { System.out.println("Danh sach rong!"); return; }
+        for (Nguoi n : ds) System.out.println(n);
+    }
+
+    public void timTheoTen(String tk) {
+        boolean coKq = false;
+        for (Nguoi n : ds) {
+            if (n.getHoTen().toLowerCase().contains(tk.toLowerCase())) {
+                System.out.println(n);
+                coKq = true;
+            }
+        }
+        if (!coKq) System.out.println("Khong tim thay!");
+    }
+
+    public void thongKe() {
+        int sv = 0, gv = 0;
+        for (Nguoi n : ds) {
+            if (n instanceof SinhVien) sv++;
+            else if (n instanceof GiangVien) gv++;
+        }
+        System.out.println("Sinh vien: " + sv + ", Giang vien: " + gv);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        QuanLy ql = new QuanLy();
+        int chon;
+
+        do {
+            System.out.println("\n=== MENU ===");
+            System.out.println("1. Them sinh vien");
+            System.out.println("2. Them giang vien");
+            System.out.println("3. In danh sach");
+            System.out.println("4. Tim theo ten");
+            System.out.println("5. Thong ke");
+            System.out.println("0. Thoat");
+            System.out.print("Chon: ");
+            chon = sc.nextInt();
+            sc.nextLine();
+
+            switch (chon) {
+                case 1:
+                    System.out.print("Ho ten: "); String ht = sc.nextLine();
+                    System.out.print("Nam sinh: "); int ns = sc.nextInt(); sc.nextLine();
+                    System.out.print("Ma SV: "); String msv = sc.nextLine();
+                    System.out.print("Diem TB: "); double dtb = sc.nextDouble();
+                    ql.them(new SinhVien(ht, ns, msv, dtb));
+                    break;
+                case 2:
+                    System.out.print("Ho ten: "); String ht2 = sc.nextLine();
+                    System.out.print("Nam sinh: "); int ns2 = sc.nextInt(); sc.nextLine();
+                    System.out.print("Ma GV: "); String mgv = sc.nextLine();
+                    System.out.print("Hoc vi: "); String hv = sc.nextLine();
+                    ql.them(new GiangVien(ht2, ns2, mgv, hv));
+                    break;
+                case 3: ql.inDanhSach(); break;
+                case 4:
+                    System.out.print("Nhap ten can tim: ");
+                    ql.timTheoTen(sc.nextLine());
+                    break;
+                case 5: ql.thongKe(); break;
+                case 0: System.out.println("Tam biet!"); break;
+                default: System.out.println("Khong hop le!");
+            }
+        } while (chon != 0);
+        sc.close();
+    }
+}
+        </pre>
+    </details>
+
+    <hr>
+
+    <!-- ================== TỔNG KẾT CHƯƠNG ================== -->
+    <h2>Tổng kết chương 5</h2>
+    <ul>
+        <li><b>OOP</b> gồm 4 tính chất: <b>Đóng gói, Kế thừa, Đa hình, Trừu tượng</b>.</li>
+        <li><b>Lớp (class)</b> là khuôn mẫu; <b>đối tượng (object)</b> là một thể hiện cụ thể được tạo bằng <code>new</code>.</li>
+        <li><b>Constructor</b> trùng tên lớp, không có kiểu trả về; có thể nạp chồng nhiều constructor.</li>
+        <li><b>Đóng gói</b>: dùng <code>private</code> cho thuộc tính, cung cấp getter/setter kiểm soát truy cập.</li>
+        <li><b>Kế thừa</b>: dùng <code>extends</code>, gọi constructor lớp cha qua <code>super(...)</code>; Java chỉ đơn kế thừa lớp nhưng đa kế thừa interface.</li>
+        <li><b>Đa hình</b>: Overloading (compile-time) và Overriding (runtime, ghi đè có <code>@Override</code>).</li>
+        <li><b>Abstract class</b> không tạo được đối tượng, có thể chứa cả phương thức trừu tượng và phương thức thường.</li>
+        <li><b>Interface</b> là "hợp đồng" hành vi, cho phép đa kế thừa interface.</li>
+        <li><code>static</code> thuộc về lớp, dùng chung cho mọi đối tượng; <code>final</code> không thể thay đổi/ghi đè/kế thừa.</li>
+        <li>Vận dụng OOP giúp mã dễ đọc, dễ tái sử dụng và mở rộng – đặc biệt quan trọng trong các dự án lớn.</li>
+    </ul>
+
+    <hr>
+    <p align="center">
+        <i>— Hết Chương 5 —</i><br>
+        <a href="index.html">Quay lại Trang chủ</a> |
+        <a href="chuong4.html">← Chương 4</a> |
+        <a href="chuong6.html">Chương 6 →</a>
+    </p>
+<script src="app.js"></script>
+</body>
+</html>
